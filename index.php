@@ -1,7 +1,7 @@
 <?php
 	error_reporting(0);
     include_once "panel/include/koneksi.php";
-a
+
 	$profil=mysql_fetch_object(mysql_query("SELECT * FROM profil_perusahaan"));
 ?>
 
