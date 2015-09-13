@@ -126,7 +126,7 @@
 		<div class="form-group">
             <label for="NIP_PEGAWAI" class="col-sm-3 control-label">NIP</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $NIP_PEGAWAI; ?>" id="NIP_PEGAWAI" name="NIP_PEGAWAI" placeholder="NIP Pegawai" required\>
+				<input type="text" class="form-control" value="<?php echo $NIP_PEGAWAI; ?>" id="NIP_PEGAWAI" name="NIP_PEGAWAI" required\>
 				<div id="availability"></div>
 				<input type="hidden" id="KODE_PEGAWAI" name="KODE_PEGAWAI" value="<?php echo $KODE_PEGAWAI; ?>" />
             </div>
@@ -134,13 +134,13 @@
 		<div class="form-group">
             <label for="NAMA_PEGAWAI" class="col-sm-3 control-label">Nama</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" value="<?php echo $NAMA_PEGAWAI; ?>" id="NAMA_PEGAWAI" name="NAMA_PEGAWAI" placeholder="Nama Pegawai" \>
+                <input type="text" class="form-control" value="<?php echo $NAMA_PEGAWAI; ?>" id="NAMA_PEGAWAI" name="NAMA_PEGAWAI" \>
             </div>
 		</div>
 		<div class="form-group">
             <label for="TEMPAT_LAHIR" class="col-sm-3 control-label">Tempat Lahir</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $TEMPAT_LAHIR; ?>" id="TEMPAT_LAHIR" name="TEMPAT_LAHIR" placeholder="<?php echo date("Y-m-d"); ?>"\>
+				<input type="text" class="form-control" value="<?php echo $TEMPAT_LAHIR; ?>" id="TEMPAT_LAHIR" name="TEMPAT_LAHIR" "\>
             </div>
 		</div>
 		<div class="form-group">
@@ -186,25 +186,25 @@
 		<div class="form-group">
             <label for="JUMLAH_ANAK" class="col-sm-3 control-label">Jumlah Anak</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $JUMLAH_ANAK; ?>" id="JUMLAH_ANAK" name="JUMLAH_ANAK" placeholder="Jumlah Anak"\>
+				<input type="text" class="form-control" value="<?php echo $JUMLAH_ANAK; ?>" id="JUMLAH_ANAK" name="JUMLAH_ANAK" \>
             </div>
 		</div>
 		<div class="form-group">
             <label for="alamat" class="col-sm-3 control-label">Alamat</label>
             <div class="col-sm-9">
-				<textarea class="form-control" id="ALAMAT" name="ALAMAT" placeholder="Alamat Petugas" placeholder="Alamat Petugas"><?php echo $ALAMAT; ?></textarea>
+				<textarea class="form-control" id="ALAMAT" name="ALAMAT" ><?php echo $ALAMAT; ?></textarea>
             </div>
 		</div>
 		<div class="form-group">
             <label for="NOMOR_TELEPON" class="col-sm-3 control-label">No Telepon</label>
             <div class="col-sm-9">
-            	<input type="text" class="form-control" value="<?php echo $NOMOR_TELEPON; ?>" id="NOMOR_TELEPON" name="NOMOR_TELEPON" placeholder="Nomor Telepon"\>
+            	<input type="text" class="form-control" value="<?php echo $NOMOR_TELEPON; ?>" id="NOMOR_TELEPON" name="NOMOR_TELEPON" \>
             </div>
 		</div>
 		<div class="form-group">
             <label for="email" class="col-sm-3 control-label">Email</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $EMAIL; ?>" id="EMAIL" name="EMAIL" placeholder="Email"\>
+				<input type="text" class="form-control" value="<?php echo $EMAIL; ?>" id="EMAIL" name="EMAIL" \>
             </div>
 		</div>
 		<div class="form-group">
@@ -237,52 +237,37 @@
             </div>
 		</div>
 		<div class="form-group">
-            <label for="GAJI_POKOK" class="col-sm-3 control-label">Gaji Pokok</label>
+            <label for="GAJI_POKOK" class="col-sm-3 control-label">Gaji Harian</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $GAJI_POKOK; ?>" id="GAJI_POKOK" name="GAJI_POKOK" placeholder="Gaji Pokok" \>
+				<input type="text" class="form-control" value="<?php echo $GAJI_POKOK; ?>" id="GAJI_POKOK" name="GAJI_POKOK" \>
             </div>
 		</div>
 		<div class="form-group">
             <label for="NOMINAL_UMT" class="col-sm-3 control-label">Nominal UMT</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $NOMINAL_UMT; ?>" id="NOMINAL_UMT" name="NOMINAL_UMT" placeholder="Nominal UMT" \>
+				<input type="text" class="form-control" value="<?php echo $NOMINAL_UMT; ?>" id="NOMINAL_UMT" name="NOMINAL_UMT"\>
             </div>
 		</div>	
-		<div class="form-group">
-            <label for="TABUNGAN" class="col-sm-3 control-label">Nominal Tabungan</label>
-            <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $TABUNGAN; ?>" id="TABUNGAN" name="TABUNGAN" placeholder="Nominal TABUNGAN" \>
-            </div>
-		</div>	
-	
-		<div class="form-group">
-            <label for="PENGHARGAAN" class="col-sm-3 control-label">Nominal Penghargaan</label>
-            <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $PENGHARGAAN; ?>" id="PENGHARGAAN" name="PENGHARGAAN" placeholder="Nominal PENGHARGAAN" \>
-            </div>
-		</div>	
+		
+				<input type="hidden" class="form-control" value="0" id="TABUNGAN" name="TABUNGAN" \>
+          
+		
+				<input type="hidden" class="form-control" value="0" id="PENGHARGAAN" name="PENGHARGAAN" placeholder="Nominal PENGHARGAAN" \>
+          	
 
-		<div class="form-group">
-            <label for="NOMINAL_LEMBUR" class="col-sm-3 control-label">Nominal Lembur</label>
-            <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $NOMINAL_LEMBUR; ?>" id="NOMINAL_LEMBUR" name="NOMINAL_LEMBUR" placeholder="Nominal lembur" \>
-            </div>
-		</div>	
-		<div class="form-group">
-            <label for="OUTLET" class="col-sm-3 control-label">Pegawai Outlet</label>
-            <div class="col-sm-9">
-				<select name="OUTLET" class="form-control" id="OUTLET" style="width:100%">
-					<option value="Tidak" <?php if($OUTLET=="Tidak"){echo "selected='selected'";}?>>Tidak</option>
-                    <option value="Ya" <?php if($OUTLET=="Ya"){echo "selected='selected'";}?>>Ya</option>
-                </select>
-			</div>
-		</div>
+	
+				<input type="hidden" class="form-control" value="0" id="NOMINAL_LEMBUR" name="NOMINAL_LEMBUR" placeholder="Nominal lembur" \>
+           
+		
+				
+					<input type="hidden" class="form-control" value="Tidak" id="OUTLET" name="OUTLET"  \>
+		
 		<div class="form-group">
             <label for="TUNJANGAN_LAIN" class="col-sm-3 control-label">Tunjangan Lain</label>
             <div class="col-sm-9">
 				<?php
 					$result = mysql_query("select * from master_tunjangan");  
-                    echo '<select multiple="multiple" style="width:100%" class="form-control select2" name="TUNJANGAN_LAIN[]" id="TUNJANGAN_LAIN" placeholder="Tunjangan Lain">';  
+                    echo '<select multiple="multiple" style="width:100%" class="form-control select2" name="TUNJANGAN_LAIN[]" id="TUNJANGAN_LAIN" >';  
                     while ($row = mysql_fetch_array($result)) {  
 						echo '<option value="' .$row['KODE_MASTER_TUNJANGAN'].'"';
 						foreach($tmptunjanganlain as $tmptunjanganlains){
@@ -299,14 +284,14 @@
 		<div class="form-group">
             <label for="NO_REKENING" class="col-sm-3 control-label">No Rekening</label>
             <div class="col-sm-9">
-				<input type="text" class="form-control" value="<?php echo $NO_REKENING; ?>" id="NO_REKENING" name="NO_REKENING" placeholder="No Rekening" \>
+				<input type="text" class="form-control" value="<?php echo $NO_REKENING; ?>" id="NO_REKENING" name="NO_REKENING"\>
             </div>
 		</div>	
 		<div class="form-group">
             <label for="TANGGAL_MASUK" class="col-sm-3 control-label">Tanggal Masuk</label>
             <div class="col-sm-9">
                 <div class="input-group date" id="datePicker1">
-                    <input type="text" class="form-control" id="TANGGAL_MASUK" name="TANGGAL_MASUK" value="<?php echo $TANGGAL_MASUK; ?>" placeholder="<?php echo date("Y-m-d"); ?>" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" id="TANGGAL_MASUK" name="TANGGAL_MASUK" value="<?php echo $TANGGAL_MASUK; ?>"  required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
             </div>
 		</div>
@@ -314,7 +299,7 @@
             <label for="TANGGAL_KELUAR" class="col-sm-3 control-label">Tanggal Keluar</label>
             <div class="col-sm-9">
                 <div class="input-group date" id="datePicker2">
-                    <input type="text" class="form-control" id="TANGGAL_KELUAR" name="TANGGAL_KELUAR" value="<?php echo $TANGGAL_KELUAR; ?>" placeholder="<?php echo date("Y-m-d"); ?>"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" id="TANGGAL_KELUAR" name="TANGGAL_KELUAR" value="<?php echo $TANGGAL_KELUAR; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
             </div>
 		</div>
@@ -322,10 +307,9 @@
             <label for="STATUS_PEGAWAI" class="col-sm-3 control-label">Status Pegawai</label>
             <div class="col-sm-9">
 				<select name="STATUS_PEGAWAI" class="form-control" id="STATUS_PEGAWAI" style="width:100%">
-                    <option value="">Pilih Status Pegawai</option>
-                    <option value="Kontrak" <?php if($STATUS_PEGAWAI=="Kontrak"){echo "selected='selected'";}?>>Harian</option>
-                    <option value="Tetap" <?php if($STATUS_PEGAWAI=="Tetap"){echo "selected='selected'";}?>>Bulanan</option>
-                    <option value="Keluar" <?php if($STATUS_PEGAWAI=="Keluar"){echo "selected='selected'";}?>>Keluar</option>
+                   <option value="Kontrak" <?php if($STATUS_PEGAWAI=="Kontrak"){echo "selected='selected'";}?>>1.Harian (Buaran)</option>
+                  
+                    <option value="Keluar" <?php if($STATUS_PEGAWAI=="Keluar"){echo "selected='selected'";}?>>2.Keluar (Non-Aktif)</option>
                 </select>
 			</div>
 		</div>

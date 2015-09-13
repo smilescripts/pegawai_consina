@@ -20,14 +20,10 @@
   <li class="active"><span class="glyphicon glyphicon-user"> info</li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Kelola Data info</h3>
-</div>
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-        <h3 class="panel-title">Data info</h3>
-    </div>
+    <h1 class="headingtable" style="margin-top:0px" ><span>Informasi</span> Perusahaan</h1>
+   
     <div class="panel-body">
 	
 		<div class="well">

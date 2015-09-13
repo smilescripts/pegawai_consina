@@ -27,14 +27,11 @@
   <li class="active"><span class="glyphicon glyphicon-user">Laporan gaji</li>
 </ol>
 
-<div class="page-header" id="non-printable" style="margin-top:5px;">
-    <h3>Laporan  gaji karyawan harian</h3>
-</div>
+
 
 <div class="panel panel-warning" id="non-printable">
-    <div class="panel-heading">
-        <h3 class="panel-title">Pencarian</h3>
-    </div>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Laporan</span> Gaji Karyawan Harian (Buaran)</h1>
+	
     <div class="panel-body" >
 		<div class="well">
             <form class="form-horizontal laporan_slipForm" id="laporan_slipForm" action="modul/mod_laporan_slip/laporan_slip.php" type="POST">
@@ -167,9 +164,8 @@
 </div>
 
 <div class="panel panel-warning">
-    <div class="panel-heading"  id="non-printable">
-        <h3 class="panel-title">Data laporan gaji karyawan harian</h3>
-    </div>
+    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Harian (Buaran)</h1>
+	
     <div class="panel-body">
 
         <div id="data-laporan_slip" id="non-printable">

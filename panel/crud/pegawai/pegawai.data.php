@@ -29,13 +29,9 @@
 		</thead>
 		<tbody>
 		<?php
-			if($_SESSION['AKSES']==43){
-				$querypetugas=mysql_query("SELECT * FROM pegawai WHERE STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak'") or die (mysql_error());
-			}else if($_SESSION['AKSES']==44){
-				$querypetugas=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Tetap'") or die (mysql_error());
-			}else{
-				$querypetugas=mysql_query("SELECT * FROM pegawai") or die (mysql_error());
-			}
+			
+				$querypetugas=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak'") or die (mysql_error());
+			
             $no = 1;
             
 			while($objectdata=mysql_fetch_object($querypetugas)){

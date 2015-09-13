@@ -97,7 +97,21 @@
                         <h4 style="color:<?php echo $profil->COLOR; ?>;">Online Sistem Penggajian Dan Absensi Karyawan</h4>
                     </td>
 				</tr>
+				<!--<div class="clock" style="position:absolute;margin-left:870px;margin-top:20px;
+                font:bold 12px Arial, Helvetica, sans-serif;
+                color:#bbbbbb;background:#202020;">
+                
+                <ul style="width:300px; margin:0 auto; padding:0px; list-style:none; text-align:center; ">
+					<li style=" display:inline; font-size:5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff;" id="hours"> </li>
+					<li style=" display:inline; font-size:5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff;" id="point">:</li>
+					<li style=" display:inline; font-size:5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff;" id="min"> </li>
+					<li style=" display:inline; font-size:5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff;" id="point">:</li>
+					<li style=" display:inline; font-size:5em; text-align:center; font-family:'BebasNeueRegular', Arial, Helvetica, sans-serif; text-shadow:0 0 5px #00c6ff;" id="sec"> </li>
+				</ul>
+
+			</div>-->
             </table>
+			
         </div>
 		<div id="data-menu" class="data-menu"></div>	
     </nav>	
@@ -125,7 +139,7 @@
 
 	<!-- bootstrap -->
     <script src="bootstrap/docs/dist/js/bootstrap.min.js"></script>
-	 
+	 	<script src="js/timer.js"></script>
 	 <!-- datepicker -->
     <script src="tparty/datepicker/js/bootstrap-datepicker.js"></script>
     <script src="tparty/datepicker/js/bootstrap-datepicker.min.js"></script>

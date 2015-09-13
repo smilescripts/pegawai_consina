@@ -36,9 +36,9 @@
 
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-		<h3 class="panel-title">penggajian pegawai harian</h3>
-    </div>
+   
+	   <h1 class="headingtable" style="margin-top:0px" ><span>Penggajian</span> Pegawai Harian(Buaran)</h1>
+	
     <div class="panel-body">
 		<div class="well">
 			<form class="form-inline" id="input_penggajianForm" action="crud/input_penggajian/input_penggajian.input.php" type="POST">

@@ -20,14 +20,12 @@
   <li class="active"><span class="glyphicon glyphicon-user"> Jam Kerja</li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Kelola Data Jam Kerja</h3>
-</div>
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-        <h3 class="panel-title">Data Jam Kerja</h3>
-    </div>
+    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Jam Kerja Pegawai</h1>
+			<div class="btnbantuan" style="margin-top: -55px;">
+							
+							</div>
     <div class="panel-body">
 		<div class="well">
             <div id="data-jam"></div>

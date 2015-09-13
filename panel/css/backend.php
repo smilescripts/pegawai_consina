@@ -44,6 +44,9 @@ body {
 
 .navbar-custom {
 background:<?php echo $profil->COLOR; ?>; 
+ -webkit-box-shadow: 0 0 30px #666;
+    -moz-box-shadow: 0 0 30px #666;
+    box-shadow: 0 0 30px #666;
 }
 .navbar-custom .navbar-brand {
   color: #ffffff;
@@ -170,4 +173,36 @@ color:white;
 .panel-warning {
   border-color:<?php echo $profil->COLOR; ?>;
   border-bottom: 1px solid <?php echo $profil->COLOR; ?>;
+   -webkit-box-shadow: 0 0 10px #666;
+    -moz-box-shadow: 0 0 10px #666;
+    box-shadow: 0 0 10px #666;
+}
+
+.headingtable {
+    background: <?php echo $profil->COLOR ?>;
+    border: 1px solid #3d8bbd;
+    padding: 15px;
+	padding-bottom:-20px
+	
+    width: auto;
+	
+    padding-left: 20px;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    z-index: 2;
+    -webkit-box-shadow: 0 0 10px #666;
+    -moz-box-shadow: 0 0 10px #666;
+    box-shadow: 0 0 10px #666;
+    color: #FFF;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.btnbantuan {
+    float: right;
+    margin-top: -40px;
+    margin-right: 15px;
+    position: relative;
+    z-index: 2;
+	
 }

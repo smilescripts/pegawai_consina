@@ -20,6 +20,14 @@
             var url = "modul/mod_pegawai/pegawai.php";
             $("#data-utama").load(url);
         });
+		$('.pegawai_bekasi').live("click", function(){
+            var url = "modul/mod_pegawai_bekasi/pegawai_bekasi.php";
+            $("#data-utama").load(url);
+        });
+		$('.pegawai_bulanan').live("click", function(){
+            var url = "modul/mod_pegawai_bulanan/pegawai_bulanan.php";
+            $("#data-utama").load(url);
+        });
 		
 		$('.izin_absen').live("click", function(){
             var url = "modul/mod_izin/izin_absen.php";
@@ -100,6 +108,10 @@
             var url = "modul/mod_jam_kerja/jam.php";
             $("#data-utama").load(url);
 		});
+		$('.grade_bekasi').live("click", function(){
+            var url = "modul/mod_grade_bekasi/grade_bekasi.php";
+            $("#data-utama").load(url);
+		});
         
         $('.absensi').live("click", function(){
             var url = "modul/mod_absensi/absensi.php";
@@ -125,6 +137,11 @@
             var url = "modul/mod_laporan_slip/laporan_slip.php";
             $("#data-utama").load(url);
 		});
+		
+		$('.laporan_slip_bekasi').live("click", function(){
+            var url = "modul/mod_laporan_slip_bekasi/laporan_slip_bekasi.php";
+            $("#data-utama").load(url);
+		});
 	
 		$('.laporan_slip_bulanan').live("click", function(){
             var url = "modul/mod_laporan_slip_bulanan/laporan_slip_bulanan.php";
@@ -137,6 +154,10 @@
 		});
 		$('.rekapitulasi_harian').live("click", function(){
             var url = "modul/mod_rekapitulasi_harian/laporan_slip_harian.php";
+            $("#data-utama").load(url);
+		});
+		$('.rekapitulasi_harian_bekasi').live("click", function(){
+            var url = "modul/mod_rekapitulasi_harian_bekasi/laporan_slip_harian_bekasi.php";
             $("#data-utama").load(url);
 		});
 	
@@ -197,6 +218,10 @@
 	
 		$('.input_penggajian').live("click", function(){
             var url = "modul/mod_input_penggajian/input_penggajian.php";
+            $("#data-utama").load(url);
+		});
+		$('.input_penggajian_bekasi').live("click", function(){
+            var url = "modul/mod_input_penggajian_bekasi/input_penggajian_bekasi.php";
             $("#data-utama").load(url);
 		});
 	

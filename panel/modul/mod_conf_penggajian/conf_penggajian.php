@@ -20,9 +20,7 @@
   <li class="active"><span class="glyphicon glyphicon-user"> Konfigurasi penggajian</li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Konfigurasi penggajian</h3>
-</div>
+
 
 <div class="panel panel-warning">
     <div class="panel-heading">

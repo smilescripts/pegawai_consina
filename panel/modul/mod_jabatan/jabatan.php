@@ -20,19 +20,14 @@
   <li class="active"><span class="glyphicon glyphicon-user"> jabatan</li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Kelola Data jabatan</h3>
-</div>
 
 <div class="panel panel-warning">
-	<div class="panel-heading">
-		<h3 class="panel-title">Data jabatan</h3>
-    </div>
+	 <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Jabatan</h1>
+			<div class="btnbantuan" style="margin-top: -55px;">
+							<a href="#dialog-jabatan" id="0" class="btn tambah-jabatan btn-danger" data-toggle="modal" ><i class="glyphicon glyphicon-plus-sign"></i>Tambah Data</a>
+							</div>
     <div class="panel-body">
-		<div style="padding: 10px 10px 10px;">
-			<a href="#dialog-jabatan" id="0" class="btn tambah-jabatan btn-info" data-toggle="modal" >Tambah Data</a> 
-			
-		</div>
+	
 		<div class="well">
 			<div id="data-jabatan"></div>
 		</div>

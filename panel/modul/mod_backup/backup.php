@@ -21,19 +21,18 @@
   <li class="active"><span class="glyphicon glyphicon-user"></li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Pencadangan basis data</h3>
-</div>
+
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-		<h3 class="panel-title"></h3>
-    </div>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Pencadangan</span> Basis Data</h1>
+   <div class="btnbantuan" style="margin-top: -55px;">
+						<form action="modul/mod_backup/prosesbackup.php" name="backup-form" id="backup-form"  class="backup-form form-horizontal" method="POST">
+				<input type="submit" class="btn tambah-backup btn-danger" name="backup" value="Proses Pencadangan"> 
+			</form>
+							</div>
     <div class="panel-body">
 		<div style="padding: 10px 10px 10px;">
-			<form action="modul/mod_backup/prosesbackup.php" name="backup-form" id="backup-form"  class="backup-form form-horizontal" method="POST">
-				<input type="submit" class="btn tambah-backup btn-info" name="backup" value="Proses Pencadangan"> 
-			</form>
+			
 		</div>
         <div class="well">
             <div id="data-backup"></div>

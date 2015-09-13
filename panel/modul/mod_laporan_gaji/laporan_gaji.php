@@ -15,14 +15,11 @@
   <li class="active"><span class="glyphicon glyphicon-user">Laporan Penggajian</li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Laporan Penggajian</h3><hr/>
-</div>
+
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-        <h3 class="panel-title">Pencarian</h3>
-    </div>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Pencarian</span> Penggajian</h1>
+	
     <div class="panel-body">
 		<div class="well">
             <form class="form-horizontal laporan_gajiForm" id="laporan_gajiForm" action="modul/mod_laporan_gaji/laporan_gaji.php" type="POST">
@@ -150,9 +147,8 @@
 </div>
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-        <h3 class="panel-title">Data Penggajian</h3>
-    </div>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Penggajian</h1>
+	
     <div class="panel-body">
 		<div id="data-laporan_gaji">
 			<span id="laporan"></span>

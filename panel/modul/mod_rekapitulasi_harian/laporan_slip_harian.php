@@ -27,14 +27,9 @@
   <li class="active"><span class="glyphicon glyphicon-user">Rekapitulasi karyawan harian</li>
 </ol>
 
-<div class="page-header" id="non-printable" style="margin-top:5px;">
-    <h3>Rekapitulasi gaji dan kehadiran karyawan harian</h3>
-</div>
 
 <div class="panel panel-warning" id="non-printable">
-    <div class="panel-heading">
-        <h3 class="panel-title">Pencarian</h3>
-    </div>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Buaran)</h1>
     <div class="panel-body" >
 		<div class="well">
             <form class="form-horizontal rekapitulasi_harianForm" id="rekapitulasi_harianForm" action="modul/mod_rekapitulasi_harian/laporan_slip_harian.php" type="POST">
@@ -148,9 +143,7 @@
 </div>
 
 <div class="panel panel-warning">
-    <div class="panel-heading"  id="non-printable">
-        <h3 class="panel-title">Data rekapitulasi</h3>
-    </div>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Buaran)</h1>
     <div class="panel-body">
 		<div id="data-rekapitulasi_harian" id="non-printable">
 			<span id="laporan"></span>

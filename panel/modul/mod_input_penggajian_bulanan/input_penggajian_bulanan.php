@@ -37,9 +37,9 @@
 
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-		<h3 class="panel-title">Input penggajian bulanan</h3>
-    </div>
+  
+	  <h1 class="headingtable" style="margin-top:0px" ><span>Penggajian</span> Pegawai Bulanan(Buaran)</h1>
+	
     <div class="panel-body">
 
         <div class="well">

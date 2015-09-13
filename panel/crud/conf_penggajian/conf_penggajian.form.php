@@ -8,7 +8,7 @@
         SELECT * FROM pengaturan_penggajian WHERE ID=".$id
     ));
 		
-    if($id> 0) { 
+    if($id > 0) { 
 		$ID = $data['ID'];
 		$PARAMETER = $data['PARAMETER'];
 		$VALUE = $data['VALUE'];
@@ -31,10 +31,10 @@
 		<div class="form-group">
             <label for="NAMA_conf_penggajian" class="col-sm-3 control-label"> Value</label>
             <div class="col-sm-9">
-				<?php if($ID!="4" && $ID!="3" && $ID!="2"&& $ID!="5" ){ ?>
+				<?php if($ID!="4" && $ID!="3" && $ID !="2" && $ID!="5" && $ID!="15" && $ID!="16" ){ ?>
 				<input type="text" class="form-control"  value="<?php echo $VALUE; ?>" id="VALUE" name="VALUE"  \>
 				<?php } ?>
-				<?php if($ID=="2"){ ?>
+				<?php if($ID=="2" || $ID=="15" || $ID=="16"){ ?>
 				<div class="col-sm-3" style="margin-left:-15px">
 					<input type="text" class="form-control" value="<?php echo $VALUE; ?>" id="VALUE" name="VALUE"  \>
 				</div>
@@ -65,10 +65,15 @@
 				<br/><p><i>Catatan:
 				<?php 
 					if($ID=="1"){echo "Jumlah Hari kerja Masukan Jumlah Hari kerja Efektif Dalam Seminggu";}
-					if($ID=="2"){echo "Keterlambatan Masukan Dalam Satuan Menit";}
+					if($ID=="2" || $ID=="15" || $ID=="16" ){echo "Keterlambatan Masukan Dalam Satuan Menit";}
 					if($ID=="3"){echo "Lembur Masukan Keterangan THP Atau Gaji Pokok";}
+					if($ID=="6"){echo "Masukan Jumlah jam kerja pada hari sabtu";}
 					if($ID=="5"){echo "Mangkir Masukan Keterangan THP Atau Gaji Pokok";}
+					if($ID=="9"){echo "Masukan Lama jangka waktu perubahan penggajian setelah tanggal proses penggajian dilakukan";}
 					if($ID=="4"){echo "Pilih Tanggal Penggajian";}
+					if($ID=="17"){echo "Masukan nominal lemburan pegawai bekasi dengan jangka kerja 0-2 Tahun";}
+					if($ID=="18"){echo "Masukan nominal lemburan pegawai bekasi dengan jangka kerja 2-3 Tahun";}
+					if($ID=="19"){echo "Masukan nominal lemburan pegawai bekasi dengan jangka kerja 3 tahun-Dst";}
 		
 				?>
 				</i></p>

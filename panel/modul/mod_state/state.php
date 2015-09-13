@@ -20,18 +20,15 @@
   <li class="active"><span class="glyphicon glyphicon-user"> lokasi</li>
 </ol>
 
-<div class="page-header" style="margin-top:5px;">
-    <h3>Kelola data lokasi</h3>
-</div>
+
 
 <div class="panel panel-warning">
-    <div class="panel-heading">
-        <h3 class="panel-title">Data state</h3>
-    </div>
+       <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Lokasi</h1>
+			<div class="btnbantuan" style="margin-top: -55px;">
+							<a href="#dialog-state" id="0" class="btn tambah-state btn-danger" data-toggle="modal" ><i class="glyphicon glyphicon-plus-sign"></i>Tambah Data</a>
+							</div>
     <div class="panel-body">
-		<div style="padding: 10px 10px 10px;">
-            <a href="#dialog-state" id="0" class="btn tambah-state btn-info" data-toggle="modal" >Tambah Data</a> 
-		</div>
+		
 		<div class="well">
             <div id="data-state"></div>
 		</div>
