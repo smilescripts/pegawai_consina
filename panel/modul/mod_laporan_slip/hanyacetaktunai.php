@@ -13,7 +13,7 @@
 	<?php
 		$pdfcetak=mysql_query("SELECT head_penggajian.* FROM head_penggajian
 		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
-		where head_penggajian.format='Harian' and head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING='' 
+		where head_penggajian.format='Harian' and head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL) 
 		and pegawai.STATE_ID='$_SESSION[STATE_ID]' AND pegawai.STATUS_PEGAWAI='Kontrak'") or die (mysql_error());
         $no = 0;
         
