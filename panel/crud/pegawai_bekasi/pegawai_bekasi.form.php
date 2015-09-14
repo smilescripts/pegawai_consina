@@ -245,7 +245,7 @@
                     echo '<select id="GAJI_POKOK" name="GAJI_POKOK" style="width: 100%;" class="form-control">';  
                         echo '<option value="">Silahkan Pilih Grade Gaji</option>';  
 						while ($rowresultgrade = mysql_fetch_array($resultgrade)) {  
-                            echo '<option value="' . $rowresultgrade['NOMINAL_GRADE'] . '"';if($GAJI_POKOK==$rowresultgrade['NOMINAL_GRADE']){echo "selected='selected'";} echo'>' . $rowresultgrade['NAMA_GRADE'].' - Rp.'. number_format($rowresultgrade['NOMINAL_GRADE']). '</option>';  
+                            echo '<option value="' . $rowresultgrade['KODE_GRADE'] . '"';if($GAJI_POKOK==$rowresultgrade['KODE_GRADE']){echo "selected='selected'";} echo'>' . $rowresultgrade['NAMA_GRADE'].' - Rp.'. number_format($rowresultgrade['NOMINAL_GRADE']). '</option>';  
 						}  
                     echo '</select>';
 				?>
@@ -403,7 +403,7 @@
                 processData: false,
                 type: 'POST',
                 success: function(data) {
-                    $('#dialog-pegawai').modal('hide');
+                    $('#dialog-pegawai_bekasi').modal('hide');
 					//alert(data);
                 }
             });

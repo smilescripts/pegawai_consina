@@ -18,8 +18,8 @@
 				<th>No</th>
 				<th>Nip - Nama</th>
 				<th>Bulan - Tahun</th>
-				<th>Jumlah penyesuaian hari</th>
-				<th>Tanggal & Jam</th>
+				<th style="width:50px">Jumlah </th>
+				<th style="width:150px">Tanggal & Jam</th>
 				<th>Tanggal akses</th>
 				<th>Petugas</th>
 				<th>Aksi</th>
@@ -56,7 +56,7 @@
 				$penyesuaian=mysql_query("SELECT * FROM detail_penyesuaian_absensi where HEAD_ID_PENYESUAIAN='$objectdata->ID' and TANGGAL!='0000-00-00' and JAM_MASUK!='' and JAM_KELUAR!=''") or die (mysql_error());
 				
 				while($objectdatapenyesuaian=mysql_fetch_object($penyesuaian)){
-					echo '&bull;'.$objectdatapenyesuaian->TANGGAL.'('.$objectdatapenyesuaian->JAM_MASUK.'-'.$objectdatapenyesuaian->JAM_KELUAR.')<br/>'; 
+					echo '&bull;<b>'.$objectdatapenyesuaian->TANGGAL.'</b><br/>(<i>'.$objectdatapenyesuaian->JAM_MASUK.'-'.$objectdatapenyesuaian->JAM_KELUAR.'</i>)<br/>'; 
 				}
 				
 				echo'

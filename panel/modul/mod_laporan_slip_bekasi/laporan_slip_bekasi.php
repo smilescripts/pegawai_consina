@@ -77,11 +77,13 @@
 					$('#datePicker').datepicker({
 						format: "yyyy",
 						startView: 2,
+						orientation: "top center",
 						minViewMode: 2,
 						autoclose: true
 					});
 					$('#datePicker1').datepicker({
 						format: "mm",
+						orientation: "top center",
 						minViewMode: 1,
 						autoclose: true
 					});

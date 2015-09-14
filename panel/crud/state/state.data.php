@@ -15,9 +15,9 @@
     <table id="example" class="table table-bordered">
 		<thead>
             <tr>
-				<th>No</th>
+				<th style="width:10px">No</th>
 				<th>Nama lokasi</th>
-				<th>Aksi</th>
+				<th style="width:10px">Aksi</th>
             </tr>
 		</thead>
 		<tbody>

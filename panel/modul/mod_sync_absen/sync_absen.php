@@ -35,7 +35,6 @@
 						</div>
                     </div>
 				<div class="form-group">
-					<label for="exampleInputName2">Nama Mesin</label>
 						<?php
 							$result = mysql_query("select * from mesin_absensi");  
 							echo '<select id="KODE_MESIN" name="KODE_MESIN" class="form-control">';  
