@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 		<?php
-            $querypetugas=mysql_query("SELECT * FROM restore_data") or die (mysql_error());
+            $querypetugas=mysql_query("SELECT * FROM `restore_data` order by date(`tanggal`) desc") or die (mysql_error());
             $no = 1;
             
 			while($objectdata=mysql_fetch_object($querypetugas)){

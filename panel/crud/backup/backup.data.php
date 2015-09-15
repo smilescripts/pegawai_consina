@@ -23,7 +23,7 @@
 		</thead>
 		<tbody>
 		<?php
-            $querybackup=mysql_query("SELECT * FROM backup_data") or die (mysql_error());
+            $querybackup=mysql_query("SELECT * FROM `backup_data` order by date(`tanggal`) desc") or die (mysql_error());
             $no = 1;
             
 			while($objectdata=mysql_fetch_object($querybackup)){

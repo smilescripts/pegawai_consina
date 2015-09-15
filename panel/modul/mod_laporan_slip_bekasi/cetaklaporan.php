@@ -21,15 +21,11 @@ page[size="A4"] {
 <body onload="print()">
 
 <?php 
-	session_start();
+session_start();
 	$state_session=$_SESSION['STATE_ID'];
 	error_reporting(0);
 	include_once "../../include/koneksi.php";
 	include("../../include/function_hitunggaji.php");
-	include "../../include/catat.php";
-	$user=$_SESSION['KODE_PETUGAS'];
-	$aksi="Mengakses halaman cetak data laporan penggajian karyawan Harian Bekasi";
-	catat($user,$aksi);
 	$BULAN=$_GET["BULAN"];
 	$TAHUN=$_GET["TAHUN"];
 	$DEPT=$_GET["DEPT"];
@@ -52,8 +48,8 @@ page[size="A4"] {
 	if($BULAN=="11"){$namabulan="November";}
 	if($BULAN=="12"){$namabulan="Desember";}
 
-	$tahun=date('Y');
-	$bulanini=date('m');
+	$tahun=$TAHUN;
+	$bulanini=$BULAN;
 	$harilibur1=array();
 	$libur1=mysql_query("select * from hari_libur where BULAN='$bulanini' and TAHUN='$tahun'");
 	$viewdata=mysql_fetch_object($libur1);
@@ -63,32 +59,53 @@ page[size="A4"] {
 
 <?php
 	$no = 0;
-	if($DEPT=="all" && $NIP_PEGAWAIH!=""){
-		$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH' and STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi'"));
-		$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Harian Bekasi' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
-       
-	}
 	
-	if($DEPT=="all" && $NIP_PEGAWAIH==""){
-		$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Harian Bekasi' and kode_pegawai IN (SELECT KODE_PEGAWAI FROM pegawai WHERE STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi')") or die (mysql_error());
-	}
+		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
+			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH' and STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi'"));
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Harian' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+		   
+		}
+		
+		if($DEPT=="all" && $NIP_PEGAWAIH==""){
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Harian Bekasi' and kode_pegawai IN (SELECT KODE_PEGAWAI FROM pegawai WHERE  STATUS_PEGAWAI='Kontrak Bekasi')") or die (mysql_error());
+		}
+		
+		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
+			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH' and STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi'"));
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+		}
+		
+		if($DEPT!="all" && $NIP_PEGAWAIH==""){
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian' and kode_pegawai IN (SELECT KODE_PEGAWAI FROM pegawai WHERE STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi')") or die (mysql_error());
+		}
 	
-	if($DEPT!="all" && $NIP_PEGAWAIH!=""){
-		$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH' and STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi'"));
-		$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian Bekasi' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
-	}
-	
-	if($DEPT!="all" && $NIP_PEGAWAIH==""){
-		$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian Bekasi' and kode_pegawai IN (SELECT KODE_PEGAWAI FROM pegawai WHERE STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi')") or die (mysql_error());
-	}
-	
-	while($objectdata=mysql_fetch_object($query)){
-		$totalgaji=0;
-		$totaljam=0;
-		$totaljamlembur=0;
-		$totallembur=0;
-		$subtotalgaji=0;
-		$no++;
+		while($objectdata=mysql_fetch_object($query)){
+			
+			$lamakerja=mysql_query("SELECT YEAR(`TANGGAL_MASUK`) as tahun FROM `pegawai` WHERE `KODE_PEGAWAI`='$objectdata->KODE_PEGAWAI'");
+			$getlamakerja=mysql_fetch_object($lamakerja);
+			$tahunsekarang=date("Y");
+			$hasillamakerja=$tahunsekarang - $getlamakerja->tahun;
+			if($hasillamakerja <= 2){
+			$qlembur=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='17'") or die (mysql_error());
+			$tampilqlembur=mysql_fetch_object($qlembur);
+			$nominallembur=$tampilqlembur->VALUE;
+			}
+			if($hasillamakerja >= 2 && $hasillamakerja <= 3 ){
+			$qlembur=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='18'") or die (mysql_error());
+			$tampilqlembur=mysql_fetch_object($qlembur);
+			$nominallembur=$tampilqlembur->VALUE;
+			}
+			if($hasillamakerja >= 3 ){
+			$qlembur=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='19'") or die (mysql_error());
+			$tampilqlembur=mysql_fetch_object($qlembur);
+			$nominallembur=$tampilqlembur->VALUE;
+			}
+			$totalgaji=0;
+			$totaljam=0;
+			$totaljamlembur=0;
+			$totallembur=0;
+			$subtotalgaji=0;
+			$no++;
 ?>
 
 <page size="A4">
@@ -111,7 +128,9 @@ page[size="A4"] {
 		    	<p>Jakarta , <?php echo  $objectdata->tanggal_gaji;?><p>
 				<?php 
 					$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->kode_pegawai' and STATUS_PEGAWAI='Kontrak Bekasi'") or die (mysql_error());
-					$getnamapegawaidata=mysql_fetch_object($pegawaidata);
+				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
+				$grade_bekasi=mysql_query("select * from grade_bekasi where KODE_GRADE='$getnamapegawaidata->GAJI_POKOK'");
+				$pgrade_bekasi=mysql_fetch_object($grade_bekasi);
 				?>
 		    	<p>Kepada Yth :<?php echo  $getnamapegawaidata->NAMA_PEGAWAI;?><p>
 		    	<p>NIP Karyawan :<?php echo  $getnamapegawaidata->NIP_PEGAWAI;?><p>
@@ -161,7 +180,6 @@ page[size="A4"] {
 				<td><?php echo $getabsensidata->TANGGAL;?></td>
 				<td><?php
 					$datetime = DateTime::createFromFormat('Y-m-d', ''.$getabsensidata->TANGGAL.'');
-			
 					if($datetime->format('D')=="Mon"){$hari="Senin";}
 					if($datetime->format('D')=="Tue"){$hari="Selasa";}
 					if($datetime->format('D')=="Wed"){$hari="Rabu";}
@@ -220,7 +238,6 @@ page[size="A4"] {
 						$tampiljam=mysql_fetch_object($queryjam);
 						$start=new DateTime($tampiljam->JAM_PULANG);
 						$end=new DateTime($getabsensidata->JAM_KELUAR);
-						
 						if($end < $start){$lembur = 0 ;}
 						else{$lembur = $end->diff($start)->format('%h'); }
 					}
@@ -243,10 +260,9 @@ page[size="A4"] {
 						$param3=date('H:i:s',$jdatang);
 						$JAM_DATANG=new DateTime($param3);
 						$tjam = $JAM_DATANG->diff($JAM_PULANG)->format('%h');
-						$hitungharigaji=$getnamapegawaidata->GAJI_POKOK/$tjam;
+						$hitungharigaji=$pgrade_bekasi->NOMINAL_GRADE/$tjam;
 						
 						if($jmlhjam > $tjam){
-			
 							if($datetime->format('D')=="Sun"){
 								$gajiperhari=$hitungharigaji*$tjam*2;
 							}
@@ -254,27 +270,27 @@ page[size="A4"] {
 							if($datetime->format('D')!="Sun"){
 								$gajiperhari=$hitungharigaji*$tjam;
 							}
-			
+							
 							foreach($harilibur1 as $datalibur1){
 								if($getabsensidata->TANGGAL==$datalibur1){
 									$gajiperhari=$hitungharigaji*$tjam*2;	
 								}
 							} 	
-			
+							
 							$lemburdata=$jmlhjam-$tjam;
 			
 							if($lembur > 0){
 								if($datetime->format('D')=="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata*2;	
+									$gajilembur=$nominallembur*$lemburdata*2;	
 								}
 				
 								if($datetime->format('D')!="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata;	
+									$gajilembur=$nominallembur*$lemburdata;	
 								}
-				
+					
 								foreach($harilibur1 as $datalibur1){
 									if($getabsensidata->TANGGAL==$datalibur1){
-										$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata*2;		
+										$gajilembur=$nominallembur*$lemburdata*2;		
 									}
 								} 	
 							}
@@ -298,19 +314,19 @@ page[size="A4"] {
 							} 	
 			
 							$lemburdata=$jmlhjam-$tjam;
-			
+							
 							if($lembur > 0){
 								if($datetime->format('D')=="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata*2;	
+									$gajilembur=$nominallembur*$lemburdata*2;	
 								}
-				
+								
 								if($datetime->format('D')!="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata;	
+									$gajilembur=$nominallembur*$lemburdata;	
 								}
 				
 								foreach($harilibur1 as $datalibur1){
 									if($getabsensidata->TANGGAL==$datalibur1){
-										$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata*2;		
+										$gajilembur=$nominallembur*$lemburdata*2;		
 									}
 								}
 							}
@@ -323,23 +339,22 @@ page[size="A4"] {
 			
 					if($datetime->format('D')=="Sat"){
 			
-						$hitungharigaji=$getnamapegawaidata->GAJI_POKOK/$valuesabtu;
+						$hitungharigaji=$pgrade_bekasi->NOMINAL_GRADE/$valuesabtu;
 			
 						if($jmlhjam > $valuesabtu){
-			
 							if($datetime->format('D')=="Sun"){
 								$gajiperhari=$hitungharigaji*$valuesabtu*2;
 							}
-							
+			
 							$lemburdata=$jmlhjam-$valuesabtu;
 			
 							if($lembur > 0){
 								if($datetime->format('D')=="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata*2;	
+									$gajilembur=$nominallembur*$lemburdata*2;	
 								}
 				
 								if($datetime->format('D')!="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata;	
+									$gajilembur=$nominallembur*$lemburdata;	
 								}
 							}
 						}
@@ -356,14 +371,15 @@ page[size="A4"] {
 				
 							if($lembur > 0){
 								if($datetime->format('D')=="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata*2;	
+									$gajilembur=$nominallembur*$lemburdata*2;	
 								}
 				
 								if($datetime->format('D')!="Sun"){
-									$gajilembur=$pdata->NOMINAL_LEMBUR*$lemburdata;	
+									$gajilembur=$nominallembur*$lemburdata;	
 								}
 							}
 						}
+			
 						echo $gajiperhari;
 					}
 			
@@ -389,34 +405,34 @@ page[size="A4"] {
 				<td></td>
 				<td></td>
 				<td>
-				<?php 
+					<?php 
 			
-					echo $totaljam.' Jam';
-				?>
+						echo $totaljam.' Jam';
+					?>
 				</td>
 				<td>
-				<?php 
+					<?php 
 			
-					echo $totaljamlembur.' Jam';
-				?>
+						echo $totaljamlembur.' Jam';
+					?>
 				</td>
 				<td>
-				<?php 
+					<?php 
 			
-					echo 'Rp.'.number_format($totalgaji);
-				?>
+						echo 'Rp.'.number_format($totalgaji);
+					?>
 				</td>
 				<td>
-				<?php 
+					<?php 
 			
-					echo 'Rp.'.number_format($totallembur);
-				?>
+						echo 'Rp.'.number_format($totallembur);
+					?>
 				</td>
 				<td>
-				<?php 
+					<?php 
 			
-					echo 'Rp.'.number_format($subtotalgaji);
-				?>
+						echo 'Rp.'.number_format($subtotalgaji);
+					?>
 				</td>
 			</tr>
 		</table>
@@ -425,40 +441,38 @@ page[size="A4"] {
 	<table width="100%" style="font-size:9pt">
 		<tr>
 			<th width="60%" style="text-align:left">
-				<p>Gaji per hari:Rp.<?php echo number_format($pdata->GAJI_POKOK);?></p>
-				<p>Lemburan per jam:Rp.<?php echo number_format($pdata->NOMINAL_LEMBUR);?></p>
-				<p>(Lemburan akan dibayar bila ada perintah LEMBUR)</p>
-				<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 7 KALI SETAHUN)</p>
-				<p>Rumus gaji Senin-Sabtu:(Gaji per hari + Jumlah lembur)</p>
-				<p>Rumus gaji Minggu/Hari libur:((Gaji per hari X 2) + (Lembur per jam X 2))</p>
+				<p>Gaji per hari:Rp.<?php echo number_format($pgrade_bekasi->NOMINAL_GRADE);?></p>
+			<p>Lemburan per jam:Rp.<?php echo number_format($nominallembur);?></p>
+			<p>(Lemburan akan dibayar bila ada perintah LEMBUR)</p>
+			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 7 KALI SETAHUN)</p>
+			<p>Rumus gaji Senin-Sabtu:(Gaji per hari + Jumlah lembur)</p>
+			<p>Rumus gaji Minggu/Hari libur:((Gaji per hari X 2) + (Lembur per jam X 2))</p>
 			</th>
 			<th style="text-align:right">
 				<p>Total Cuti: <?php echo $objectdata->jumlah_cuti;?> Hari</p>
-				<p>Total potongan gaji untuk pelunasan:Rp.<?php echo  $objectdata->total_potongan;?></p>
-				<p>Total bonus gaji untuk full 1 bulan masuk:Rp.<?php echo  number_format($objectdata->nominal_kehadiran_full);?></p>
-				<p><b>Total terima gaji:Rp.<?php echo  number_format($objectdata->thp);?></b></p>
-				<p>Total pengambilan tabungan anda sampai saat ini:<?php
+			<p>Total potongan gaji untuk pelunasan:Rp.<?php echo $objectdata->total_potongan;?></p>
+			<p>Total bonus gaji untuk full 1 bulan masuk:Rp.<?php echo  number_format($objectdata->nominal_kehadiran_full);?></p>
+			<p><b>Total terima gaji:Rp.<?php echo  number_format($objectdata->thp);?></b></p>
+			<p>Total pengambilan tabungan anda sampai saat ini:<?php
 			
-					$pengambilantab=mysql_fetch_object(mysql_query("SELECT sum(NOMINAL_PENGAMBILAN) as totalpengambilanpeg FROM pengambilan_tabungan where NIP_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI'"));
-					echo 'Rp.'.number_format($pengambilantab->totalpengambilanpeg);
-				?></p>
-				<p>Total tabungan anda sampai saat ini:<?php
-					$tabungan=mysql_fetch_object(mysql_query("SELECT sum(tabungan) as totaltabungan FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI'"));
+				$pengambilantab=mysql_fetch_object(mysql_query("SELECT sum(NOMINAL_PENGAMBILAN) as totalpengambilanpeg FROM pengambilan_tabungan where NIP_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI'"));
+				echo 'Rp.'.number_format($pengambilantab->totalpengambilanpeg);
+			?></p>
+			<p>Total tabungan anda sampai saat ini:<?php
+				$tabungan=mysql_fetch_object(mysql_query("SELECT sum(NOMINAL) as totaltabungan FROM tabungan where NIP='$getnamapegawaidata->KODE_PEGAWAI'"));
 			
-					$pengambilan=mysql_fetch_object(mysql_query("SELECT sum(NOMINAL_PENGAMBILAN) as totalpengambilan FROM pengambilan_tabungan where NIP_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI'"));
+				$pengambilan=mysql_fetch_object(mysql_query("SELECT sum(NOMINAL_PENGAMBILAN) as totalpengambilan FROM pengambilan_tabungan where NIP_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI'"));
 			
-					$subtotaltabungan=$tabungan->totaltabungan-$pengambilan->totalpengambilan;
-					
-					if($subtotaltabungan <=0){$tb=0;}
-					
-					if($subtotaltabungan > 0){$tb=$subtotaltabungan;}
-					echo 'Rp.'.number_format($tb);
-				?></p>
-				<p>Tanggal mulai Nabung:
-				<?php
-					$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
-					echo $tnabung->tanggalnabung;
-				?></p>
+				$subtotaltabungan=$tabungan->totaltabungan-$pengambilan->totalpengambilan;
+				if($subtotaltabungan <=0){$tb=0;}
+				if($subtotaltabungan > 0){$tb=$subtotaltabungan;}
+				echo 'Rp.'.number_format($tb);
+			?></p>
+			<p>Tanggal mulai Nabung:
+			<?php
+				$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
+				echo $tnabung->tanggalnabung;
+			?></p>
 			</th>
 		</tr>
 	</table>

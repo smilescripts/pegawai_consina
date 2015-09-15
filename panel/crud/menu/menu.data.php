@@ -25,7 +25,7 @@
 						$data=$rights_groupdata["AKSES"];
 						$tmptrights_group=array();
 						$tmptrights_group=explode(",",$data);
-						$mastermenu=mysql_query("select * from rights_menu where ID < '11'  or ID='25' or ID='28' or ID='34' or ID='35' or ID='36' or ID='37'");
+						$mastermenu=mysql_query("select * from rights_menu where ID < '11' or ID='28' or ID='34' or ID='35' or ID='36' or ID='37'");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){	
@@ -69,6 +69,20 @@
 					<ul class="dropdown-menu " role="menu">
 					<?php
 						$mastermenu=mysql_query("select * from rights_menu where ID = '31' OR ID='32' OR ID='40' ");
+						
+						while($datamastermenu=mysql_fetch_object($mastermenu)){
+							foreach($tmptrights_group as $datarights){
+					?>
+						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-user"><?php echo $datamastermenu->MENU_NAME;?></a></li>
+					<?php } ?>
+					<?php } ?>
+					</ul>
+				</li>
+				<li class="dropdown">
+					 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>Penyesuaian<span class="caret"></span></a>
+					<ul class="dropdown-menu " role="menu">
+					<?php
+						$mastermenu=mysql_query("select * from rights_menu where ID = '25' OR ID='41' ");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){

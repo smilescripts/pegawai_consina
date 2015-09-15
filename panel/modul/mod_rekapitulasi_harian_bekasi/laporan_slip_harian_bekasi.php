@@ -24,7 +24,7 @@
 
 <ol class="breadcrumb" id="non-printable">
   <li><a href="#" id="beranda" class="beranda"><span class="glyphicon glyphicon-home"> Beranda</a></li>
-  <li class="active"><span class="glyphicon glyphicon-user">Rekapitulasi karyawan harian</li>
+  <li class="active"><span class="glyphicon glyphicon-user">Rekapitulasi karyawan harian Bekasi</li>
 </ol>
 
 

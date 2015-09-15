@@ -61,7 +61,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Slip gaji</h3>
     </div>
-    <div class="panel-body">	
+   	
 	<?php
 		$Akhir = new DateTime('01-'.$BULAN.'-'.$TAHUN);
 		$Akhir->modify('last day of this month');
@@ -332,6 +332,7 @@ while ($minggu != $dateakhirnya);
 			/* batas  */
 	?>
 	<hr/>
+	 <div class="panel-body">
 	<center><h3><u>REKAPITULASI KEHADIRAN DAN GAJI KARYAWAN HARIAN</u></h3><h3><?php echo $namabulan;?> <?php echo $TAHUN;?></h3></center>
 			
 		<div class="col-md-5" >

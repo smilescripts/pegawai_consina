@@ -20,6 +20,10 @@
             var url = "modul/mod_pegawai/pegawai.php";
             $("#data-utama").load(url);
         });
+		$('.penyesuaian_dana').live("click", function(){
+            var url = "modul/mod_penyesuaian_dana/penyesuaian_dana.php";
+            $("#data-utama").load(url);
+        });
 		$('.pegawai_bekasi').live("click", function(){
             var url = "modul/mod_pegawai_bekasi/pegawai_bekasi.php";
             $("#data-utama").load(url);
