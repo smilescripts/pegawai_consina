@@ -98,6 +98,7 @@
 								var DEPT = document.getElementById('DEPT').value;
 								var NIP_PEGAWAIH = document.getElementById('NIP_PEGAWAIH').value;
 								$.get("modul/mod_rekapitulasi_bulanan/laporan.php?start="+start+"&end="+end+"&DEPT="+DEPT+"&NIP_PEGAWAIH="+NIP_PEGAWAIH, function(data){
+								
 									$('#laporan').html(data);
 								});
 								

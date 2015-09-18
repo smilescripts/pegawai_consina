@@ -85,6 +85,7 @@
                 type: 'POST',
                 data: $form.serialize(),
                 success: function(data) {
+					//alert(data);
 					var tipe=data["tipe"];
 					var departemen=data["departemen"];
 					if(tipe=="SIMPAN"){

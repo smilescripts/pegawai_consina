@@ -347,7 +347,7 @@
 		$umt=$dataumt->NOMINAL_UMT;
 		$TUNJANGAN_LAIN=$datapeg->TUNJANGAN_LAIN;
 
-		$gjlembur=gajilembur($NIP);
+		
 		$tmptunjanganlain=array();
 		$tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
 

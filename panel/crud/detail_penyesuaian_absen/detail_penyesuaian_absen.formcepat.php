@@ -17,17 +17,12 @@
     if($id> 0) { 
 		$ID_DETAIL_PENYESUAIAN = $data['ID_DETAIL_PENYESUAIAN'];
 		$HEAD_ID_PENYESUAIAN = $data['HEAD_ID_PENYESUAIAN'];
-		$JAM_MASUK = $data['JAM_MASUK'];
-		$JAM_KELUAR = $data['JAM_KELUAR'];
-		$TANGGAL = $data['TANGGAL'];
 		$KODE_PEGAWAI = $data['KODE_PEGAWAI'];
 	
     } else {
 		$ID_DETAIL_PENYESUAIAN = $id;
 		$HEAD_ID_PENYESUAIAN = $headid;
-		$JAM_MASUK = "8:00";
-		$JAM_KELUAR = "17:00";
-		$TANGGAL = "";
+		$JML = "";
 		$KODE_PEGAWAI = $kpeg;
     }
 ?>
@@ -38,7 +33,7 @@
     .red{color: red;}
 </style>
 <script type="text/javascript">
-	$(document).ready(function () {
+	/* $(document).ready(function () {
 
 		$("#TANGGAL").change(function () {
 			var nip = <?php echo $data2['KODE_PEGAWAI']; ?>;
@@ -64,10 +59,10 @@
 		
 			} 
 		});
-	});
+	}); */
 </script>
 	
-<form class="form-horizontal petugasForm2" id="petugasForm2" action="crud/detail_penyesuaian_absen/detail_penyesuaian_absen.input.php" type="POST">
+<form class="form-horizontal petugasForm2" id="petugasForm2" action="crud/detail_penyesuaian_absen/detail_penyesuaian_absen.inputcepat.php" type="POST">
     <div class="modal-body">
 		<div class="form-group">
 			<label class="col-sm-3 control-label"></label>
@@ -79,35 +74,27 @@
 		<input type="hidden" class="form-control" value="<?php echo $HEAD_ID_PENYESUAIAN; ?>" id="HEAD_ID_PENYESUAIAN" name="HEAD_ID_PENYESUAIAN"  \>
 		<input type="hidden" class="form-control" value="<?php echo $KODE_PEGAWAI; ?>" id="KODE_PEGAWAI" name="KODE_PEGAWAI"  \>
         <div class="form-group">
-            <label for="tanggal" class="col-sm-3 control-label"> Tanggal</label>
+            <label for="tanggal" class="col-sm-3 control-label"> Periode</label>
             <div class="col-sm-9">
-				<div class="input-group date" id="datePicker6" >
-					<input type="text" id="TANGGAL" name="TANGGAL" class="form-control" value="<?php echo $TANGGAL; ?>" placeholder="Tanggal" readonly \>
-					<span class="input-group-addon"></span>
-				</div>
-				<div id="availability6"></div>
-            </div>
-			
-		</div>
-		<div class="form-group">
-            <label for="jam_masuk" class="col-sm-3 control-label"> Jam Masuk</label>
-            <div class="col-sm-4">
-				<div class="input-group bootstrap-timepicker">
-				  <input type="text" id="JAM_MASUK" class="form-control" name="JAM_MASUK" value="<?php echo $JAM_MASUK; ?>" placeholder="Jam masuk" aria-describedby="basic-addon2">
-				  <span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-time"></i></span>
+                <div class="input-daterange input-group" id="datepicker">
+					<input type="text" class="input-sm form-control" id="start" name="start" readonly />
+					<span class="input-group-addon">to</span>
+					<input type="text" class="input-sm form-control" id="end" name="end" readonly />
 				</div>
             </div>
 		</div>
 		<div class="form-group">
-            <label for="jam_masuk" class="col-sm-3 control-label"> Jam Pulang</label>
+            <label for="tanggal" class="col-sm-3 control-label"> Jumlah Hari</label>
             <div class="col-sm-4">
-				<div class="input-group bootstrap-timepicker">
-				  <input type="text" id="JAM_KELUAR" class="form-control" name="JAM_KELUAR" value="<?php echo $JAM_KELUAR; ?>" placeholder="Jam pulang" aria-describedby="basic-addon2">
-				  <span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-time"></i></span>
-				</div>
+               <input type="text" class="form-control" value="<?php echo $JML; ?>" id="JML" name="JML" placeholder="Jumlah Hari" \>
             </div>
 		</div>
-    </div>
+		<div class="form-group">
+            <label for="tanggal" class="col-sm-3 control-label"></label>
+            <div class="col-sm-8">
+               <div id="availability6" class="availability6" style="color:red;"></div>
+            </div>
+		</div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Batal Simpan</button>
         <button type="submit" id="simpan2" class="btn btn-success">Simpan</button>
@@ -115,46 +102,37 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function() {
-		$('#JAM_MASUK').timepicker({
-			minuteStep: 1,
-                secondStep: 5,
-                showInputs: false,
-                template: 'modal',
-                modalBackdrop: true,
-                showSeconds: false,
-                showMeridian: false
-			});
-		$('#JAM_KELUAR').timepicker({
-			 minuteStep: 1,
-                secondStep: 5,
-                showInputs: false,
-                template: 'modal',
-                modalBackdrop: true,
-                showSeconds: false,
-                showMeridian: false
-		});
-		 $('#datePicker6').datepicker({
-            format: "yyyy-mm-dd",
-            autoclose: true,
-            todayHighlight: true
-		}).on('changeDate', function(e) {
-            // Revalidate the date field
-            $('#petugasForm2').formValidation('revalidateField', 'TANGGAL');
-        });
+		$('.input-daterange').datepicker({
+						format: "yyyy-mm-dd",
+						orientation: "top right",
+						autoclose: true,
+						todayHighlight: true
+					}).on('changeDate', function(e) {
+						
+						$('#petugasForm2').formValidation('revalidateField', 'end');
+					});
 		$('#petugasForm2')
 	
 		.on('success.form.fv', function(e) {
             e.preventDefault();
-
+			//alert('tes');
             var $form = $(e.target),
                 fv    = $form.data('formValidation');
 			//alert("tes");
             $.ajax({
                 url: $form.attr('action'),
                 type: 'POST',
+				dataType: "json",
                 data: $form.serialize(),
-                success: function(data) {
-                    $('#dialog-detail_penyesuaian_absen').modal('hide');
+                success: function(html) {
+					//alert(html);
+					if(html["ket"]=='nol'){
+						$("#availability6").html("data absensi pegawai ini tidak perlu penyesuaian");
+					}else if(html["ket"]=='lebih'){
+						$("#availability6").html("jumlah hari penyesuaian max : "+html["hasil"]);
+					}else if(html["ket"]=='ok'){
+						$('#dialog-detail_penyesuaian_absen').modal('hide');
+					}
                 }
             });
         })
@@ -177,21 +155,22 @@
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-				TANGGAL: {
+				JML: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'
-                        }
+                        },
+						integer: {
+							message: 'Harap isi dengan angka'
+						},
+						between: {
+							min: 1,
+							max: 999,
+							message: 'Nilai dimasukkan minimal 1'
+						}
                     }
                 },
-				JAM_MASUK: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The is required'
-                        }
-                    }
-                },
-				JAM_KELUAR: {
+				end: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'

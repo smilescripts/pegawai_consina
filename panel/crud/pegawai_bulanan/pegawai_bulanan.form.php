@@ -402,7 +402,7 @@
                 processData: false,
                 type: 'POST',
                 success: function(data) {
-                    $('#dialog-pegawai').modal('hide');
+                    $('#dialog-pegawai_bulanan').modal('hide');
 					//alert(data);
                 }
             });

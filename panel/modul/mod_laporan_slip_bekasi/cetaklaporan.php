@@ -194,15 +194,29 @@ session_start();
 				<td><?php 
 					$queryjam1=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
 					$tampiljam1=mysql_fetch_object($queryjam1);
+					
+						$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='16'");
+						$tmenit=mysql_fetch_object($qmenit);
+						$tmenit2=explode(",",$tmenit->VALUE);
+						$ckmenit1=date('H:i', strtotime($getabsensidata->JAM_MASUK));
+						$ckmenit2=date('H', strtotime($tampiljam1->JAM_DATANG));
+						$ckmenit3=$ckmenit2.":".$tmenit2[0];
+						
+						if($ckmenit1>$ckmenit3){
+							$jammasuknya=$getabsensidata->JAM_MASUK;
+						}else{
+							$jammasuknya=$tampiljam1->JAM_DATANG;
+						}
+					
 					if($datetime->format('D')=="Sat"){
 				
-						$jamnya=strtotime($getabsensidata->JAM_MASUK);
+						$jamnya=strtotime($jammasuknya);
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
 						
 						$start1=new DateTime($tampiljam1->JAM_DATANG);
-						$end1=new DateTime($getabsensidata->JAM_MASUK);
+						$end1=new DateTime($jammasuknya);
 						if($end1<$start1){
 							$jmlhjam=$jamkeluarpegawai->diff($start1)->format('%h'); 
 						}else{
@@ -211,13 +225,13 @@ session_start();
 					}
 			
 					if($datetime->format('D')!="Sat"){
-						$jamnya=strtotime($getabsensidata->JAM_MASUK)+60*60*1;
+						$jamnya=strtotime($jammasuknya)+60*60*1;
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
 						
 						$start1=new DateTime($tampiljam1->JAM_DATANG);
-						$end1=new DateTime($getabsensidata->JAM_MASUK);
+						$end1=new DateTime($jammasuknya);
 						if($end1<$start1){
 							$jamnya1=strtotime($tampiljam1->JAM_DATANG)+60*60*1;
 							$param2=date('H:i:s',$jamnya1);

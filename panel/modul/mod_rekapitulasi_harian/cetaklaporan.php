@@ -450,7 +450,7 @@ while ($minggu != $dateakhirnya);
 					$queryjam1=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
 					$tampiljam1=mysql_fetch_object($queryjam1);
 					
-					$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+					$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='15'");
 						$tmenit=mysql_fetch_object($qmenit);
 						$tmenit2=explode(",",$tmenit->VALUE);
 						$ckmenit1=date('H:i', strtotime($getabsensidata->JAM_MASUK));

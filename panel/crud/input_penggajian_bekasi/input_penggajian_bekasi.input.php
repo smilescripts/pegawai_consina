@@ -255,7 +255,7 @@ while ($minggu != $dateakhirnya);
 			$queryjam1=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidataharian->KODE_JAM_KERJA) or die (mysql_error());
 			$tampiljam1=mysql_fetch_object($queryjam1);
 			
-			$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+			$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='16'");
 						$tmenit=mysql_fetch_object($qmenit);
 						$tmenit2=explode(",",$tmenit->VALUE);
 						$ckmenit1=date('H:i', strtotime($getabsensidataharian->JAM_MASUK));
@@ -545,7 +545,7 @@ while ($minggu != $dateakhirnya);
 			$queryjam2=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidataharian1->KODE_JAM_KERJA) or die (mysql_error());
 			$tampiljam2=mysql_fetch_object($queryjam2);
 			
-			$qmenit2=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+			$qmenit2=mysql_query("select VALUE from pengaturan_penggajian where ID='16'");
 						$tmenit21=mysql_fetch_object($qmenit2);
 						$tmenit22=explode(",",$tmenit21->VALUE);
 						$ckmenit12=date('H:i', strtotime($getabsensidataharian1->JAM_MASUK));
