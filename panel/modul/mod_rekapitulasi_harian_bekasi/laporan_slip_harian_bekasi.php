@@ -143,7 +143,7 @@
 </div>
 
 <div class="panel panel-warning">
-   <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Buaran)</h1>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Bekasi)</h1>
     <div class="panel-body">
 		<div id="data-rekapitulasi_harian_bekasi" id="non-printable">
 			<span id="laporan"></span>

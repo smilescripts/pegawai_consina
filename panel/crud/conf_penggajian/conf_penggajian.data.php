@@ -33,7 +33,7 @@
 				<td>'.$objectdata->PARAMETER.'</td>
 				';
 				
-				if($objectdata->ID=="2"){
+				if($objectdata->ID=="2" || $objectdata->ID=="15" || $objectdata->ID=="16"){
 					$tmptunjanganlain=array();
 					$tmptunjanganlain=explode(",",$objectdata->VALUE);
 		
@@ -42,7 +42,7 @@
 					';
 				}		
 				
-				if($objectdata->ID!="2"){
+				if($objectdata->ID!="2" && $objectdata->ID!="15" && $objectdata->ID!="16"){
 		
 					echo'
 				<td>'.$objectdata->VALUE.'</td>

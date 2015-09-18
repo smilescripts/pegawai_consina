@@ -348,6 +348,7 @@
 			<p>Potongan Kasbon:Rp.<?php echo number_format($objectdata->kasbon);?></p>
 			<p>Potongan Pinjaman:Rp.<?php echo number_format($objectdata->pinjaman);?></p>
 			<p>Potongan Tabungan:Rp.<?php echo number_format($objectdata->tabungan);?></p>
+		
 		</div>
 		<div class="col-md-6">
 			<p>Total potongan gaji:Rp.<?php echo  $objectdata->total_potongan;?></p>
@@ -375,6 +376,7 @@
 				$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
 				echo $tnabung->tanggalnabung;
 			?></p>
+			
 		</div>
 		<br/>
 		<p><table style="margin-top:55px" class="table table-bordered" >

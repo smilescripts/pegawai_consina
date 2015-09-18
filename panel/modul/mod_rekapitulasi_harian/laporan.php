@@ -164,17 +164,17 @@ while ($minggu != $dateakhirnya);
 		$no = 0;
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak' and STATE_ID='$_SESSION[STATE_ID]' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak'  and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
        
 		}
 	
 		if($DEPT=="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI ='Kontrak' and STATE_ID='$_SESSION[STATE_ID]'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI ='Kontrak'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI ='Kontrak' and STATE_ID='$_SESSION[STATE_ID]' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI ='Kontrak' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH==""){
@@ -339,6 +339,32 @@ while ($minggu != $dateakhirnya);
 			<?php 
 				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Kontrak'") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
+				$penyesuaian_pemotongan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini'");
+				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
+				$nominal_pemotongan=$get_penyesuaian_pemotongan->NOMINAL;
+				
+				$penyesuaian_penambahan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini'");
+				$get_penyesuaian_penambahan=mysql_fetch_object($penyesuaian_penambahan);
+				$nominal_penambahan=$get_penyesuaian_penambahan->NOMINAL;
+				$tambah_pemotongan=0;
+				$tambah_penambahan=0;
+				if($nominal_pemotongan!=""){
+					
+					$penyesuaian="Penyesuaian Pemotongan Gaji Bulan Ini Sebesar";
+					$nominal_pemotongan=$nominal_pemotongan;
+					$fix_pemotongan=$penyesuaian.' : Rp.'.number_format($nominal_pemotongan) .'<br/>Keterangan:'.$get_penyesuaian_pemotongan->KETERANGAN;
+					$tambah_pemotongan=$nominal_pemotongan;
+					
+					
+				}
+				if($nominal_penambahan!=""){
+					
+					$penyesuaian_tambah="Penyesuaian Penambahan Gaji Bulan Ini Sebesar";
+					$nominal_penambahan=$nominal_penambahan;
+					$fix_penambahan=$penyesuaian_tambah.' : Rp.'.number_format($nominal_penambahan) .'<br/>Keterangan:'.$get_penyesuaian_penambahan->KETERANGAN;
+					$tambah_penambahan=$nominal_penambahan;
+					
+				}
 			?>
 			<p>Kepada Yth :<?php echo  $getnamapegawaidata->NAMA_PEGAWAI;?><p>
 			<p>NIP Karyawan :<?php echo  $getnamapegawaidata->NIP_PEGAWAI;?><p>
@@ -668,14 +694,15 @@ while ($minggu != $dateakhirnya);
 			<p>Lembur:Rp.<?php echo $totallembur;?></p>
 			<?php
 				
-				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman);
-				$total_penerimaan=getthp($NIP)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan;
-				$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pdata->GAJI_POKOK)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan);
+				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$tambah_pemotongan);
+				$total_penerimaan=getthp($NIP)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan;
+				$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pgrade_bekasi->NOMINAL_GRADE)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan);
 			?>
 			<p>Bonus kehadiran full:Rp.<?php echo number_format($nominal_kehadiran_full);?></p>
 			<p>Potongan Kasbon:Rp.<?php echo number_format($kasbon);?></p>
 			<p>Potongan Pinjaman:Rp.<?php echo number_format($nominalpinjaman);?></p>
 			<p>Potongan Tabungan:Rp.<?php echo number_format($nominaltabungan);?></p>
+			<p><?php if($nominal_penambahan!=""){ echo $fix_penambahan;}?></p>
 		</div>
 	     	<div class="col-md-6">
 			<p>Total potongan gaji:Rp.<?php echo $total_potongan;?></p>
@@ -703,6 +730,9 @@ while ($minggu != $dateakhirnya);
 				$tnabung=mysql_fetch_object(mysql_query("SELECT TANGGAL as tanggalnabung FROM tabungan where NIP='$getnamapegawaidata->KODE_PEGAWAI'  order by TANGGAL asc limit 1"));
 				echo $tnabung->tanggalnabung;
 			?></p>
+			<p>
+			<?php if($nominal_pemotongan!=""){ echo $fix_pemotongan;}?>
+			</p>
 		</div>
 	</div>
 <?php } ?>

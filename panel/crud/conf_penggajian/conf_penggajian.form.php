@@ -17,29 +17,34 @@
 		$VALUE = "";
 	
     }
+	 if($ID=="2" || $ID=="15" || $ID=="16"){
+		$pecah=array();
+		$pecah=explode(",",$VALUE); 
+		
+	 }
 ?>
 	
 <form class="form-horizontal petugasForm" id="petugasForm" action="crud/conf_penggajian/conf_penggajian.input.php" type="POST">
     <div class="modal-body">
         <div class="form-group">
-            <label for="NAMA_conf_penggajian" class="col-sm-3 control-label"> Parameter</label>
+            <label for="PARAMETER" class="col-sm-3 control-label"> Parameter</label>
             <div class="col-sm-9">
 				<input type="text" class="form-control" readonly value="<?php echo $PARAMETER; ?>" id="PARAMETER" name="PARAMETER"  \>
 				<input type="hidden" class="form-control" value="<?php echo $ID; ?>" id="ID" name="ID"  \>
 			</div>
 		</div>
 		<div class="form-group">
-            <label for="NAMA_conf_penggajian" class="col-sm-3 control-label"> Value</label>
+            <label for="Value" class="col-sm-3 control-label"> Value</label>
             <div class="col-sm-9">
 				<?php if($ID!="4" && $ID!="3" && $ID !="2" && $ID!="5" && $ID!="15" && $ID!="16" ){ ?>
 				<input type="text" class="form-control"  value="<?php echo $VALUE; ?>" id="VALUE" name="VALUE"  \>
 				<?php } ?>
 				<?php if($ID=="2" || $ID=="15" || $ID=="16"){ ?>
 				<div class="col-sm-3" style="margin-left:-15px">
-					<input type="text" class="form-control" value="<?php echo $VALUE; ?>" id="VALUE" name="VALUE"  \>
+					<input type="text" class="form-control" value="<?php echo $pecah[0]; ?>" id="VALUE" name="VALUE"  \>
 				</div>
 				<div class="col-sm-6" style="margin-left:-15px">
-					<input type="text" class="form-control"  value="<?php echo $VALUE; ?>" id="VALUE1" name="VALUE1"  \>
+					<input type="text" class="form-control"  value="<?php echo $pecah[1]; ?>" id="VALUE1" name="VALUE1" required \>
 				</div>
 				<br/>
 				<?php } ?>
@@ -117,20 +122,6 @@
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {
-				NAMA_conf_penggajian: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The is required'
-                        },
-                        stringLength: {
-                            max: 50,
-                            message: 'The must be less than 50 characters'
-                        }
-                    }
-                },
-            }
-			<?php if($ID == "2"){ ?>
-			 fields: {
 				VALUE: {
                     validators: {
                         notEmpty: {
@@ -143,7 +134,7 @@
                     }
                 },
             }
-		<?php } ?>
+			
 			
 			
         });

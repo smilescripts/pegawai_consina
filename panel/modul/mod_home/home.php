@@ -56,7 +56,7 @@
 				$nbulan=$bulan->format('M Y');
 				
 				
-                $sql_jumlah   = "SELECT sum(thp) as jumlah FROM head_penggajian  group by bulan";        
+                $sql_jumlah   = "SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as jumlah FROM head_penggajian  group by bulan";        
 				$query_jumlah = mysql_query($sql_jumlah)  or die(mysql_error()); 
                  while( $data = mysql_fetch_array($query_jumlah ) ){
                     $jumlah = $data["jumlah"];   
@@ -256,7 +256,7 @@
 	<div class="well">
 	<div style="overflow-y:scroll;height:100px">
             <?php
-            $groupgaji=mysql_query("SELECT tanggal_gaji,sum(thp) as totgaj from `head_penggajian` group by bulan") or die (mysql_error());
+            $groupgaji=mysql_query("SELECT tanggal_gaji,SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as totgaj from `head_penggajian` group by bulan") or die (mysql_error());
             $no = 1;
             while($objectgroupgaji=mysql_fetch_object($groupgaji)){
 			$bulan=date('F Y', strtotime($objectgroupgaji->tanggal_gaji));

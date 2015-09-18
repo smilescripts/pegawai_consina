@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
     include_once "../../include/koneksi.php";
 	$ID = $_POST['ID'];
 	

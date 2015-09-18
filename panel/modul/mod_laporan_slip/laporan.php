@@ -425,7 +425,11 @@
 			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 7 KALI SETAHUN)</p>
 			<p>Rumus gaji Senin-Sabtu:(Gaji per hari + Jumlah lembur)</p>
 			<p>Rumus gaji Minggu/Hari libur:((Gaji per hari X 2) + (Lembur per jam X 2))</p>
-			
+			<p>Penambahan penyesuaian Gaji:Rp.
+			<?php
+				
+				echo number_format($objectdata->penambahan);
+			?></p>
 		</div>
 		<div class="col-md-6">
 			<p>Total Cuti: <?php echo $objectdata->jumlah_cuti;?> Hari</p>
@@ -451,6 +455,11 @@
 			<?php
 				$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
 				echo $tnabung->tanggalnabung;
+			?></p>
+				<p>Pemotongan penyesuaian Gaji: Rp.
+			<?php
+				
+				echo number_format($objectdata->pemotongan);
 			?></p>
 		</div>
 		<br/>

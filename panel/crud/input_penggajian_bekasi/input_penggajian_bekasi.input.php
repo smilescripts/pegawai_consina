@@ -168,8 +168,30 @@ while ($minggu != $dateakhirnya);
 			$tampilqlembur=mysql_fetch_object($qlembur);
 			$nominallembur=$tampilqlembur->VALUE;
 			}
-		$grade_bekasi=mysql_query("select * from grade_bekasi where KODE_GRADE='$datapegawai->GAJI_POKOK'");
-		$pgrade_bekasi=mysql_fetch_object($grade_bekasi);	
+			$grade_bekasi=mysql_query("select * from grade_bekasi where KODE_GRADE='$datapegawai->GAJI_POKOK'");
+			$pgrade_bekasi=mysql_fetch_object($grade_bekasi);	
+			
+				$nominal_pemotongan="";
+				$nominal_penambahan="";
+				$penyesuaian_pemotongan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$datapegawai->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini'");
+				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
+				$nominal_pemotongan=$get_penyesuaian_pemotongan->NOMINAL;
+				$penyesuaian_penambahan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$datapegawai->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini'");
+				$get_penyesuaian_penambahan=mysql_fetch_object($penyesuaian_penambahan);
+				$nominal_penambahan=$get_penyesuaian_penambahan->NOMINAL;
+				$nominal_pemotongan_tambah=0;
+				$nominal_penambahan_tambah=0;
+				if($nominal_pemotongan!=""){
+					$nominal_pemotongan_tambah=$nominal_pemotongan;
+				}
+				if($nominal_penambahan!=""){
+					
+					$nominal_penambahan_tambah=$nominal_penambahan;
+			
+					
+				}
+		
+		
 		
 		$NIP=$datapegawai->NIP_PEGAWAI;
 		$data=pegawai($NIP);
@@ -540,9 +562,9 @@ while ($minggu != $dateakhirnya);
 		$terlambat=potogan_terlambat($NIP);
 		$go=str_replace(array(','), array(''), $takehomepay);
 		$pot_mangkir=$go / $hitungjumlahharikerja * $hasil;
-		$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pgrade_bekasi->NOMINAL_GRADE) + $nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan);
-		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman);
-		$total_penerimaan=number_format(getthp($NIP) + $nominal_kehadiran_full+$totalgaji+$totallembur + $uang_makan_transport+ $totalpenghargaan);
+		$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pgrade_bekasi->NOMINAL_GRADE) + $nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$nominal_penambahan_tambah-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$nominal_pemotongan_tambah);
+		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman+$nominal_pemotongan_tambah);
+		$total_penerimaan=number_format(getthp($NIP) + $nominal_kehadiran_full+$totalgaji+$totallembur + $uang_makan_transport+ $totalpenghargaan+$nominal_penambahan_tambah);
 	
 		if($tipe=="SIMPAN"){
 			$bulanini=$BULAN;
@@ -550,7 +572,7 @@ while ($minggu != $dateakhirnya);
 			$getcek=mysql_fetch_object($cek);
 			
 			if($getcek==""){
-				mysql_query("insert into head_penggajian values('$getkode','$kp','$totalgaji','$uang_makan_transport','$totallembur','$hariterlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$takehomepayfix','$kasbon','$nominalpinjaman','0','$jumlahmasuk','$totalpenghargaan','$hasiljumlahcuti','$nominal_kehadiran_full','Harian Bekasi','$BULAN','$TAHUN','$startp','$endp')");
+				mysql_query("insert into head_penggajian values('$getkode','$kp','$totalgaji','$uang_makan_transport','$totallembur','$hariterlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$takehomepayfix','$kasbon','$nominalpinjaman','0','$jumlahmasuk','$totalpenghargaan','$hasiljumlahcuti','$nominal_kehadiran_full','Harian Bekasi','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah')");
 				$bulansekarang=$BULAN;
 				$tahunsekarang=$TAHUN;
 				mysql_query("UPDATE `kasbon_pegawai` SET `STATUS` = 'LUNAS' WHERE NIP_PEGAWAI='$kp' and MONTH(TANGGAL)='$bulansekarang' and YEAR(TANGGAL)='$tahunsekarang'");
