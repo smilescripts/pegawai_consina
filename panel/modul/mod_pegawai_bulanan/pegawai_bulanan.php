@@ -15,7 +15,7 @@
     });
 	
 	$.ajax({
-		url:"crud/departemen/departemen.data.php",
+		url:"crud/pegawai_bulanan/pegawai_bulanan.data.php",
 		cache: false,
 		beforeSend: function(){
 			$('#loadingDiv').show();
@@ -36,7 +36,7 @@
 
 
 <div class="panel panel-warning">
-  <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Pegawai Harian (bulanan)</h1>
+  <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Pegawai Bulanan (Office)</h1>
 			<div class="btnbantuan" style="margin-top: -55px;">
 							<a href="#dialog-pegawai_bulanan" id="0" class="btn tambah-pegawai_bulanan btn-danger" data-toggle="modal" ><i class="glyphicon glyphicon-plus-sign"></i>Tambah Data</a>
 							</div>

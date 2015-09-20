@@ -236,15 +236,9 @@
 				?>
             </div>
 		</div>
-		<div class="form-group">
-            <label for="PEGAWAI_OUTLET" class="col-sm-3 control-label">Pegawai Outlet</label>
-            <div class="col-sm-9">
-				<select name="OUTLET" class="form-control" id="OUTLET" style="width:100%">
-                    <option value="TIDAK" <?php if($OUTLET=="TIDAK"){echo "selected='selected'";}?>>1.TIDAK</option>
-					<option value="YA" <?php if($OUTLET=="YA"){echo "selected='selected'";}?>>2.YA</option>
-                </select>
-			</div>
-		</div>
+	
+				<input type="hidden" class="form-control" value="TIDAK" id="OUTLET" name="OUTLET" \>
+			
 		<div class="form-group">
             <label for="GAJI_POKOK" class="col-sm-3 control-label">Gaji Bulanan</label>
             <div class="col-sm-9">

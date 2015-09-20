@@ -19,6 +19,10 @@
 		$('.pegawai').live("click", function(){
             var url = "modul/mod_pegawai/pegawai.php";
             $("#data-utama").load(url);
+        });	
+		$('.pegawai_outlet').live("click", function(){
+            var url = "modul/mod_pegawai_outlet/pegawai_outlet.php";
+            $("#data-utama").load(url);
         });
 		$('.penyesuaian_dana').live("click", function(){
             var url = "modul/mod_penyesuaian_dana/penyesuaian_dana.php";
@@ -151,9 +155,18 @@
             var url = "modul/mod_laporan_slip_bulanan/laporan_slip_bulanan.php";
             $("#data-utama").load(url);
 		});
+		
+		$('.laporan_slip_outlet').live("click", function(){
+            var url = "modul/mod_laporan_slip_outlet/laporan_slip_outlet.php";
+            $("#data-utama").load(url);
+		});
 	
 		$('.rekapitulasi_bulanan').live("click", function(){
             var url = "modul/mod_rekapitulasi_bulanan/laporan_slip_bulanan.php";
+            $("#data-utama").load(url);
+		});
+		$('.rekapitulasi_outlet').live("click", function(){
+            var url = "modul/mod_rekapitulasi_outlet/laporan_slip_outlet.php";
             $("#data-utama").load(url);
 		});
 		$('.rekapitulasi_harian').live("click", function(){
@@ -231,6 +244,10 @@
 	
 		$('.input_penggajian_bulanan').live("click", function(){
             var url = "modul/mod_input_penggajian_bulanan/input_penggajian_bulanan.php";
+            $("#data-utama").load(url);
+		});
+		$('.input_penggajian_outlet').live("click", function(){
+            var url = "modul/mod_input_penggajian_outlet/input_penggajian_outlet.php";
             $("#data-utama").load(url);
 		});
     });

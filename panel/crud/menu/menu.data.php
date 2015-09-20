@@ -25,7 +25,7 @@
 						$data=$rights_groupdata["AKSES"];
 						$tmptrights_group=array();
 						$tmptrights_group=explode(",",$data);
-						$mastermenu=mysql_query("select * from rights_menu where ID < '11' or ID='28' or ID='34' or ID='35' or ID='36' or ID='37'");
+						$mastermenu=mysql_query("select * from rights_menu where ID < '11' or ID='28' or ID='34' or ID='35' or ID='36' or ID='37' or ID='42'");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){	
@@ -40,7 +40,7 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>Proses Penggajian<span class="caret"></span></a>
 					<ul class="dropdown-menu " role="menu">
 					<?php
-						$mastermenu=mysql_query("select * from rights_menu where ID='12' or ID='38' or ID='27'  ");
+						$mastermenu=mysql_query("select * from rights_menu where ID='12' or ID='38' or ID='27' or ID='45'  ");
 					
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
@@ -54,7 +54,7 @@
 					 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>Data Laporan<span class="caret"></span></a>
 					<ul class="dropdown-menu " role="menu">
 					<?php
-						$mastermenu=mysql_query("select * from rights_menu where ID = '13' or ID='26' or ID='29' or ID='39'");
+						$mastermenu=mysql_query("select * from rights_menu where ID = '13' or ID='26' or ID='29' or ID='39' or ID='44'");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
@@ -68,7 +68,7 @@
 					 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>Rekapitulasi<span class="caret"></span></a>
 					<ul class="dropdown-menu " role="menu">
 					<?php
-						$mastermenu=mysql_query("select * from rights_menu where ID = '31' OR ID='32' OR ID='40' ");
+						$mastermenu=mysql_query("select * from rights_menu where ID = '31' OR ID='32' OR ID='40' OR ID='43' ");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
