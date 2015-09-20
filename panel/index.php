@@ -62,14 +62,11 @@
 			</form>
 		</section>
     </section>
-	<audio id="audio">
-    <source src="sound/welcome.mp3" type="audio/mp3" />
-	</audio>
+	
 	<audio id="denied">
     <source src="sound/denied.mp3" type="audio/mp3" />
 	</audio>
    <script type="text/javascript">
-		var audio = document.getElementById('audio');
 		var denied = document.getElementById('denied');
 		$(document).ready(function() {
             $('#loginForm')
@@ -92,10 +89,9 @@
 								  denied.play();
 							}
 							if(html['cek']=='true'){
-								audio.play();
-								setTimeout( function show(){
+								
 								window.location='panel.php';
-									}, 1000 );
+								
 							}
 						}
 					});
