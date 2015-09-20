@@ -133,7 +133,7 @@ while ($minggu != $dateakhirnya);
 	}
 	
 	
-	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Tetap'");
+	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Tetap' and OUTLET!='YA'");
 	
 	while($datapegawai=mysql_fetch_object($getpegawai)){
 		$totalgaji=0;
@@ -360,7 +360,22 @@ while ($minggu != $dateakhirnya);
 					$totaljamlembur=$lembur1+$totaljamlembur;
 			} 
 		
-		
+		$nominal_pemotongan="";
+		$nominal_penambahan="";
+		$penyesuaian_pemotongan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$kp' and STATUS='Pemotongan' and BULAN='$bulanini'");
+		$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
+		$nominal_pemotongan=$get_penyesuaian_pemotongan->NOMINAL;
+		$penyesuaian_penambahan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$kp' and STATUS='Penambahan' and BULAN='$bulanini'");
+		$get_penyesuaian_penambahan=mysql_fetch_object($penyesuaian_penambahan);
+		$nominal_penambahan=$get_penyesuaian_penambahan->NOMINAL;
+		$nominal_pemotongan_tambah=0;
+		$nominal_penambahan_tambah=0;
+		if($nominal_pemotongan!=""){
+			$nominal_pemotongan_tambah=$nominal_pemotongan;
+		}
+		if($nominal_penambahan!=""){
+			$nominal_penambahan_tambah=$nominal_penambahan;
+		}	
 		
 		
 		$lembur=((1/173)*(getthp($NIP) + $uang_makan_transport))*$totaljamlembur;
@@ -371,16 +386,16 @@ while ($minggu != $dateakhirnya);
 		$tmenit22=explode(",",$tmenit->VALUE);
 				
 		$terlambat=$jmlterlambat*$tmenit22[1];
-		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman+$terlambat);
-		$total_penerimaan=number_format(getthp($NIP) + $uang_makan_transport +$nominal_kehadiran_full+$lembur);
-		$thp=(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur)-($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat)-$pot_mangkir;
+		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman+$terlambat+$nominal_pemotongan_tambah);
+		$total_penerimaan=number_format(getthp($NIP) + $uang_makan_transport +$nominal_kehadiran_full+$lembur+$nominal_penambahan_tambah);
+		$thp=(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur+$nominal_penambahan_tambah)-($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$nominal_pemotongan_tambah)-$pot_mangkir;
 		if($tipe=="SIMPAN"){
 			$bulanini=$BULAN;
 			$cek=mysql_query("select * from head_penggajian where bulan='$bulanini' and tahun='$tahun' and kode_pegawai='$kp'");
 			$getcek=mysql_fetch_object($cek);
 			
 			if($getcek==""){
-				mysql_query("insert into head_penggajian values('$getkode','$kp','$gaji_pokok','$uang_makan_transport','$datalembur','$terlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$thp','$kasbon','$nominalpinjaman','$pot_mangkir','$jumlahmasuk','0','$hasiljumlahcuti','$nominal_kehadiran_full','Bulanan','$BULAN','$TAHUN','$startp','$endp','0','0')");
+				mysql_query("insert into head_penggajian values('$getkode','$kp','$gaji_pokok','$uang_makan_transport','$datalembur','$terlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$thp','$kasbon','$nominalpinjaman','$pot_mangkir','$jumlahmasuk','0','$hasiljumlahcuti','$nominal_kehadiran_full','Bulanan','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah')");
 				$bulansekarang=$BULAN;
 				$tahunsekarang=$TAHUN;
 				mysql_query("UPDATE `kasbon_pegawai` SET `STATUS` = 'LUNAS' WHERE NIP_PEGAWAI='$kp' and MONTH(TANGGAL)='$bulansekarang' and YEAR(TANGGAL)='$tahunsekarang'");

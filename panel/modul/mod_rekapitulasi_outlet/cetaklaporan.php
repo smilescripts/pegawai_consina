@@ -359,6 +359,32 @@ while ($minggu != $dateakhirnya);
 			<?php 
 				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Tetap' and OUTLET='YA'") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
+				$penyesuaian_pemotongan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini'");
+				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
+				$nominal_pemotongan=$get_penyesuaian_pemotongan->NOMINAL;
+				
+				$penyesuaian_penambahan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini'");
+				$get_penyesuaian_penambahan=mysql_fetch_object($penyesuaian_penambahan);
+				$nominal_penambahan=$get_penyesuaian_penambahan->NOMINAL;
+				$tambah_pemotongan=0;
+				$tambah_penambahan=0;
+				if($nominal_pemotongan!=""){
+					
+					$penyesuaian="Penyesuaian Pemotongan Gaji Bulan Ini Sebesar";
+					$nominal_pemotongan=$nominal_pemotongan;
+					$fix_pemotongan=$penyesuaian.' : Rp.'.number_format($nominal_pemotongan) .'<br/>Keterangan:'.$get_penyesuaian_pemotongan->KETERANGAN;
+					$tambah_pemotongan=$nominal_pemotongan;
+					
+					
+				}
+				if($nominal_penambahan!=""){
+					
+					$penyesuaian_tambah="Penyesuaian Penambahan Gaji Bulan Ini Sebesar";
+					$nominal_penambahan=$nominal_penambahan;
+					$fix_penambahan=$penyesuaian_tambah.' : Rp.'.number_format($nominal_penambahan) .'<br/>Keterangan:'.$get_penyesuaian_penambahan->KETERANGAN;
+					$tambah_penambahan=$nominal_penambahan;
+					
+				}
 			?>
 			<p>Kepada Yth :<?php echo  $getnamapegawaidata->NAMA_PEGAWAI;?><p>
 			<p>NIP Karyawan :<?php echo  $getnamapegawaidata->NIP_PEGAWAI;?><p>
@@ -642,9 +668,9 @@ while ($minggu != $dateakhirnya);
 				$tmenit22=explode(",",$tmenit->VALUE);
 				
 				$terlambat=$jmlterlambat*$tmenit22[1];
-				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat);
-				$total_penerimaan=number_format(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur);
-				$takehomepayfix2=(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur)-($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat);
+				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$tambah_pemotongan);
+				$total_penerimaan=number_format(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur+$tambah_penambahan);
+				$takehomepayfix2=(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur+$tambah_penambahan)-($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$tambah_pemotongan);
 			?>
 			<p>Potongan terlambat:Rp.<?php echo number_format($terlambat);?></p>
 			<p>Potongan Kasbon:Rp.<?php echo number_format($kasbon);?></p>
@@ -679,6 +705,8 @@ while ($minggu != $dateakhirnya);
 				$tnabung=mysql_fetch_object(mysql_query("SELECT TANGGAL as tanggalnabung FROM tabungan where NIP='$getnamapegawaidata->KODE_PEGAWAI'  order by TANGGAL asc limit 1"));
 				echo $tnabung->tanggalnabung;
 			?></p>
+			<p><?php if($nominal_penambahan!=""){ echo $fix_penambahan;}?></p>
+			<p><?php if($nominal_pemotongan!=""){ echo $fix_pemotongan;}?></p>
 		</th>
 		</tr>
 </table>

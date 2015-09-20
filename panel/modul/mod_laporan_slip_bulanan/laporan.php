@@ -377,6 +377,16 @@
 				$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
 				echo $tnabung->tanggalnabung;
 			?></p>
+				<p>Pemotongan penyesuaian Gaji: Rp.
+			<?php
+				
+				echo number_format($objectdata->pemotongan);
+			?></p>		
+				<p>Penambahan penyesuaian Gaji:Rp.
+			<?php
+				
+				echo number_format($objectdata->penambahan);
+			?></p>
 			
 		</div>
 		<br/>
