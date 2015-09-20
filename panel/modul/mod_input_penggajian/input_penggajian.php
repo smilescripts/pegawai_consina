@@ -165,12 +165,12 @@
 		<div class="alert alert-success" role="alert"><h3 ><b>Proses Penggajian Bulan Ini Berhasil Dilakukan</b></h3></div>
 		</div>
 		<div id="penggajian_gagal" style="display:none" >
-		<div class="alert alert-danger" role="alert"><h3><b>Maaf Penggajian Bulan Ini Sudah Dilakukan</b></h3></div>
+		<div class="alert alert-danger" role="alert"><h3><b><span class="glyphicon glyphicon-alert"></span>&nbsp;Maaf Penggajian Bulan Ini Sudah Dilakukan&nbsp;<span class="glyphicon glyphicon-alert"></span></b></h3></div>
 		</div>
 		<div id="loadingDiv" style="display:none" >
 		<p><b>Proses Penggajian Sedang Berlangsung Mohon Tunggu</b></p>
 		<img src='img/gif-load.gif'/>
-		<p><div class="alert alert-danger" role="alert"><b>Peringatan:Jangan Tutup Browser Selama Proses Penggajian Sedang Berlangsung</b></div></p>
+		<p><div class="alert alert-danger" role="alert"><b><span class="glyphicon glyphicon-alert"></span>&nbsp;Peringatan:Jangan Tutup Browser Selama Proses Penggajian Sedang Berlangsung&nbsp;<span class="glyphicon glyphicon-alert"></span></b></div></p>
 		</div> 
 		</center>
 <div class="modal fade" id="dialog-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -31,7 +31,7 @@
 							foreach($tmptrights_group as $datarights){	
 						
 					?>
-						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?>  id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-user"><?php echo $datamastermenu->MENU_NAME;?></a></li>
+						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?>  id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-align-right"><?php echo $datamastermenu->MENU_NAME;?></a></li>
 					<?php  } ?>
 					<?php  } ?>
 					</ul>
@@ -45,7 +45,7 @@
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
 					?>
-						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?>  id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-user"><?php echo $datamastermenu->MENU_NAME;?></a></li>
+						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?>  id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-save-file"><?php echo $datamastermenu->MENU_NAME;?></a></li>
 					<?php } ?>
 					<?php } ?>
 					</ul>
@@ -59,7 +59,7 @@
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
 					?>
-						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-user"><?php echo $datamastermenu->MENU_NAME;?></a></li>
+						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-book"><?php echo $datamastermenu->MENU_NAME;?></a></li>
 					<?php } ?>
 					<?php } ?>
 					</ul>
@@ -73,7 +73,7 @@
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
 					?>
-						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-user"><?php echo $datamastermenu->MENU_NAME;?></a></li>
+						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-book"><?php echo $datamastermenu->MENU_NAME;?></a></li>
 					<?php } ?>
 					<?php } ?>
 					</ul>
@@ -87,7 +87,7 @@
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
 					?>
-						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-user"><?php echo $datamastermenu->MENU_NAME;?></a></li>
+						<li style="letter-spacing:2px;word-spacing:-0.8em;"><a href="#" <?php  if($datarights!=$datamastermenu->ID){echo 'style="display:none"'; }?> id="<?php echo $datamastermenu->MENU_LINK;?>" class="<?php echo $datamastermenu->MENU_LINK;?>"><span class="glyphicon glyphicon-export"><?php echo $datamastermenu->MENU_NAME;?></a></li>
 					<?php } ?>
 					<?php } ?>
 					</ul>
