@@ -21,7 +21,7 @@
 			$('#loadingDiv').show();
 		},
 		complete: function(){
-			$('#loadingDiv').delay(5000).hide(0);
+			$('#loadingDiv').hide(0);
 		}
 	
     });
@@ -35,7 +35,7 @@
 
 
 <div id="loadingDiv" style="display:none" >
-	<img src='img/loading-bar.gif' style="position:absolute;margin-left:30%;margin-top:2%" />
+	<img src='img/loading.gif' style="position:absolute;margin-left:35%;margin-top:6%" width="300" />
 </div> 
 
 <div class="panel panel-warning">

@@ -99,6 +99,9 @@
 							url: $form.attr('action'),
 							type: 'POST',
 							data: $form.serialize(),
+							beforeSend: function(){
+								$('#loadingDiv').show();
+							},
 							success: function(data) {
 								var BULAN = document.getElementById('BULAN').value;
 								var TAHUN = document.getElementById('TAHUN').value;
@@ -106,6 +109,7 @@
 								var NIP_PEGAWAIH = document.getElementById('NIP_PEGAWAIH').value;
 								$.get("modul/mod_laporan_slip/laporan.php?BULAN="+BULAN+"&TAHUN="+TAHUN+"&DEPT="+DEPT+"&NIP_PEGAWAIH="+NIP_PEGAWAIH, function(data){
 									$('#laporan').html(data);
+									$('#loadingDiv').hide(0);
 								});
 								
 							}
@@ -169,7 +173,11 @@
     <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Harian (Buaran)</h1>
 	
     <div class="panel-body">
-
+		<center>
+		<div id="loadingDiv" style="display:none" >
+		<img src='img/gif-load.gif'/>
+		</div> 
+		</center>
         <div id="data-laporan_slip" id="non-printable">
 			<span id="laporan"></span>
 		</div>

@@ -49,15 +49,15 @@
 	
 ?>
 
-<a href="modul/mod_rekapitulasi_bulanan/cetaklaporan.php?start=<?php echo $startp;?>&end=<?php echo $endp;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak data rekapitulasi</a>
-
-
-<hr/>
-			
+		
 <div class="panel panel-warning" id="non-printable">
 	<div class="panel-heading">
 		<h3 class="panel-title">Slip gaji</h3>
     </div>
+	<div class="btnbantuan" style="margin-top:-37px;">
+							<a href="modul/mod_rekapitulasi_bulanan/cetaklaporan.php?start=<?php echo $startp;?>&end=<?php echo $endp;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak data rekapitulasi</a>
+
+							</div>
     <div class="panel-body">	
 	<?php
 		$Akhir = new DateTime('01-'.$BULAN.'-'.$TAHUN);
@@ -300,6 +300,7 @@
 			/* batas  */
 	?>
 	<hr/>
+
 	<center><h3><u>REKAPITULASI KEHADIRAN DAN GAJI KARYAWAN BULANAN</u></h3><h3><?php echo $namabulan;?> <?php echo $TAHUN;?></h3></center>
 			
 		<div class="col-md-5">
@@ -623,7 +624,12 @@
 				$tnabung=mysql_fetch_object(mysql_query("SELECT TANGGAL as tanggalnabung FROM tabungan where NIP='$getnamapegawaidata->KODE_PEGAWAI'  order by TANGGAL asc limit 1"));
 				echo $tnabung->tanggalnabung;
 			?></p>
+			<hr/>
+				<br/>
+				<br/>
+				<br/>
 		</div>
+		
 <?php } ?>
 
  </div>

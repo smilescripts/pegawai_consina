@@ -20,6 +20,7 @@
             "sDom": '<"top"Cflt<"clear">>rt<"bottom"ip<"clear">>',
         });
     });
+
 </script>
 
 <ol class="breadcrumb" id="non-printable">
@@ -90,6 +91,12 @@
 							url: $form.attr('action'),
 							type: 'POST',
 							data: $form.serialize(),
+						
+							beforeSend: function(){
+								$('#loadingDiv').show();
+							},
+							
+	
 							success: function(data) {
 								var start = document.getElementById('start').value;
 								var end = document.getElementById('end').value;
@@ -98,7 +105,9 @@
 								$.get("modul/mod_rekapitulasi_harian/laporan.php?start="+start+"&end="+end+"&DEPT="+DEPT+"&NIP_PEGAWAIH="+NIP_PEGAWAIH, function(data){
 									$('#laporan').html(data);
 									//alert(data);
+									$('#loadingDiv').hide(0);
 								});
+						
 								
 							}
 						});
@@ -146,6 +155,11 @@
    <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Buaran)</h1>
     <div class="panel-body">
 		<div id="data-rekapitulasi_harian" id="non-printable">
+		<center>
+		<div id="loadingDiv" style="display:none" >
+		<img src='img/gif-load.gif'/>
+		</div> 
+		</center>
 			<span id="laporan"></span>
 		</div>
 	

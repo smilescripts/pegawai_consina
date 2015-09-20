@@ -93,6 +93,7 @@
                     </td>
 				</tr>
 				<tr>
+				
                     <td class="col-sm-12">
                         <h4 style="color:<?php echo $profil->COLOR; ?>;">Online Sistem Penggajian Dan Absensi Karyawan</h4>
                     </td>
@@ -119,6 +120,11 @@
 
     <div class="container theme-showcase" role="main">
 		<div class="col-md-12">
+		<noscript>
+		<center>
+				<p><div class="alert alert-danger" role="alert"><b>Peringatan:Silahkan Aktifkan Fitur Javascript Pada Browser Anda, Untuk Dapat Mengakses Web Ini</b></div></p>
+		</center>	
+		</noscript>
             <div id="data-utama" class="data-utama"></div>
 		</div>
     </div> <!-- /container -->

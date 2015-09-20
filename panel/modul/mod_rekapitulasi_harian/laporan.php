@@ -52,15 +52,17 @@
 	
 ?>
 
-<a href="modul/mod_rekapitulasi_harian/cetaklaporan.php?start=<?php echo $startp;?>&end=<?php echo $endp;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak data rekapitulasi</a>
 
 
-<hr/>
-			
+		
 <div class="panel panel-warning" id="non-printable">
 	<div class="panel-heading">
 		<h3 class="panel-title">Slip gaji</h3>
     </div>
+	<div class="btnbantuan" style="margin-top:-37px;">
+							<a href="modul/mod_rekapitulasi_harian/cetaklaporan.php?start=<?php echo $startp;?>&end=<?php echo $endp;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak data rekapitulasi</a>
+
+							</div>
    	
 	<?php
 		$Akhir = new DateTime('01-'.$BULAN.'-'.$TAHUN);
@@ -332,6 +334,7 @@ while ($minggu != $dateakhirnya);
 			/* batas  */
 	?>
 	<hr/>
+	
 	 <div class="panel-body">
 	<center><h3><u>REKAPITULASI KEHADIRAN DAN GAJI KARYAWAN HARIAN</u></h3><h3><?php echo $namabulan;?> <?php echo $TAHUN;?></h3></center>
 			

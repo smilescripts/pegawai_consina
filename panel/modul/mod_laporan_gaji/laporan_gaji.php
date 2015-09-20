@@ -83,12 +83,16 @@
 							url: $form.attr('action'),
 							type: 'POST',
 							data: $form.serialize(),
+							beforeSend: function(){
+								$('#loadingDiv').show();
+							},
 							success: function(data) {
 								var BULAN = document.getElementById('BULAN').value;
 								var TAHUN = document.getElementById('TAHUN').value;
 								var DEPT = document.getElementById('DEPT').value;
 								$.get("modul/mod_laporan_gaji/laporan.php?BULAN="+BULAN+"&TAHUN="+TAHUN+"&DEPT="+DEPT, function(data){
 									$('#laporan').html(data);
+									$('#loadingDiv').hide(0);
 								});
 								
 							}
@@ -152,6 +156,11 @@
    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Penggajian</h1>
 	
     <div class="panel-body">
+		<center>
+		<div id="loadingDiv" style="display:none" >
+		<img src='img/gif-load.gif'/>
+		</div> 
+		</center>
 		<div id="data-laporan_gaji">
 			<span id="laporan"></span>
 		</div>

@@ -13,8 +13,21 @@
             "sDom": '<"top"Cflt<"clear">>rt<"bottom"ip<"clear">>',
         });
     });
+	$.ajax({
+		url:"crud/jabatan/jabatan.data.php",
+		cache: false,
+		beforeSend: function(){
+			$('#loadingDiv').show();
+		},
+		complete: function(){
+			$('#loadingDiv').hide(0);
+		}
+	
+    });
 </script>
-
+<div id="loadingDiv" style="display:none" >
+	<img src='img/loading.gif' style="position:absolute;margin-left:35%;margin-top:10%" width="300" />
+</div> 
 <ol class="breadcrumb">
   <li><a href="#" id="beranda" class="beranda"><span class="glyphicon glyphicon-home"> Beranda</a></li>
   <li class="active"><span class="glyphicon glyphicon-user"> jabatan</li>

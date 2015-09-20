@@ -92,6 +92,10 @@
 							url: $form.attr('action'),
 							type: 'POST',
 							data: $form.serialize(),
+							beforeSend: function(){
+								$('#loadingDiv').show();
+							},
+							
 							success: function(data) {
 								var start = document.getElementById('start').value;
 								var end = document.getElementById('end').value;
@@ -100,6 +104,7 @@
 								$.get("modul/mod_rekapitulasi_bulanan/laporan.php?start="+start+"&end="+end+"&DEPT="+DEPT+"&NIP_PEGAWAIH="+NIP_PEGAWAIH, function(data){
 								
 									$('#laporan').html(data);
+									$('#loadingDiv').hide(0);
 								});
 								
 							}
@@ -147,6 +152,11 @@
 <div class="panel panel-warning">
     <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan bulanan (Buaran)</h1>
     <div class="panel-body">
+	<center>
+		<div id="loadingDiv" style="display:none" >
+		<img src='img/gif-load.gif'/>
+		</div> 
+		</center>
 		<div id="data-rekapitulasi_bulanan" id="non-printable">
 			<span id="laporan"></span>
 		</div>

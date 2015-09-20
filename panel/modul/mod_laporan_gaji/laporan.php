@@ -8,7 +8,6 @@
 	$DEPT=$_GET["DEPT"];
 
 ?>
-<h3>Bulan:<?php echo $BULAN;?>-Tahun:<?php echo $TAHUN;?></h3>
 <div class="panel panel-warning">
 	<div class="panel-heading">
 		<h3 class="panel-title">Laporan pengeluaran gaji</h3>

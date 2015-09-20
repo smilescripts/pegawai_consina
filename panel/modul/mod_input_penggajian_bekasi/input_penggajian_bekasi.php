@@ -86,18 +86,24 @@
                 url: $form.attr('action'),
                 type: 'POST',
                 data: $form.serialize(),
+				beforeSend: function(){
+				$('#loadingDiv').show();
+				$('#penggajian_berhasil').hide();
+				$('#penggajian_gagal').hide();
+				},
                 success: function(data) {
+					$('#loadingDiv').hide(0);
 					//alert(data);
 					var tipe=data["tipe"];
 					var departemen=data["departemen"];
 					if(tipe=="SIMPAN"){
 					
-						alert("Input Data Penggajian berhasil");
+						$('#penggajian_berhasil').show();
 					
 					}
 					if(tipe=="false"){
 					
-						alert("Maaf Penggajian sudah dilakukan bulan ini");
+						$('#penggajian_gagal').show();
 					
 					}
 					/* if(tipe!="false" && tipe!="SIMPAN" ){
@@ -154,6 +160,19 @@
 		});
     });
 </script>
+<center>
+		<div id="penggajian_berhasil" style="display:none" >
+		<div class="alert alert-success" role="alert"><h3 ><b>Proses Penggajian Bulan Ini Berhasil Dilakukan</b></h3></div>
+		</div>
+		<div id="penggajian_gagal" style="display:none" >
+		<div class="alert alert-danger" role="alert"><h3><b>Maaf Penggajian Bulan Ini Sudah Dilakukan</b></h3></div>
+		</div>
+		<div id="loadingDiv" style="display:none" >
+		<p><b>Proses Penggajian Sedang Berlangsung Mohon Tunggu</b></p>
+		<img src='img/gif-load.gif'/>
+		<p><div class="alert alert-danger" role="alert"><b>Peringatan:Jangan Tutup Browser Selama Proses Penggajian Sedang Berlangsung</b></div></p>
+		</div> 
+		</center>
 <div class="modal fade" id="dialog-info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

@@ -47,6 +47,7 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">Slip gaji</h3>
     </div>
+	
     <div class="panel-body">	
 	<?php
 		$no = 0;
