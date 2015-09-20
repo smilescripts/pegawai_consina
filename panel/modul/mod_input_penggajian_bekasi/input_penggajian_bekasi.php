@@ -71,7 +71,7 @@
     <source src="sound/succes.mp3" type="audio/mp3" />
 </audio>
 <script type="text/javascript">
-var audio = document.getElementById('audio');
+	var audio = document.getElementById('audio');
 	var audiofail = document.getElementById('audiofail');
 	var audiosucces = document.getElementById('audiosucces');
     $(document).ready(function() {

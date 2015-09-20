@@ -62,8 +62,15 @@
 			</form>
 		</section>
     </section>
-  
+	<audio id="audio">
+    <source src="sound/welcome.mp3" type="audio/mp3" />
+	</audio>
+	<audio id="denied">
+    <source src="sound/denied.mp3" type="audio/mp3" />
+	</audio>
    <script type="text/javascript">
+		var audio = document.getElementById('audio');
+		var denied = document.getElementById('denied');
 		$(document).ready(function() {
             $('#loginForm')
 				.on('success.form.fv', function(e) {
@@ -75,15 +82,20 @@
 						type: 'POST',
 						dataType: "json",
 						data: $form.serialize(),
+					
 						success: function(html) {
 							if(html['cek']=='false'){
 								$('#login-error').show();
 								 setTimeout( function show(){
 									  $('#login-error').hide();
 								  }, 5000 );
+								  denied.play();
 							}
 							if(html['cek']=='true'){
+								audio.play();
+								setTimeout( function show(){
 								window.location='panel.php';
+									}, 1000 );
 							}
 						}
 					});
