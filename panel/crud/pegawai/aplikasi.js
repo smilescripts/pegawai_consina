@@ -2,10 +2,11 @@
     $(document).ready(function(e) {
 		var id = 0;
 		var logo1 = logo;
-	
+		
 		var main = "crud/pegawai/pegawai.data.php";
+		
 		$("#data-pegawai").load(main);
-
+		
 		$('.ubah-pegawai, .tambah-pegawai').live("click", function(){
             var url = "crud/pegawai/pegawai.form.php";
             id = this.id;

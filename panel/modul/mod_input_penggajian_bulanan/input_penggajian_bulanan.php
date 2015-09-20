@@ -59,8 +59,20 @@
 
     </div>
 </div>
-
+<audio id="audio">
+    <source src="sound/pleasewait.mp3" type="audio/mp3" />
+</audio>
+<audio id="audiofail">
+    <source src="sound/fail.mp3" type="audio/mp3" />
+</audio>
+<audio id="audiosucces">
+    <source src="sound/succes.mp3" type="audio/mp3" />
+</audio>
 <script type="text/javascript">
+	var audio = document.getElementById('audio');
+	var audiofail = document.getElementById('audiofail');
+	var audiosucces = document.getElementById('audiosucces');
+
     $(document).ready(function() {
 		$('.input-daterange').datepicker({
 						format: "yyyy-mm-dd",
@@ -85,22 +97,24 @@
                 type: 'POST',
                 data: $form.serialize(),
 				beforeSend: function(){
+				audio.play();
 				$('#loadingDiv').show();
 				$('#penggajian_berhasil').hide();
 				$('#penggajian_gagal').hide();
 				},
                 success: function(data) {
 					$('#loadingDiv').hide(0);
+					
 					//alert(data);
 					var tipe=data["tipe"];
 					var departemen=data["departemen"];
 					if(tipe=="SIMPAN"){
-					
+						audiosucces.play();
 						$('#penggajian_berhasil').show();
 					
 					}
 					if(tipe=="false"){
-					
+						audiofail.play();
 						$('#penggajian_gagal').show();
 					
 					}

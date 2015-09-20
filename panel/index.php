@@ -42,6 +42,11 @@
 				<a href="#" class="close" data-dismiss="alert">&times;</a>
 				<strong>Perhatian!</strong> Mohon Cek Kembali Username atau Password Anda.
 			</div>
+				<noscript>
+				<center>
+				<p><div class="alert alert-danger"  id="login-error" role="alert"><b>Peringatan:Silahkan Aktifkan Fitur Javascript Pada Browser Anda, Untuk Dapat Mengakses Web Ini</b></div></p>
+				</center>	
+				</noscript>
 			<form method="post" id="loginForm" action="cek.php" role="login">
 				<div class="form-group">
 					<input type="text" name="username" placeholder="Enter your Username" required class="form-control" />
