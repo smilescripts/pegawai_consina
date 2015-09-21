@@ -37,6 +37,11 @@
             $("#data-utama").load(url);
         });
 		
+		$('.hari_libur_outlet').live("click", function(){
+            var url = "modul/mod_hari_libur_outlet/hari_libur_outlet.php";
+            $("#data-utama").load(url);
+        });
+		
 		$('.izin_absen').live("click", function(){
             var url = "modul/mod_izin/izin_absen.php";
             $("#data-utama").load(url);

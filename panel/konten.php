@@ -112,4 +112,8 @@ $module = $_GET['module'];
 	elseif ($module == 'lihat_aspek'){
 		include "modul/mod_aspek/lihat.php";
 	}
+	
+	elseif ($module == 'hari_libur_outlet'){
+		include "modul/mod_hari_libur_outlet/hari_libur_outlet.php";
+	}
 ?>
