@@ -33,7 +33,6 @@
 </ol>
 
 
-
 <div id="loadingDiv" style="display:none" >
 	<img src='img/loading.gif' style="position:absolute;margin-left:35%;margin-top:6%" width="300" />
 </div> 
@@ -64,6 +63,18 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="dialog-riwayat" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="width:1200px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 id="myModalLabel">Riwayat Data pegawai</h3>
+      </div>
+      <div id="isiForm" class="isiForm"></div>
+    </div>
+  </div>
+</div>
+
 <script>var logo='<?php echo $profil->logo; ?>';</script>
 <script src="crud/pegawai/aplikasi.js"></script>
 

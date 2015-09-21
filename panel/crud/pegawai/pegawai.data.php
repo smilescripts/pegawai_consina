@@ -63,12 +63,12 @@
 				</td>
 				<td>
                     <a href="#dialog-pegawai" id="'.$objectdata->KODE_PEGAWAI.'" alt="Ubah" title="Ubah" class="glyphicon ubah-pegawai glyphicon-edit" data-toggle="modal"></a>&nbsp; 
-                   
+					  <a href="#dialog-riwayat" id="'.$objectdata->KODE_PEGAWAI.'" alt="riwayat" title="riwayat" class="glyphicon riwayat-pegawai glyphicon-eye-open" data-toggle="modal"></a>
 				</td>
             </tr>';
 				$no++;
             }
-			/*  <a href="#" id="'.$objectdata->KODE_PEGAWAI.'" alt="Hapus" title="Hapus" class="glyphicon hapus-pegawai glyphicon-trash"></a> */
+			
 		?>
 		</tbody>
     </table>

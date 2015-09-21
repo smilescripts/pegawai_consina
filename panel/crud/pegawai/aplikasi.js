@@ -22,6 +22,19 @@
 			});
 		});
 		
+		$('.riwayat-pegawai').live("click", function(){
+            var url = "crud/pegawai/riwayat_pegawai.form.php";
+            id = this.id;
+			
+           
+				$("#myModalLabel").html("<img alt='Brand' src='"+logo1+"' style='width:50px; height:50px;'/>&nbsp;&nbsp;&nbsp;Riwayat pegawai");
+           
+
+            $.post(url, {id: id} ,function(data) {
+				$(".isiForm").html(data).show();
+			});
+		});
+		
 		$('.import').live("click", function(){
             var url = "crud/pegawai/import.form.php";
             $("#myModalLabel").html("<img alt='Brand' src='"+logo1+"' style='width:50px; height:50px;'/>&nbsp;&nbsp;&nbsp;Import Data pegawai");
@@ -47,5 +60,10 @@
             $("#data-pegawai").load(main);
             $("#myModalLabel").html("<img alt='Brand' src='"+logo1+"' style='width:50px; height:50px;'/>&nbsp;&nbsp;&nbsp;Tambah Data pegawai");
 		});
+		$('#riwayat-pegawai').on('hidden.bs.modal', function () {
+            $("#data-pegawai").load(main);
+            $("#myModalLabel").html("<img alt='Brand' src='"+logo1+"' style='width:50px; height:50px;'/>&nbsp;&nbsp;&nbsp;Riwayat Data pegawai");
+		});
+		
     });	
 }) (jQuery);

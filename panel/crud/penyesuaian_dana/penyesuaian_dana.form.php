@@ -54,7 +54,7 @@
             </div>
 		</div>
 		<div class="form-group">
-            <label for="NOMINAL" class="col-sm-3 control-label">Status Dana</label>
+            <label for="STATUS" class="col-sm-3 control-label">Status Dana</label>
             <div class="col-sm-9">
 				<select id="STATUS" name="STATUS" style="width: 100%;" class="STATUS form-control" required>
 				<option value="">--Silahkan Pilih Status--</option>
