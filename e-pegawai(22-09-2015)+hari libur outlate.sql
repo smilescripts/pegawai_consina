@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21 Sep 2015 pada 19.10
+-- Generation Time: 22 Sep 2015 pada 17.53
 -- Versi Server: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -1718,7 +1718,7 @@ CREATE TABLE IF NOT EXISTS `rights_control` (
   `GROUP_ID` int(11) NOT NULL,
   `AKSES` text NOT NULL,
   `CONTROL` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1017 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1061 ;
 
 --
 -- Dumping data untuk tabel `rights_control`
@@ -2671,7 +2671,51 @@ INSERT INTO `rights_control` (`ID`, `GROUP_ID`, `AKSES`, `CONTROL`) VALUES
 (1013, 2, '42', 'C,R,U,D'),
 (1014, 2, '43', 'C,R,U,D'),
 (1015, 2, '44', 'C,R,U,D'),
-(1016, 2, '45', 'C,R,U,D');
+(1016, 2, '45', 'C,R,U,D'),
+(1017, 2, '1', 'C,R,U,D'),
+(1018, 2, '2', 'C,R,U,D'),
+(1019, 2, '3', 'C,R,U,D'),
+(1020, 2, '4', 'C,R,U,D'),
+(1021, 2, '5', 'C,R,U,D'),
+(1022, 2, '6', 'C,R,U,D'),
+(1023, 2, '7', 'C,R,U,D'),
+(1024, 2, '8', 'C,R,U,D'),
+(1025, 2, '9', 'C,R,U,D'),
+(1026, 2, '10', 'C,R,U,D'),
+(1027, 2, '12', 'C,R,U,D'),
+(1028, 2, '13', 'C,R,U,D'),
+(1029, 2, '14', 'C,R,U,D'),
+(1030, 2, '16', 'C,R,U,D'),
+(1031, 2, '17', 'C,R,U,D'),
+(1032, 2, '18', 'C,R,U,D'),
+(1033, 2, '19', 'C,R,U,D'),
+(1034, 2, '20', 'C,R,U,D'),
+(1035, 2, '21', 'C,R,U,D'),
+(1036, 2, '22', 'C,R,U,D'),
+(1037, 2, '23', 'C,R,U,D'),
+(1038, 2, '24', 'C,R,U,D'),
+(1039, 2, '25', 'C,R,U,D'),
+(1040, 2, '26', 'C,R,U,D'),
+(1041, 2, '27', 'C,R,U,D'),
+(1042, 2, '28', 'C,R,U,D'),
+(1043, 2, '29', 'C,R,U,D'),
+(1044, 2, '30', 'C,R,U,D'),
+(1045, 2, '31', 'C,R,U,D'),
+(1046, 2, '32', 'C,R,U,D'),
+(1047, 2, '33', 'C,R,U,D'),
+(1048, 2, '34', 'C,R,U,D'),
+(1049, 2, '35', 'C,R,U,D'),
+(1050, 2, '36', 'C,R,U,D'),
+(1051, 2, '37', 'C,R,U,D'),
+(1052, 2, '38', 'C,R,U,D'),
+(1053, 2, '39', 'C,R,U,D'),
+(1054, 2, '40', 'C,R,U,D'),
+(1055, 2, '41', 'C,R,U,D'),
+(1056, 2, '42', 'C,R,U,D'),
+(1057, 2, '43', 'C,R,U,D'),
+(1058, 2, '44', 'C,R,U,D'),
+(1059, 2, '45', 'C,R,U,D'),
+(1060, 2, '46', 'C,R,U,D');
 
 -- --------------------------------------------------------
 
@@ -2690,7 +2734,7 @@ CREATE TABLE IF NOT EXISTS `rights_group` (
 --
 
 INSERT INTO `rights_group` (`ID`, `GROUP_NAME`, `AKSES`) VALUES
-(2, 'Full Akses', '1,2,3,4,5,6,7,8,9,10,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45'),
+(2, 'Full Akses', '1,2,3,4,5,6,7,8,9,10,12,13,14,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46'),
 (42, 'Admin', '1,2,3,4,5,10,16,17,18,19,20,23,24,30,33'),
 (43, 'Penggajian Harian Pusat', '2,7,8,9,12,21,22,25,26,28,32,33,34'),
 (44, 'Penggajian Office', '2,6,7,8,9,21,22,25,27,28,29,31,33,34');
@@ -2705,7 +2749,7 @@ CREATE TABLE IF NOT EXISTS `rights_menu` (
 `ID` int(11) NOT NULL,
   `MENU_NAME` text NOT NULL,
   `MENU_LINK` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data untuk tabel `rights_menu`
@@ -2754,7 +2798,8 @@ INSERT INTO `rights_menu` (`ID`, `MENU_NAME`, `MENU_LINK`) VALUES
 (42, 'Pegawai Bulanan(Outlet)', 'pegawai_outlet'),
 (43, 'Rekapitulasi Bulanan(Outlet)', 'rekapitulasi_outlet'),
 (44, 'Laporan Gaji Karyawan Bulanan(Outlet)', 'laporan_slip_outlet'),
-(45, 'Penggajian Bulanan(Outlet)', 'input_penggajian_outlet');
+(45, 'Penggajian Bulanan(Outlet)', 'input_penggajian_outlet'),
+(46, 'Konfigurasi Libur Outlet', 'hari_libur_outlet');
 
 -- --------------------------------------------------------
 
@@ -5670,7 +5715,7 @@ CREATE TABLE IF NOT EXISTS `user_log_activity` (
   `ip_address` text NOT NULL,
   `hostname` text NOT NULL,
   `user_agent` text NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=576 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=579 ;
 
 --
 -- Dumping data untuk tabel `user_log_activity`
@@ -6253,7 +6298,10 @@ INSERT INTO `user_log_activity` (`id`, `kode_petugas`, `aktivitas`, `waktu`, `ip
 (572, '2', 'Mengakses halaman master pegawai', '2015-09-21 23:53:21', '::1', 'USER-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'),
 (573, '2', 'Mengakses halaman master pegawai', '2015-09-21 23:53:40', '::1', 'USER-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'),
 (574, '2', 'Mengakses halaman utama sistem', '2015-09-22 00:08:47', '::1', 'USER-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'),
-(575, '2', 'Mengakses halaman master pegawai', '2015-09-22 00:08:51', '::1', 'USER-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36');
+(575, '2', 'Mengakses halaman master pegawai', '2015-09-22 00:08:51', '::1', 'USER-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'),
+(576, '13', 'Melakukan login sistem', '2015-09-22 22:52:44', '::1', 'INDRA-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'),
+(577, '13', 'Mengakses halaman utama sistem', '2015-09-22 22:52:46', '::1', 'INDRA-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36'),
+(578, '13', 'Mengakses halaman master group pengguna', '2015-09-22 22:53:16', '::1', 'INDRA-PC', 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36');
 
 --
 -- Indexes for dumped tables
@@ -6623,7 +6671,7 @@ MODIFY `id_restore` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `rights_control`
 --
 ALTER TABLE `rights_control`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1017;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1061;
 --
 -- AUTO_INCREMENT for table `rights_group`
 --
@@ -6633,7 +6681,7 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=45;
 -- AUTO_INCREMENT for table `rights_menu`
 --
 ALTER TABLE `rights_menu`
-MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=46;
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `state`
 --
@@ -6653,7 +6701,7 @@ MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=116;
 -- AUTO_INCREMENT for table `user_log_activity`
 --
 ALTER TABLE `user_log_activity`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=576;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=579;
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
