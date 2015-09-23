@@ -9,109 +9,285 @@
         SELECT * FROM pegawai WHERE KODE_PEGAWAI=".$id
     ));
 
-    if($id> 0) { 
+		
 		$KODE_PEGAWAI = $data['KODE_PEGAWAI'];
 		$NIP_PEGAWAI = $data['NIP_PEGAWAI'];
 		$NAMA_PEGAWAI = $data['NAMA_PEGAWAI'];
-		$TEMPAT_LAHIR = $data['TEMPAT_LAHIR'];
-		$EMAIL = $data['EMAIL'];
-		$TANGGAL_LAHIR = $data['TANGGAL_LAHIR'];
-		$AGAMA = $data['AGAMA'];
-		$STATUS_PERNIKAHAN = $data['STATUS_PERNIKAHAN'];
-		$JUMLAH_ANAK=$data['JUMLAH_ANAK'];
-		$ALAMAT=$data['ALAMAT'];
-		$NOMOR_TELEPON=$data['NOMOR_TELEPON'];
 		$KODE_JABATAN=$data['KODE_JABATAN'];
 		$KODE_DEPARTEMEN=$data['KODE_DEPARTEMEN'];
-		$GAJI_POKOK=$data['GAJI_POKOK'];
-		$TANGGAL_MASUK=$data['TANGGAL_MASUK'];
-		$TANGGAL_KELUAR=$data['TANGGAL_KELUAR'];
-		$STATUS_PEGAWAI=$data['STATUS_PEGAWAI'];
-		$JENIS_KELAMIN=$data['JENIS_KELAMIN'];
 		$FOTO_PEGAWAI=$data['FOTO_PEGAWAI'];
-		$NO_REKENING=$data['NO_REKENING'];
-		$STATE_ID=$data['STATE_ID'];
-		$NOMINAL_UMT=$data['NOMINAL_UMT'];
-		$TABUNGAN=$data['TABUNGAN'];
-		$PENGHARGAAN=$data['PENGHARGAAN'];
-		$CATATAN=$data['CATATAN'];
-		$TUNJANGAN_LAIN = $data['TUNJANGAN_LAIN'];
-		$NOMINAL_LEMBUR = $data['NOMINAL_LEMBUR'];
-		$OUTLET = $data['OUTLET'];
-		$STATE_ID = $data['STATE_ID'];
-        $tmptunjanganlain=array();
-        $tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
-        $tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
-    } else {
-			
-		$query = "SELECT max(NIP_PEGAWAI) as idMaks FROM pegawai";
-		$hasil = mysql_query($query);
-		$data  = mysql_fetch_array($hasil);
-		$nim = $data['idMaks'];
-		$noUrut = (int) substr($nim, 8, 5);
-		$noUrut++;
-		$char =  date('ym');
-		$w = "PG".$state_session."-";
-		$NIP_PEGAWAI = ""/* $w.$char . sprintf("%05s", $noUrut) */;
-
-		$NAMA_PEGAWAI = "";
-		$TEMPAT_LAHIR = "";
-		$TANGGAL_LAHIR = "";
-		$EMAIL = "";
-		$AGAMA = "";
-		$STATUS_PERNIKAHAN = "";
-		$JUMLAH_ANAK="";
-		$ALAMAT="";
-		$NOMOR_TELEPON="";
-		$KODE_JABATAN="";
-		$KODE_DEPARTEMEN="";
-		$GAJI_POKOK="";
-		$TANGGAL_MASUK="";
-		$TANGGAL_KELUAR="";
-		$STATUS_PEGAWAI="";
-		$JENIS_KELAMIN="";
-		$FOTO_PEGAWAI="";
-		$NO_REKENING="";
-		$STATE_ID="";
-		$NOMINAL_UMT="";
-		$TABUNGAN="";
-		$PENGHARGAAN="";
-		$CATATAN="";
-		$TUNJANGAN_LAIN = "";
-		$NOMINAL_LEMBUR = "";
-		$OUTLET = "";
-		$STATE_ID = "";
-		$tmptunjanganlain=array();
-		$tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
-    }
-?>
-<div class="modal-body">	
+		$queryjabatan=mysql_query("SELECT * FROM jabatan WHERE KODE_JABATAN=".$KODE_JABATAN) or die (mysql_error());
+        $tampiljabatan=mysql_fetch_object($queryjabatan);
+        $querydepartemen=mysql_query("SELECT * FROM departemen WHERE KODE_DEPARTEMEN=".$KODE_DEPARTEMEN) or die (mysql_error());
+		$tampildepartemen=mysql_fetch_object($querydepartemen);
+ ?>
+<div class="modal-body">
+<div class="row">
+  <div class="col-md-6">
+ <div style="height:200px;overflow-y:auto;overflow-x: hidden;">
 <table class="tg" style="undefined;table-layout: fixed; width: 346px">
 <colgroup>
 <col style="width:113px">
-<col style="width:109px">
-<col style="width:124px">
+<col style="width:209px">
+<col style="width:250px">
 </colgroup>
   <tr>
-    <th class="tg-hy62" rowspan="4"><?php  echo '<img src="foto/pegawai/'.$FOTO_PEGAWAI.'" style="width:50px">'; ?></th>
+    <th class="tg-hy62" rowspan="4">
+	<?php if($FOTO_PEGAWAI!=""){
+          echo '<img src="foto/pegawai/'.$FOTO_PEGAWAI.'" style="width:50px">';
+           }else{
+          echo '<img src="user.png" style="width:100px">';
+          }?></th>
     <th class="tg-031e">NIP</th>
-    <th class="tg-031e"></th>
+    <th class="tg-031e"><?php echo $NIP_PEGAWAI;?></th>
   </tr>
   <tr>
     <td class="tg-4eph">NAMA</td>
-    <td class="tg-4eph"></td>
+    <td class="tg-4eph"><?php echo $NAMA_PEGAWAI;?></td>
   </tr>
   <tr>
     <td class="tg-031e">JABATAN</td>
-    <td class="tg-031e"></td>
+    <td class="tg-031e"><?php echo $tampiljabatan->NAMA_JABATAN;?></td>
   </tr>
   <tr>
     <td class="tg-4eph">DEPARTEMEN</td>
-    <td class="tg-4eph"></td>
+    <td class="tg-4eph"><?php echo $tampildepartemen->NAMA_DEPARTEMEN;?></td>
   </tr>
 </table>
+</div>
+<hr/>
+<p><b>Data Cuti / Izin</b></p>
+ <div style="height:200px;overflow-y:auto">
 
-    <div class="modal-footer">
+    <table id="example" class="table table-bordered">
+		<thead>
+            <tr>
+				<th>No</th>
+				
+                <th>Keterangan</th>
+				<th>Tanggal Awal</th>
+                <th>Tanggal Akhir</th>
+              
+            </tr>
+		</thead>
+		
+		<tbody>
+	
+		<?php
+			
+			$querycuti=mysql_query("SELECT * FROM cuti WHERE NIP_PEGAWAI=".$KODE_PEGAWAI) or die (mysql_error());
+			
+            $no = 1;
+            
+			while($objectdatacuti=mysql_fetch_object($querycuti)){
+                echo'
+				<tr>
+				<td>'.$no.'</td>
+				 <td>'.$objectdatacuti->KETERANGAN.'</td>
+                <td>'.$objectdatacuti->TANGGAL_AWAL.'</td>
+                <td>'.$objectdatacuti->TANGGAL_AKHIR.'</td>
+				
+            </tr>';
+                $no++;
+            }
+		?>
+		
+		</tbody>
+		
+    </table>
+	</div>
+<hr/>
+<p><b>Data Tabungan</b></p>
+ <div style="height:200px;overflow-y:auto">
+
+    <table id="example" class="table table-bordered">
+		<thead>
+            <tr>
+				<th>No</th>
+				<th>Nominal</th>
+				<th>Tanggal Nabung</th>
+               
+              
+            </tr>
+		</thead>
+		<tbody>
+		<?php
+			
+			$querytabungan=mysql_query("SELECT sum(NOMINAL) as jmltabungan,TANGGAL FROM tabungan where NIP='$KODE_PEGAWAI' group by MONTH(TANGGAL) ") or die (mysql_error());
+			
+            $no = 1;
+            
+			while($objectdatatabungan=mysql_fetch_object($querytabungan)){
+             
+                echo'
+				<tr>
+				<td>'.$no.'</td>
+				 <td>Rp.'.number_format($objectdatatabungan->jmltabungan).'</td>
+                <td>'.$objectdatatabungan->TANGGAL.'</td>
+               
+            </tr>';
+                $no++;
+            }
+		?>
+		</tbody>
+    </table>
+</div>
+</div>
+ <div class="col-md-6">
+  <p><b>Data Kasbon</b></p>
+ <div style="height:170px;overflow-y:auto">
+
+ <table id="example" class="table table-bordered">
+		<thead>
+            <tr>
+                <th>No</th>
+				<th>Tanggal</th>
+				<th>Nominal</th>
+                <th>Status</th>
+               
+				
+            </tr>
+		</thead>
+		<tbody>
+		<?php
+			$querykasbon=mysql_query("SELECT * FROM kasbon_pegawai WHERE NIP_PEGAWAI='$KODE_PEGAWAI'  order by TANGGAL DESC") or die (mysql_error());
+			
+            $no = 1;
+			while($objectdatakasbon=mysql_fetch_object($querykasbon)){
+            echo'
+            <tr>
+				<td>'.$no.'</td>
+				<td>'.$objectdatakasbon->TANGGAL.'</td>
+                <td>Rp.'.number_format($objectdatakasbon->NOMINAL).',-</td>
+                <td>'.$objectdatakasbon->STATUS.'</td>
+            </tr>';
+                $no++;
+            }
+			
+		?>
+		</tbody>
+    </table>
+	</div>
+<hr/>
+<p><b>Data Pinjaman</b></p>
+ <div style="height:200px;overflow-y:auto">
+
+   <table id="example" class="table table-bordered">
+		<thead>
+            <tr>
+			
+				<th>No</th>
+				<th>Tanggal</th>
+				<th>Nominal</th>
+				<th>Jumlah</th>
+				<th>Cicilan/Bulan</th>
+				<th>Sisa</th>
+				
+            </tr>
+		</thead>
+		<tbody>
+		<?php
+			
+			$querypinjaman=mysql_query("SELECT * FROM pinjaman  where KODE_PEGAWAI='$KODE_PEGAWAI' order by TANGGAL DESC") or die (mysql_error());
+		
+            $no = 1;
+           
+			while($objectdatapinjaman=mysql_fetch_object($querypinjaman)){
+              
+                echo'
+				<tr>
+				<td>'.$no.'</td>
+				<td>'.$objectdatapinjaman->TANGGAL.'</td>
+                <td>'.number_format($objectdatapinjaman->NOMINAL).',-</td>
+                <td>'.$objectdatapinjaman->JUMLAH_BLN.' Bulan</td>
+               
+                 <td>Rp.'.number_format($objectdatapinjaman->CICILAN_PERBULAN).',-</td>
+                 <td>X '.$objectdatapinjaman->SISA_CICILAN.'</td>
+				
+				
+            </tr>';
+                $no++;
+            }
+		?>
+		</tbody>
+    </table>
+	</div>
+	<hr/>
+	<p><b>Data Penggajian</b></p>
+	 <div style="height:200px;overflow-y:auto">
+  
+    <table id="example" class="table table-bordered">
+		<thead>
+            <tr>
+				<th>No</th>
+				
+                <th>Bulan</th>
+                <th>Total Pemotongan</th>
+				<th>Total Penerimaan</th>
+                <th>Take home pay</th>
+              
+            </tr>
+		</thead>
+		<tbody>
+		<?php
+			 $no = 1;
+            
+                $querypegawai11=mysql_query("SELECT * FROM head_penggajian WHERE kode_pegawai='$KODE_PEGAWAI' group by bulan ") or die (mysql_error());
+				 while($objectdata=mysql_fetch_object($querypegawai11)){
+                echo'
+				<tr>
+				<td>'.$no.'</td>
+				 <td>'.$objectdata->bulan.'</td>
+				 <td>Rp.'.$objectdata->total_potongan.'</td>
+                <td>Rp.'.$objectdata->total_penerimaan.'</td>
+                <td>Rp.'.number_format($objectdata->thp).'</td>
+				
+            </tr>';
+                $no++;
+            }
+		?>
+		</tbody>
+    </table>
+	</div>
+	<hr/>
+	  <p><b>Data Penyesuaian Dana</b></p>
+	 <div style="height:200px;overflow-y:auto">
+
+    <table id="example" class="table table-bordered">
+		<thead>
+            <tr>
+				<th>No</th>
+				<th>Nominal</th>
+                <th>Bulan</th>
+				<th>Status</th>
+               
+            </tr>
+		</thead>
+		<tbody>
+		<?php
+			 $no = 1;
+            
+                $querypenyesuaiandana=mysql_query("SELECT sum(NOMINAL) as totpen,BULAN,STATUS FROM penyesuaian_dana WHERE kode_pegawai='$KODE_PEGAWAI' group by bulan,STATUS") or die (mysql_error());
+				 while($objectdatapenyesuaiandana=mysql_fetch_object($querypenyesuaiandana)){
+                echo'
+				<tr>
+				<td>'.$no.'</td>
+				<td>Rp.'.number_format($objectdatapenyesuaiandana->totpen).'</td>
+				<td>'.$objectdatapenyesuaiandana->BULAN.'</td>
+                <td>'.$objectdatapenyesuaiandana->STATUS.'</td>
+              
+				
+            </tr>';
+                $no++;
+            }
+		?>
+		</tbody>
+    </table>
+  
+ </div>
+ </div>
+</div>	
+    <div class="modal-footer" style="margin-top:20px">
         <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Tutup Halaman</button>
      
     </div>

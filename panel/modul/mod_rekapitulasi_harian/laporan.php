@@ -406,8 +406,7 @@ while ($minggu != $dateakhirnya);
 			
 				while($getabsensidata=mysql_fetch_object($absensidata)){
 					
-					$datapegawai=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI'") or die (mysql_error());	
-					$pdata=mysql_fetch_object($datapegawai);
+					
 					$no++;
 			?>
 			<tr>
@@ -647,6 +646,8 @@ while ($minggu != $dateakhirnya);
 			</tr>
 			<?php 
 				} 
+				$datapegawai=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI'") or die (mysql_error());	
+				$pdata=mysql_fetch_object($datapegawai);
 			?>
 			<tr>
 				<td></td>
