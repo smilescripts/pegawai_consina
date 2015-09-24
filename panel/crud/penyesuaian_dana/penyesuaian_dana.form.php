@@ -14,6 +14,7 @@
 		$STATUS = $data['STATUS'];
 		$NOMINAL = $data['NOMINAL'];
 		$BULAN = $data['BULAN'];
+		$TAHUN = $data['TAHUN'];
 		$KETERANGAN = $data['KETERANGAN'];
        
     } else {
@@ -23,6 +24,7 @@
         $TUNJANGAN_LAIN = "";
 		$NOMINAL = "";
 		$BULAN = "";
+		$TAHUN = date("Y");
 		$KETERANGAN = "";
     }
 ?>
@@ -70,6 +72,7 @@
 				<input type="hidden" class="form-control" value="<?php echo $ID_PENYESUAIAN; ?>" id="ID_PENYESUAIAN" name="ID_PENYESUAIAN"  \>
             </div>
 		</div>
+		<input type="hidden" name="TAHUN" value="<?php echo $TAHUN; ?>" />
 		  <div class="form-group">
             <label for="BULAN" class="col-sm-3 control-label">Bulan</label>
             <div class="col-sm-9">

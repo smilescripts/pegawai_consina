@@ -38,6 +38,14 @@ page[size="A4"] {
 	$jamsabtu=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='6'") or die (mysql_error());
 	$tampiljamsabtu=mysql_fetch_object($jamsabtu);
 	$valuesabtu=$tampiljamsabtu->VALUE;
+	
+	$full=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='11'") or die (mysql_error());
+	$tampilfull=mysql_fetch_object($full);
+	$valuefull=$tampilfull->VALUE;
+	
+	$qtabungan=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='14'") or die (mysql_error());
+	$tampilqtabungan=mysql_fetch_object($qtabungan);
+	$nominaltabungan=$tampilqtabungan->VALUE;
 
 	if($BULAN=="01"){$namabulan="Januari";}
 	if($BULAN=="02"){$namabulan="Februari";}
@@ -167,9 +175,27 @@ page[size="A4"] {
 				<td><?php echo $getabsensidata->JAM_MASUK;?></td>
 				<td><?php echo $getabsensidata->JAM_KELUAR;?></td>
 				<td><?php 
+					$queryjam1=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
+					$tampiljam1=mysql_fetch_object($queryjam1);
+					
+						$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+						$tmenit=mysql_fetch_object($qmenit);
+						$tmenit2=explode(",",$tmenit->VALUE);
+						$ckmenit1=date('H:i', strtotime($getabsensidata->JAM_MASUK));
+						$ckmenit2=date('H', strtotime($tampiljam1->JAM_DATANG));
+						$ckmenit3=$ckmenit2.":".$tmenit2[0];
+						
+						if($ckmenit1>$ckmenit3){
+							$nominal_kehadiran_full=0;
+							$jmlterlambat+=1;
+							$jammasuknya=$getabsensidata->JAM_MASUK;
+						}else{
+							$jammasuknya=$tampiljam1->JAM_DATANG;
+						}
+					
 					if($datetime->format('D')=="Sat"){
 				
-						$jamnya=strtotime($getabsensidata->JAM_MASUK);
+						$jamnya=strtotime($jammasuknya);
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
@@ -177,7 +203,7 @@ page[size="A4"] {
 					}
 			
 					if($datetime->format('D')!="Sat"){
-						$jamnya=strtotime($getabsensidata->JAM_MASUK)+60*60*1;
+						$jamnya=strtotime($jammasuknya)+60*60*1;
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
@@ -366,7 +392,7 @@ page[size="A4"] {
 			<p>Tunjangan Lainnya:Rp.<?php echo number_format(gettunjangan($getnamapegawaidata->NIP_PEGAWAI));?></p>
 				<p>UMT:Rp.<?php echo number_format($objectdata->uang_makan_transport);?></p>
 				<p>Lembur:Rp.<?php echo $objectdata->lembur;?></p>
-				<p>Penghargaan:Rp.<?php echo number_format($objectdata->penghargaan);?></p>
+				<p>Penghargaan:Rp.<?php echo number_format($objectdata->nominal_kehadiran_full);?></p>
 				<p>Potongan terlambat:Rp.<?php echo number_format($objectdata->terlambat);?></p>
 				<p>Potongan Kasbon:Rp.<?php echo number_format($objectdata->kasbon);?></p>
 				<p>Potongan Pinjaman:Rp.<?php echo number_format($objectdata->pinjaman);?></p>
@@ -399,6 +425,16 @@ page[size="A4"] {
 					$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
 					echo $tnabung->tanggalnabung;
 				?></p>
+				<p>Pemotongan penyesuaian Gaji: Rp.
+			<?php
+				
+				echo number_format($objectdata->pemotongan);
+			?></p>		
+				<p>Penambahan penyesuaian Gaji:Rp.
+			<?php
+				
+				echo number_format($objectdata->penambahan);
+			?></p>
 			</th>
 		</tr>
 	</table>

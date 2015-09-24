@@ -255,5 +255,9 @@
             var url = "modul/mod_input_penggajian_outlet/input_penggajian_outlet.php";
             $("#data-utama").load(url);
 		});
+		$('.libur_perbln_peg').live("click", function(){
+            var url = "modul/mod_libur_perbln/libur_perbln.php";
+            $("#data-utama").load(url);
+        });	
     });
 }) (jQuery);

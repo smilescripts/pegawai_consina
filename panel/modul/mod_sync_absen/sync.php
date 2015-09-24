@@ -64,6 +64,10 @@
 										$TIME=date("H:i:s", strtotime($attendancedata[3]));
 										$ckTGL=date("Y-m-d", strtotime($DATE));
 										
+										$qpeg=mysql_query("select STATUS_PEGAWAI from pegawai where KODE_PEGAWAI='$NIP'");
+										$tpeg=mysql_fetch_object($qpeg);
+										$cekcek=$get->STATUS_PEGAWAI;
+										
 										if($ckTGL>=$start && $ckTGL<=$end){
 											if($NIP!=""){
 												$queryjam=mysql_query("SELECT * FROM jam_kerja WHERE KODE_MASUK='$state' or KODE_KELUAR='$state'");
@@ -89,7 +93,17 @@
 												$hasil=$get->NIP_PEGAWAI;
 													
 												if($hasil==""){
-													$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+													
+													if($cekcek=="Kontrak"){
+														$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='15'");
+													}
+													if($cekcek=="Kontrak Bekasi"){
+														$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='16'");
+													}
+													if($cekcek=="Tetap"){
+														$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+													}
+													
 													$tmenit=mysql_fetch_object($qmenit);
 													$ckmenit1=date('i', strtotime($DATE));
 													$ckmenit2=date('i', strtotime($tmenit->VALUE));
@@ -131,7 +145,15 @@
 														$jmldataklr++;
 													}else if($hasilgetsemua2!="" && $state==$tampiljam->KODE_MASUK){
 														//$jamkeluar=date('H:i:s');
-														$qmenit1=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+														if($cekcek=="Kontrak"){
+															$qmenit1=mysql_query("select VALUE from pengaturan_penggajian where ID='15'");
+														}
+														if($cekcek=="Kontrak Bekasi"){
+															$qmenit1=mysql_query("select VALUE from pengaturan_penggajian where ID='16'");
+														}
+														if($cekcek=="Tetap"){
+															$qmenit1=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
+														}
 														$tmenit1=mysql_fetch_object($qmenit1);
 														$ckmenit3=date('i', strtotime($DATE));
 														$ckmenit4=date('i', strtotime($tmenit1->VALUE));

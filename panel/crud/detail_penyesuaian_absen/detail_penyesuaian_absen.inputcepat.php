@@ -13,13 +13,14 @@
 	$end = $_POST['end'];
 	$JML = $_POST['JML'];
 	$KODE_PEGAWAI = $_POST['KODE_PEGAWAI'];
+	$KODE_JAM_KERJA = $_POST['KODE_JAM_KERJA'];
 	
 	$tBULAN=new DateTime($end);
 	$tTAHUN=new DateTime($end);
 	$BULAN=$tBULAN->format("m");
 	$TAHUN=$tTAHUN->format("Y");
 	
-	$querywaktukerja=mysql_query("select * from jam_kerja where KODE_JAM_KERJA='1'");	
+	$querywaktukerja=mysql_query("select * from jam_kerja where KODE_JAM_KERJA='$KODE_JAM_KERJA'");	
 	$getwaktukerja=mysql_fetch_object($querywaktukerja);
 	
 	$hariliburmerah=array();

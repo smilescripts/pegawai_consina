@@ -150,12 +150,12 @@ while ($minggu != $dateakhirnya);
 	while($datapegawai=mysql_fetch_object($getpegawai)){
 				$nominal_pemotongan="";
 				$nominal_penambahan="";
-				$penyesuaian_pemotongan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$datapegawai->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini'");
+				$penyesuaian_pemotongan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$datapegawai->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
-				$nominal_pemotongan=$get_penyesuaian_pemotongan->NOMINAL;
-				$penyesuaian_penambahan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$datapegawai->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini'");
+				$nominal_pemotongan=$get_penyesuaian_pemotongan->total;
+				$penyesuaian_penambahan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$datapegawai->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_penambahan=mysql_fetch_object($penyesuaian_penambahan);
-				$nominal_penambahan=$get_penyesuaian_penambahan->NOMINAL;
+				$nominal_penambahan=$get_penyesuaian_penambahan->total;
 				$nominal_pemotongan_tambah=0;
 				$nominal_penambahan_tambah=0;
 				if($nominal_pemotongan!=""){

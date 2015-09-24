@@ -84,6 +84,20 @@
             </div>
 		</div>
 		<div class="form-group">
+            <label for="KODE_JAM_KERJA" class="col-sm-3 control-label">Jam Kerja</label>
+            <div class="col-sm-9">
+                <?php
+                    $result = mysql_query("select * from jam_kerja");  
+                    echo '<select id="KODE_JAM_KERJA" name="KODE_JAM_KERJA" style="width: 100%;" class="form-control">';  
+                        echo '<option value="">Silahkan Pilih Jam Kerja</option>';  
+						while ($row = mysql_fetch_array($result)) {  
+                            echo '<option value="' . $row['KODE_JAM_KERJA'] . '">' . $row['KETERANGAN']. '</option>';  
+						}  
+                    echo '</select>';
+				?>
+            </div>
+		</div>
+		<div class="form-group">
             <label for="tanggal" class="col-sm-3 control-label"> Jumlah Hari</label>
             <div class="col-sm-4">
                <input type="text" class="form-control" value="<?php echo $JML; ?>" id="JML" name="JML" placeholder="Jumlah Hari" \>
@@ -171,6 +185,13 @@
                     }
                 },
 				end: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The is required'
+                        }
+                    }
+                },
+				KODE_JAM_KERJA: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'

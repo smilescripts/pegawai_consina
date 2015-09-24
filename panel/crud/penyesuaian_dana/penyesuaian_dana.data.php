@@ -19,7 +19,7 @@
 				<th>Pegawai</th>
 				<th>Status Dana</th>
 				<th>Nominal</th>
-				<th>Bulan</th>
+				<th>Bulan - Tahun</th>
 				<th>Keterangan</th>
 				<th style="width:10px">Aksi</th>
             </tr>
@@ -37,7 +37,7 @@
 				<td>'.$peg->NAMA_PEGAWAI.' ('.$peg->NIP_PEGAWAI.')</td>
 				<td>'.$objectdata->STATUS.'</td>
 				<td>Rp.'.number_format($objectdata->NOMINAL).',-</td>
-				<td>'.$objectdata->BULAN.'</td>
+				<td>'.$objectdata->BULAN.'-'.$objectdata->TAHUN.'</td>
 				<td>'.$objectdata->KETERANGAN.'</td>
 			
 				<td>

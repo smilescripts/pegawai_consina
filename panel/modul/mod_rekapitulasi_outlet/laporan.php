@@ -307,20 +307,20 @@
 			<?php 
 				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Tetap' and OUTLET='YA'") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
-				$penyesuaian_pemotongan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini'");
+				$penyesuaian_pemotongan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
-				$nominal_pemotongan=$get_penyesuaian_pemotongan->NOMINAL;
+				$nominal_pemotongan=$get_penyesuaian_pemotongan->total;
 				
-				$penyesuaian_penambahan=mysql_query("select * from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini'");
+				$penyesuaian_penambahan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Penambahan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_penambahan=mysql_fetch_object($penyesuaian_penambahan);
-				$nominal_penambahan=$get_penyesuaian_penambahan->NOMINAL;
+				$nominal_penambahan=$get_penyesuaian_penambahan->total;
 				$tambah_pemotongan=0;
 				$tambah_penambahan=0;
 				if($nominal_pemotongan!=""){
 					
 					$penyesuaian="Penyesuaian Pemotongan Gaji Bulan Ini Sebesar";
 					$nominal_pemotongan=$nominal_pemotongan;
-					$fix_pemotongan=$penyesuaian.' : Rp.'.number_format($nominal_pemotongan) .'<br/>Keterangan:'.$get_penyesuaian_pemotongan->KETERANGAN;
+					$fix_pemotongan=$penyesuaian.' : Rp.'.number_format($nominal_pemotongan);
 					$tambah_pemotongan=$nominal_pemotongan;
 					
 					
@@ -329,7 +329,7 @@
 					
 					$penyesuaian_tambah="Penyesuaian Penambahan Gaji Bulan Ini Sebesar";
 					$nominal_penambahan=$nominal_penambahan;
-					$fix_penambahan=$penyesuaian_tambah.' : Rp.'.number_format($nominal_penambahan) .'<br/>Keterangan:'.$get_penyesuaian_penambahan->KETERANGAN;
+					$fix_penambahan=$penyesuaian_tambah.' : Rp.'.number_format($nominal_penambahan);
 					$tambah_penambahan=$nominal_penambahan;
 					
 				}
