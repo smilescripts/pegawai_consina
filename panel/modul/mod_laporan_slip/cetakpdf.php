@@ -1,5 +1,4 @@
 <?php
-error_reporting(0);
 session_start();
 include_once "../../include/koneksi.php";
 $profil=mysql_fetch_object(mysql_query("SELECT * FROM profil_perusahaan"));
@@ -33,7 +32,7 @@ include "../../include/catat.php";
  */
 
 // Include the main TCPDF library (search for installation path).
-require_once('tcpdf_include.php');
+require_once('../../tparty/pdf/tcpdf_include.php');
 
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
