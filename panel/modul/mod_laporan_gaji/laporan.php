@@ -167,50 +167,45 @@
 </style>
 <table class="tg" style="undefined;table-layout: fixed; width: 1701px">
 <colgroup>
-<col style="width: 63px">
+<col style="width: 40px">
 <col style="width: 82px">
-<col style="width: 188px">
-<col style="width: 192px">
-<col style="width: 169px">
-<col style="width: 154px">
-<col style="width: 149px">
-<col style="width: 183px">
-<col style="width: 169px">
-<col style="width: 140px">
-<col style="width: 168px">
-<col style="width: 22px">
-<col style="width: 22px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
+<col style="width: 100px">
 </colgroup>
   <tr>
-    <th class="tg-031e" rowspan="3">No</th>
-    <th class="tg-031e" rowspan="3">BULAN</th>
-    <th class="tg-031e" colspan="6">BAGIAN</th>
-    <th class="tg-031e" colspan="3">POTONGAN HUTANG</th>
-    <th class="tg-031e" rowspan="3">NILAI</th>
-    <th class="tg-031e" rowspan="3">KETERANGAN</th>
+    <th class="tg-031e" rowspan="3"><center>No</center></th>
+    <th class="tg-031e" rowspan="3"><center>BULAN</center></th>
+    <th class="tg-031e" colspan="6"><center>BAGIAN</center></th>
+    <th class="tg-031e" colspan="3"><center>POTONGAN HUTANG</center></th>
+    <th class="tg-031e" rowspan="3"><center>NILAI</center></th>
+    <th class="tg-031e" rowspan="3"><center>KETERANGAN</center></th>
   </tr>
   <tr>
-    <td class="tg-031e" colspan="2">PEMASARAN</td>
-    <td class="tg-031e" colspan="2">PRODUKSI</td>
-    <td class="tg-031e" colspan="2">UMUM</td>
-    <td class="tg-031e" colspan="3">BAGIAN</td>
-    <td class="tg-031e"></td>
-    <td class="tg-031e"></td>
+    <td class="tg-031e" colspan="2"><center>PEMASARAN</center></td>
+    <td class="tg-031e" colspan="2"><center>PRODUKSI</center></td>
+    <td class="tg-031e" colspan="2"><center>UMUM</center></td>
+    <td class="tg-031e" colspan="3"><center>BAGIAN</center></td>
   </tr>
   <tr>
-	<td class="tg-031e">CASH</td>
-    <td class="tg-031e">BRI</td>
-    <td class="tg-031e">CASH</td>
-    <td class="tg-031e">BRI</td>
-    <td class="tg-031e">CASH</td>
-    <td class="tg-031e">BRI</td>
-    <td class="tg-031e">PEMASARAN</td>
-    <td class="tg-031e">PRODUKSI</td>
-    <td class="tg-031e">UMUM</td>
-    <td class="tg-031e"></td>
-    <td class="tg-031e"></td>
-    <td class="tg-031e"></td>
-    <td class="tg-031e"></td>
+	<td class="tg-031e"><center>CASH</center></td>
+    <td class="tg-031e"><center>BRI</center></td>
+    <td class="tg-031e"><center>CASH</center></td>
+    <td class="tg-031e"><center>BRI</center></td>
+    <td class="tg-031e"><center>CASH</center></td>
+    <td class="tg-031e"><center>BRI</center></td>
+    <td class="tg-031e"><center>PEMASARAN</center></td>
+    <td class="tg-031e"><center>PRODUKSI</center></td>
+    <td class="tg-031e"><center>UMUM</center></td>
+
 
   </tr>
   <?php
@@ -279,18 +274,18 @@
 			echo'
 	
 		<tr>
-			<td class="tg-031e">'.$queryumum->hasil.'</td>
-			<td class="tg-031e">'.$queryumumbri->hasil.'</td>
-			<td class="tg-031e">'.$queryproduksi->hasil.'</td>
-			<td class="tg-031e">'.$queryproduksibri->hasil.'</td>
-			<td class="tg-031e">'.$querypemasaran->hasil.'</td>
-			<td class="tg-031e">'.$querypemasaranbri->hasil.'</td>
-			<td class="tg-031e">'.$querypotpemasaran->hasil.'</td>
-			<td class="tg-031e">'.$querypotproduksi->hasil.'</td>
-			<td class="tg-031e">'.$querypotumum->hasil.'</td>
-			<td class="tg-031e">'; echo $jumlah; echo'</td>
-			<td class="tg-031e"></td>
-			<td class="tg-031e"></td>
+			<td class="tg-031e"><center>1</center></td>
+			<td class="tg-031e"><center>'.$BULAN.'</center></td>
+			<td class="tg-031e"><center>'.$queryumum->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$queryumumbri->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$queryproduksi->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$queryproduksibri->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$querypemasaran->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$querypemasaranbri->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$querypotpemasaran->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$querypotproduksi->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$querypotumum->hasil.'</center></td>
+			<td class="tg-031e"><center>'.$jumlah.'</center></td>
 			<td class="tg-031e"></td>
 		</tr>
 	
