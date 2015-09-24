@@ -221,21 +221,21 @@
 				?>
             </div>
 		</div>
-	
-		<div class="form-group">
+		<input type="hidden" name="KODE_DEPARTEMEN" value="">
+		<!--<div class="form-group">
             <label for="KODE_DEPARTEMEN" class="col-sm-3 control-label">Departemen</label>
             <div class="col-sm-9">
                 <?php
-                    $result = mysql_query("select * from departemen");  
+/*                     $result = mysql_query("select * from departemen");  
                     echo '<select id="KODE_DEPARTEMEN" name="KODE_DEPARTEMEN" style="width: 100%;" class="form-control">';  
                         echo '<option value="">Silahkan Pilih Departemen</option>';  
 						while ($row = mysql_fetch_array($result)) {  
                             echo '<option value="' . $row['KODE_DEPARTEMEN'] . '"';if($KODE_DEPARTEMEN==$row['KODE_DEPARTEMEN']){echo "selected='selected'";} echo'>' . $row['NAMA_DEPARTEMEN']. '</option>';  
 						}  
-                    echo '</select>';
+                    echo '</select>'; */
 				?>
             </div>
-		</div>
+		</div>-->
 		<div class="form-group">
             <label for="GAJI_POKOK" class="col-sm-3 control-label">Gaji Harian</label>
             <div class="col-sm-9">
@@ -538,13 +538,13 @@
                         }
                     }
 				},
-                KODE_DEPARTEMEN: {
+/*                 KODE_DEPARTEMEN: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'
                         }
                     }
-				},    
+				},     */
 				/* NO_REKENING: {
                     validators: {
                         notEmpty: {

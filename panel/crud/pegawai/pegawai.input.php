@@ -44,6 +44,10 @@
 		$tmptunjanganlain = $_POST['TUNJANGAN_LAIN'];
 		$tmptunjanganlain2=implode(",",$tmptunjanganlain);
 		
+		$tdepartemen = mysql_fetch_object(mysql_query("SELECT * FROM jabatan where KODE_JABATAN='$KODE_JABATAN'"));
+		$KODE_DEPARTEMEN=$tdepartemen->KODE_DEPARTEMEN;
+	
+		
 		if($KODE_PEGAWAI == 0) {
             if($_FILES['FOTO_PEGAWAI']['name'][0]!=""){
 				foreach($_FILES['FOTO_PEGAWAI']['name'] as $key => $value){

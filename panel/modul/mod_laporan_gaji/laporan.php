@@ -149,6 +149,78 @@
 	</div>
 </div>
 
+<!-- Laporan anyar -->
+
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Laporan Keseluruhan</h3>
+    </div>
+    <div class="panel-body">	
+
+
+		<div class="table-responsive">
+ 
+			<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+</style>
+<table class="tg" style="undefined;table-layout: fixed; width: 1701px">
+<colgroup>
+<col style="width: 63px">
+<col style="width: 82px">
+<col style="width: 188px">
+<col style="width: 192px">
+<col style="width: 169px">
+<col style="width: 154px">
+<col style="width: 149px">
+<col style="width: 183px">
+<col style="width: 169px">
+<col style="width: 140px">
+<col style="width: 168px">
+<col style="width: 22px">
+<col style="width: 22px">
+</colgroup>
+  <tr>
+    <th class="tg-031e" rowspan="3">No</th>
+    <th class="tg-031e" rowspan="3">BULAN</th>
+    <th class="tg-031e" colspan="6">BAGIAN</th>
+    <th class="tg-031e" colspan="3">POTONGAN HUTANG</th>
+    <th class="tg-031e" rowspan="3">NILAI</th>
+    <th class="tg-031e" rowspan="3">KETERANGAN</th>
+  </tr>
+  <tr>
+    <td class="tg-031e" colspan="2">PEMASARAN</td>
+    <td class="tg-031e" colspan="2">PRODUKSI</td>
+    <td class="tg-031e" colspan="2">UMUM</td>
+    <td class="tg-031e" colspan="3">BAGIAN</td>
+    <td class="tg-031e"></td>
+    <td class="tg-031e"></td>
+  </tr>
+  <tr>
+	<td class="tg-031e"></td>
+    <td class="tg-031e"></td>
+    <td class="tg-031e">CASH</td>
+    <td class="tg-031e">BRI</td>
+    <td class="tg-031e">CASH</td>
+    <td class="tg-031e">BRI</td>
+    <td class="tg-031e">CASH</td>
+    <td class="tg-031e">BRI</td>
+    <td class="tg-031e">PEMASARAN</td>
+    <td class="tg-031e">PRODUKSI</td>
+    <td class="tg-031e">UMUM</td>
+    <td class="tg-031e"></td>
+    <td class="tg-031e"></td>
+
+  </tr>
+</table>
+ 
+ 
+ 
+		</div>
+	</div>
+</div>
+
 <div class="panel panel-warning">
 	<div class="panel-heading">
 		<h3 class="panel-title">Bar Grafik Penggajian</h3>

@@ -13,6 +13,7 @@
 		$NAMA_JABATAN = $data['NAMA_JABATAN'];
 		$TUNJANGAN_JABATAN = $data['TUNJANGAN_JABATAN'];
 		$TUNJANGAN_LAIN = $data['TUNJANGAN_LAIN'];
+		$KODE_DEPARTEMEN = $data['KODE_DEPARTEMEN'];
         $tmptunjanganlain=array();
         $tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
 		$NOMINAL_TABUNGAN = $data['NOMINAL_TABUNGAN'];
@@ -25,6 +26,7 @@
         $tmptunjanganlain=array();
         $tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
 		$NOMINAL_TABUNGAN = "";
+		$KODE_DEPARTEMEN = "";
 		$NOMINAL_UMT = "";
     }
 ?>
@@ -48,6 +50,20 @@
             <label for="TUNJANGAN_JABATAN" class="col-sm-3 control-label"> Tunjangan Jabatan</label>
             <div class="col-sm-9">
 				<input type="text" class="form-control" value="<?php echo $TUNJANGAN_JABATAN; ?>" id="TUNJANGAN_JABATAN" name="TUNJANGAN_JABATAN"  \>
+            </div>
+		</div>
+		<div class="form-group">
+            <label for="DEPARTEMEN" class="col-sm-3 control-label"> Departemen</label>
+            <div class="col-sm-9">
+				<?php
+                    $result = mysql_query("select * from departemen");  
+                    echo '<select id="KODE_DEPARTEMEN" name="KODE_DEPARTEMEN" class="form-control">';  
+                        echo '<option value="">Silahkan Pilih Departemen</option>';  
+						while ($row = mysql_fetch_array($result)) {  
+                            echo '<option value="' . $row['KODE_DEPARTEMEN'] . '"';if($KODE_DEPARTEMEN==$row['KODE_DEPARTEMEN']){echo "selected='selected'";} echo'>' . $row['NAMA_DEPARTEMEN']. '</option>';  
+						}  
+                    echo '</select>';
+				?>
             </div>
 		</div>
 	<!--<div class="form-group">
@@ -88,7 +104,7 @@
                     url: $form.attr('action'),
                     type: 'POST',
                     data: $form.serialize(),
-                    success: function() {
+                    success: function(data) {
 			$('#dialog-jabatan').modal('hide');
                     }
                 });
@@ -150,6 +166,13 @@
                             },
                             integer: {
                                 message: 'The is numeric'
+                            },
+                        }
+                    },
+					KODE_DEPARTEMEN: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The is required'
                             },
                         }
                     },
