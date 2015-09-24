@@ -52,7 +52,7 @@
 	<?php
 		$no = 0;
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
-			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH'"));
+			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI LIKE '$NIP_PEGAWAIH'"));
 			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Outlet' and kode_pegawai='$pegawaicari->KODE_PEGAWAI' ") or die (mysql_error());
        
 		}
@@ -62,7 +62,7 @@
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
-			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH'"));
+			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI LIKE '$NIP_PEGAWAIH'"));
 			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Outlet' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
 		}
 	
