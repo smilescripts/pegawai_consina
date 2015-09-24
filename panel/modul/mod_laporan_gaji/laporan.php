@@ -10,7 +10,7 @@
 ?>
 <div class="panel panel-warning">
 	<div class="panel-heading">
-		<h3 class="panel-title">Laporan pengeluaran gaji</h3>
+		<h3 class="panel-title">Laporan Penggajian dan Pinjaman Karyawan</h3>
     </div>
     <div class="panel-body">	
 
@@ -28,9 +28,28 @@
 				<?php
 					if($DEPT=="all"){
 					$querypetugas=mysql_query("SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as total_gaji,sum(kasbon) as total_kasbon,sum(pinjaman) as total_pinjaman from head_penggajian where tahun='$TAHUN' and bulan='$BULAN'") or die (mysql_error());
+					$cash=mysql_query("SELECT head_penggajian.*,SUM(CASE WHEN head_penggajian.thp > 0 THEN head_penggajian.thp ELSE 0 END) as total_gaji_cash FROM head_penggajian
+					INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+					where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL)") or die (mysql_error());
+					$getcash=mysql_fetch_object($cash); 
+					
+					$trans=mysql_query("SELECT head_penggajian.*,SUM(CASE WHEN head_penggajian.thp > 0 THEN head_penggajian.thp ELSE 0 END) as total_gaji_trans FROM head_penggajian
+					INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+					where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!=''") or die (mysql_error());
+					$gettrans=mysql_fetch_object($trans); 
 					}
 					else{
 					$querypetugas=mysql_query("SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as total_gaji,sum(kasbon) as total_kasbon,sum(pinjaman) as total_pinjaman from head_penggajian where tahun='$TAHUN' and bulan='$BULAN' and departemen='$DEPT'") or die (mysql_error());
+					
+					$cash=mysql_query("SELECT head_penggajian.*,SUM(CASE WHEN head_penggajian.thp > 0 THEN head_penggajian.thp ELSE 0 END) as total_gaji_cash FROM head_penggajian
+					INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+					where  head_penggajian.bulan='$BULAN' and head_penggajian.departemen='$DEPT' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL)") or die (mysql_error());
+					$getcash=mysql_fetch_object($cash);
+					
+					$trans=mysql_query("SELECT head_penggajian.*,SUM(CASE WHEN head_penggajian.thp > 0 THEN head_penggajian.thp ELSE 0 END) as total_gaji_trans FROM head_penggajian
+					INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+					where  head_penggajian.bulan='$BULAN' and head_penggajian.departemen='$DEPT' and head_penggajian.tahun='$TAHUN'and pegawai.NO_REKENING!=''") or die (mysql_error());
+					$gettrans=mysql_fetch_object($trans);
 						
 						
 					}
@@ -45,6 +64,7 @@
 				?>
 				</tbody>
 			</table>
+			<p>Keterangan: *Nominal yang memiliki nilai Minus dianggap Nol / Kosong pada proses perhitungan Total penggajian,pinjaman maupun kasbon</p>
 		</div>
 	</div>
 </div>
@@ -150,7 +170,7 @@
 							<td>Rp.'.number_format($objectdata->thp).'</td>
 							</tr>
 						';
-	
+						
 					}
 
 				?>
@@ -165,6 +185,113 @@
 <div class="panel panel-warning">
 	<div class="panel-heading">
 		<h3 class="panel-title">Laporan Gaji Cash</h3>
+    </div>
+    <div class="panel-body">	
+
+
+		<div class="table-responsive" style="height:250px">
+ 
+	<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:13px 10px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:13px 10px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-s6z2{text-align:center}
+</style>
+<table class="tg" style="undefined;table-layout: fixed;">
+<colgroup>
+<col style="width: 44px">
+<col style="width: 209px">
+<col style="width: 171px">
+<col style="width: 148px">
+<col style="width: 164px">
+<col style="width: 365px">
+</colgroup>
+  <tr>
+    <th class="tg-s6z2" rowspan="2"><br>NO</th>
+    <th class="tg-s6z2" rowspan="2"><br><br>NAMA LENGKAP<br></th>
+    <th class="tg-s6z2" colspan="3">POSISI</th>
+    <th class="tg-s6z2" rowspan="2"><br>NOMINAL</th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">SITE</td>
+    <td class="tg-s6z2">DEPARTEMEN</td>
+    <td class="tg-s6z2">JABATAN</td>
+  </tr>
+  <?php
+					$no = 0;
+					
+					if($DEPT=="all"){
+										$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
+		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL) ") or die (mysql_error());
+     
+        
+					}
+					else{
+		$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
+		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL) ") or die (mysql_error());
+     
+		
+					}
+	
+					while($objectdata=mysql_fetch_object($query)){
+						$no++;
+						echo'
+							<tr>
+							<td width="10%">'.$no.'</td>
+						';
+		
+						$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->kode_pegawai'") or die (mysql_error());
+						$getnamapegawaidata=mysql_fetch_object($pegawaidata);
+		
+						echo'
+						<td>'.$getnamapegawaidata->NAMA_PEGAWAI.'</td>
+						';
+		
+						$dept=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$getnamapegawaidata->KODE_DEPARTEMEN'") or die (mysql_error());
+						$getdept=mysql_fetch_object($dept);
+						$jabatan=mysql_query("SELECT * FROM jabatan where KODE_JABATAN='$getnamapegawaidata->KODE_JABATAN'") or die (mysql_error());
+						$getjabatan=mysql_fetch_object($jabatan);
+						$site=mysql_query("SELECT * FROM state where STATE_ID='$getnamapegawaidata->STATE_ID'") or die (mysql_error());
+						$getsite=mysql_fetch_object($site);
+		
+						echo'
+							<td>'.$getdept->NAMA_DEPARTEMEN.'</td>
+							<td>'.$getsite->STATE_NAME.'</td>
+							<td>'.$getjabatan->NAMA_JABATAN.'</td>
+						';
+		
+						
+		
+						$tunjangandata=mysql_query("SELECT SUM(nominal_tunjangan) as nomtun from detail_tunjangan_penggajian where kode_penggajian='$objectdata->kode_penggajian'") or die (mysql_error());
+						$gettunjangandata=mysql_fetch_object($tunjangandata);
+		
+						echo'
+						
+							<td>Rp.'.number_format($objectdata->thp).'</td>
+						
+							
+							</tr>
+						';
+					$tcash=$objectdata->thp+$tcash;
+					}
+
+				?>
+  
+  
+</table>
+
+	</div>
+	<h4>Total Penggajian Cash: Rp.<?php echo number_format($getcash->total_gaji_cash);?></h4>
+	<p>Keterangan: *Nominal yang memiliki nilai Minus dianggap Nol / Kosong pada proses perhitungan Total penggajian</p>
+	</div>
+</div>
+
+
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Laporan Gaji Transfer</h3>
     </div>
     <div class="panel-body">	
 
@@ -201,12 +328,17 @@
 					$no = 0;
 					
 					if($DEPT=="all"){
-						$query=mysql_query("SELECT * FROM head_penggajian where tahun='$TAHUN' and bulan='$BULAN'") or die (mysql_error());
-       
+						$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
+		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!=''") or die (mysql_error());
+     
+	
         
 					}
 					else{
-						$query=mysql_query("SELECT * FROM head_penggajian where tahun='$TAHUN' and bulan='$BULAN' and departemen='$DEPT'") or die (mysql_error());
+						$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
+		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
+		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!='' and head_penggajian.departemen='$DEPT'") or die (mysql_error());
   	
 		
 					}
@@ -225,13 +357,17 @@
 						<td>'.$getnamapegawaidata->NAMA_PEGAWAI.'</td>
 						';
 		
-						$penggajiannama=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$objectdata->departemen'") or die (mysql_error());
-						$getnamapenggajian=mysql_fetch_object($penggajiannama);
+						$dept=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$getnamapegawaidata->KODE_DEPARTEMEN'") or die (mysql_error());
+						$getdept=mysql_fetch_object($dept);
+						$jabatan=mysql_query("SELECT * FROM jabatan where KODE_JABATAN='$getnamapegawaidata->KODE_JABATAN'") or die (mysql_error());
+						$getjabatan=mysql_fetch_object($jabatan);
+						$site=mysql_query("SELECT * FROM state where STATE_ID='$getnamapegawaidata->STATE_ID'") or die (mysql_error());
+						$getsite=mysql_fetch_object($site);
 		
 						echo'
-							<td>'.$getnamapenggajian->NAMA_DEPARTEMEN.'</td>
-							<td>'.$getnamapenggajian->NAMA_DEPARTEMEN.'</td>
-							<td>'.$getnamapenggajian->NAMA_DEPARTEMEN.'</td>
+							<td>'.$getdept->NAMA_DEPARTEMEN.'</td>
+							<td>'.$getsite->STATE_NAME.'</td>
+							<td>'.$getjabatan->NAMA_JABATAN.'</td>
 						';
 		
 						
@@ -246,7 +382,7 @@
 							
 							</tr>
 						';
-	
+		$ttrans=$objectdata->thp+$ttrans;
 					}
 
 				?>
@@ -254,10 +390,10 @@
   
 </table>
 	</div>
+	<h4>Total Penggajian Transfer: Rp.<?php echo number_format($gettrans->total_gaji_trans);?></h4>
+	<p>Keterangan: *Nominal yang memiliki nilai Minus dianggap Nol / Kosong pada proses perhitungan Total penggajian</p>
 	</div>
 </div>
-
-
 <!-- Laporan anyar -->
 
 <div class="panel panel-warning">
