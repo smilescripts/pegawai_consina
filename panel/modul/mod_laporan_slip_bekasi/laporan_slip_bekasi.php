@@ -170,7 +170,7 @@
 </div>
 
 <div class="panel panel-warning">
-    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Harian (Buaran)</h1>
+    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Harian (Bekasi)</h1>
 	
     <div class="panel-body">
 		<center>

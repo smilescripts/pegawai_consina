@@ -1,17 +1,16 @@
 <table id="example" class="table table-bordered" border="1">
 	<tr>
-		<th width="10%" style="background-color:grey">No</th>
-		<th style="background-color:grey">Departemen</th>
+			<th width="10%" style="background-color:grey">No</th>
 		<th width="30%" style="background-color:grey">No Rekening</th>
-		<th style="background-color:grey">Nama</th>
-		<th style="background-color:grey">Jumlah Transfer</th>
+		<th style="background-color:grey"  width="30%">Nominal</th>
+		<th style="background-color:grey" width="30%">Pemilik Rekening</th>
 	</tr>
 	<?php
 		$BULAN=$_GET["BULAN"];
 		$TAHUN=$_GET["TAHUN"];
 		$pdfcetak=mysql_query("SELECT head_penggajian.* FROM head_penggajian
 		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
-		where head_penggajian.format='Bulanan' and head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!=''") or die (mysql_error());
+		where head_penggajian.format='Bulanan' and head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!='' ") or die (mysql_error());
         $no = 0;
         
 		while($objectdata=mysql_fetch_object($pdfcetak)){
@@ -21,10 +20,10 @@
 			echo'
 				<tr>
 				<td>'.$no.'</td>
-				<td>'.$departemen->NAMA_DEPARTEMEN.'</td>
 				<td>'.$pegawai->NO_REKENING.'</td>
-				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
+				
 				<td>'.number_format($objectdata->thp).'</td>
+				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
 		
 				</tr>';
         }

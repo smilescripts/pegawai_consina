@@ -95,7 +95,7 @@ ob_start();
 include "hanyacetaktunai.php";
 $msg = ob_get_clean();
 // Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, 65, 30,"Data Penggajian Pegawai Bulanan", 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, 75, 30,"Data Payroll Office (Cash)", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, 170, 37,"$_GET[BULAN]-$_GET[TAHUN]", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, '', 45, $msg, 0, 1, 0, true, '', true);
 
@@ -103,7 +103,7 @@ $pdf->writeHTMLCell(0, 0, '', 45, $msg, 0, 1, 0, true, '', true);
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('penggajian pegawai bulanan consina-'.$BULAN.'-'.$TAHUN.'.pdf', 'I');
+$pdf->Output('Data Payroll Office-'.$BULAN.'-'.$TAHUN.'.pdf', 'I');
 
 //============================================================+
 // END OF FILE

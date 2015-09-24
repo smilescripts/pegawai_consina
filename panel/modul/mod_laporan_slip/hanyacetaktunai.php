@@ -6,9 +6,8 @@
 <table id="example" class="table table-bordered" border="1">
 	<tr>
 		<th width="10%" style="background-color:grey">No</th>
-		<th style="background-color:grey">Departemen</th>
-		<th style="background-color:grey">Nama</th>
-		<th style="background-color:grey">Jumlah Gaji</th>
+		<th style="background-color:grey"  width="45%">Jumlah Transfer</th>
+		<th style="background-color:grey" width="45%">Pegawai</th>
 	</tr>
 	<?php
 		$pdfcetak=mysql_query("SELECT head_penggajian.* FROM head_penggajian
@@ -25,9 +24,8 @@
 			echo'
 				<tr>
 				<td>'.$no.'</td>
-				<td>'.$departemen->NAMA_DEPARTEMEN.'</td>
-				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
 				<td>'.number_format($objectdata->thp).'</td>
+				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
 		
 				</tr>
 			';

@@ -49,6 +49,18 @@
 	</div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#example1').DataTable( {
+			
+			 "paging": false,
+			"scrollY":200,
+			"scrollX":true
+			
+			
+        });
+    });
+</script>
 <div class="panel panel-warning">
 	<div class="panel-heading">
 		<h3 class="panel-title">Detail laporan data gaji</h3>
@@ -56,10 +68,9 @@
     <div class="panel-body">	
 
 
-		<div class="table-responsive">
  
-			<table id="example" class="table table-bordered" border="1">
-
+			<table id="example1" class="table table-bordered" border="1" >
+				<thead>
 				<tr>
 					<th width="10%" style="background-color:grey">No</th>
 					<th style="background-color:grey">Pegawai</th>
@@ -78,6 +89,8 @@
 					<th style="background-color:grey"> Kehadiran full</th>
 					<th style="background-color:grey">THP</th>
 				</tr>
+				</thead>
+				<tbody>
 				<?php
 					$no = 0;
 					
@@ -141,13 +154,109 @@
 					}
 
 				?>
+				</tbody>
 			</table>
  
  
- 
-		</div>
 	</div>
 </div>
+
+
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Laporan Gaji Cash</h3>
+    </div>
+    <div class="panel-body">	
+
+
+		<div class="table-responsive" style="height:500px">
+ 
+	<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:13px 10px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:13px 10px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+.tg .tg-s6z2{text-align:center}
+</style>
+<table class="tg" style="undefined;table-layout: fixed;">
+<colgroup>
+<col style="width: 44px">
+<col style="width: 209px">
+<col style="width: 171px">
+<col style="width: 148px">
+<col style="width: 164px">
+<col style="width: 365px">
+</colgroup>
+  <tr>
+    <th class="tg-s6z2" rowspan="2"><br>NO</th>
+    <th class="tg-s6z2" rowspan="2"><br><br>NAMA LENGKAP<br></th>
+    <th class="tg-s6z2" colspan="3">POSISI</th>
+    <th class="tg-s6z2" rowspan="2"><br>NOMINAL</th>
+  </tr>
+  <tr>
+    <td class="tg-s6z2">SITE</td>
+    <td class="tg-s6z2">DEPARTEMEN</td>
+    <td class="tg-s6z2">JABATAN</td>
+  </tr>
+  <?php
+					$no = 0;
+					
+					if($DEPT=="all"){
+						$query=mysql_query("SELECT * FROM head_penggajian where tahun='$TAHUN' and bulan='$BULAN'") or die (mysql_error());
+       
+        
+					}
+					else{
+						$query=mysql_query("SELECT * FROM head_penggajian where tahun='$TAHUN' and bulan='$BULAN' and departemen='$DEPT'") or die (mysql_error());
+  	
+		
+					}
+	
+					while($objectdata=mysql_fetch_object($query)){
+						$no++;
+						echo'
+							<tr>
+							<td width="10%">'.$no.'</td>
+						';
+		
+						$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->kode_pegawai'") or die (mysql_error());
+						$getnamapegawaidata=mysql_fetch_object($pegawaidata);
+		
+						echo'
+						<td>'.$getnamapegawaidata->NAMA_PEGAWAI.'</td>
+						';
+		
+						$penggajiannama=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$objectdata->departemen'") or die (mysql_error());
+						$getnamapenggajian=mysql_fetch_object($penggajiannama);
+		
+						echo'
+							<td>'.$getnamapenggajian->NAMA_DEPARTEMEN.'</td>
+							<td>'.$getnamapenggajian->NAMA_DEPARTEMEN.'</td>
+							<td>'.$getnamapenggajian->NAMA_DEPARTEMEN.'</td>
+						';
+		
+						
+		
+						$tunjangandata=mysql_query("SELECT SUM(nominal_tunjangan) as nomtun from detail_tunjangan_penggajian where kode_penggajian='$objectdata->kode_penggajian'") or die (mysql_error());
+						$gettunjangandata=mysql_fetch_object($tunjangandata);
+		
+						echo'
+						
+							<td>Rp.'.number_format($objectdata->thp).'</td>
+						
+							
+							</tr>
+						';
+	
+					}
+
+				?>
+  
+  
+</table>
+	</div>
+	</div>
+</div>
+
 
 <!-- Laporan anyar -->
 

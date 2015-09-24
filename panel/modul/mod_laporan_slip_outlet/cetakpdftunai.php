@@ -95,7 +95,7 @@ ob_start();
 include "hanyacetaktunai.php";
 $msg = ob_get_clean();
 // Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, 65, 30,"Data Penggajian Pegawai Outlet", 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, 55, 30,"Data Penggajian Pegawai Outlet (Cash)", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, 170, 37,"$_GET[BULAN]-$_GET[TAHUN]", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, '', 45, $msg, 0, 1, 0, true, '', true);
 

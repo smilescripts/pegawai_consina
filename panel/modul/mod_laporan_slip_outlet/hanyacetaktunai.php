@@ -1,9 +1,8 @@
 <table id="example" class="table table-bordered" border="1">
 	<tr>
 		<th width="10%" style="background-color:grey">No</th>
-		<th style="background-color:grey">Departemen</th>
-		<th style="background-color:grey">Nama</th>
-		<th style="background-color:grey">Jumlah Gaji</th>
+		<th style="background-color:grey"  width="45%">Nominal</th>
+		<th style="background-color:grey" width="45%">Pegawai</th>
 	</tr>
 	<?php
 		$BULAN=$_GET["BULAN"];
@@ -19,11 +18,10 @@
 			$no++;
 			echo'
 				<tr>
-				<td>'.$no.'</td>
-				<td>'.$departemen->NAMA_DEPARTEMEN.'</td>
-			
-				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
+			<td>'.$no.'</td>
+				
 				<td>'.number_format($objectdata->thp).'</td>
+				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
 		
 				</tr>';
         }

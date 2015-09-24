@@ -94,15 +94,15 @@ ob_start();
 include "hanyacetak.php";
 $msg = ob_get_clean();
 // Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, 65, 30,"Data Penggajian Pegawai Harian", 0, 1, 0, true, '', true);
-$pdf->writeHTMLCell(0, 0, 170, 37,"$_GET[BULAN]-$_GET[TAHUN]", 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, 55, 30,"Data Payroll Sewing & Helper Jakarta (Transfer)", 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, 171, 37,"$_GET[BULAN]-$_GET[TAHUN]", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, '', 45, $msg, 0, 1, 0, true, '', true);
 
 // ---------------------------------------------------------
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('penggajian pegawai harian consina-'.$BULAN.'-'.$TAHUN.'.pdf', 'I');
+$pdf->Output('Data Payroll Sewing & Helper Jakarta-'.$BULAN.'-'.$TAHUN.'.pdf', 'I');
 
 //============================================================+
 // END OF FILE
