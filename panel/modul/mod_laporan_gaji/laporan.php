@@ -198,9 +198,7 @@
     <td class="tg-031e"></td>
   </tr>
   <tr>
-	<td class="tg-031e"></td>
-    <td class="tg-031e"></td>
-    <td class="tg-031e">CASH</td>
+	<td class="tg-031e">CASH</td>
     <td class="tg-031e">BRI</td>
     <td class="tg-031e">CASH</td>
     <td class="tg-031e">BRI</td>
@@ -211,8 +209,96 @@
     <td class="tg-031e">UMUM</td>
     <td class="tg-031e"></td>
     <td class="tg-031e"></td>
+    <td class="tg-031e"></td>
+    <td class="tg-031e"></td>
 
   </tr>
+  <?php
+ /*  if($DEPT=="all"){
+	$queryumum = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING = NULL AND b.KODE_DEPARTEMEN = '23'"));
+  	
+	$queryumumbri = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING != NULL AND b.KODE_DEPARTEMEN = '23'"));
+	
+	$queryproduksi = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING = NULL AND b.KODE_DEPARTEMEN = '22'"));
+  	
+	$queryproduksibri = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING != NULL AND b.KODE_DEPARTEMEN = '22'"));
+
+	$querypemasaran = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING = NULL AND b.KODE_DEPARTEMEN = '21'"));
+  	
+	$querypemasaranbri = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING != NULL AND b.KODE_DEPARTEMEN = '21'"));
+	
+	$querypotpemasaran = mysql_fetch_object (mysql_query("SELECT sum(kasbon + pinjaman) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.KODE_DEPARTEMEN='23'"));
+	
+	$querypotproduksi = mysql_fetch_object (mysql_query("SELECT sum(kasbon + pinjaman) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.KODE_DEPARTEMEN='22'"));
+	
+	$querypotumum = mysql_fetch_object (mysql_query("SELECT sum(kasbon + pinjaman) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.KODE_DEPARTEMEN='21'"));
+
+	$jumlah = $queryumum->hasil + $queryumumbri->hasil + $queryproduksi->hasil + $queryproduksibri->hasil + $querypemasaran->hasil + $querypemasaranbri->hasil + $querypotpemasaran->hasil + $querypotproduksi->hasil + $querypotumum->hasil ;
+
+	echo'
+	
+		<tr>
+			<td class="tg-031e">'.$queryumum->hasil.'</td>
+			<td class="tg-031e">'.$queryumumbri->hasil.'</td>
+			<td class="tg-031e">'.$queryproduksi->hasil.'</td>
+			<td class="tg-031e">'.$queryproduksibri->hasil.'</td>
+			<td class="tg-031e">'.$querypemasaran->hasil.'</td>
+			<td class="tg-031e">'.$querypemasaranbri->hasil.'</td>
+			<td class="tg-031e">'.$querypotpemasaran->hasil.'</td>
+			<td class="tg-031e">'.$querypotproduksi->hasil.'</td>
+			<td class="tg-031e">'.$querypotumum->hasil.'</td>
+			<td class="tg-031e"></td>
+			<td class="tg-031e"></td>
+			<td class="tg-031e"></td>
+			<td class="tg-031e"></td>
+		</tr>
+	
+	';
+		} */
+	
+			$queryumum = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING = NULL AND b.KODE_DEPARTEMEN = '23' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+  	
+			$queryumumbri = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING != NULL AND b.KODE_DEPARTEMEN = '23' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+			
+			$queryproduksi = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING = NULL AND b.KODE_DEPARTEMEN = '22' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+			
+			$queryproduksibri = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING != NULL AND b.KODE_DEPARTEMEN = '22' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+
+			$querypemasaran = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING = NULL AND b.KODE_DEPARTEMEN = '21' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+			
+			$querypemasaranbri = mysql_fetch_object (mysql_query("SELECT SUM((REPLACE(`total_penerimaan`,',','') + `penambahan`)-(`potongan_mangkir` + `pemotongan` + `tabungan`)) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.NO_REKENING != NULL AND b.KODE_DEPARTEMEN = '21' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+			
+			$querypotpemasaran = mysql_fetch_object (mysql_query("SELECT SUM(kasbon + pinjaman) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.KODE_DEPARTEMEN='23' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+			
+			$querypotproduksi = mysql_fetch_object (mysql_query("SELECT SUM(kasbon + pinjaman) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.KODE_DEPARTEMEN='22' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+			
+			$querypotumum = mysql_fetch_object (mysql_query("SELECT SUM(kasbon + pinjaman) as hasil FROM `head_penggajian` as a , `pegawai` as b WHERE b.KODE_PEGAWAI = a.KODE_PEGAWAI AND b.KODE_DEPARTEMEN='21' AND a.tahun='$TAHUN' AND a.bulan='$BULAN'"));
+		
+			$jumlah = $queryumum->hasil + $queryumumbri->hasil + $queryproduksi->hasil + $queryproduksibri->hasil + $querypemasaran->hasil + $querypemasaranbri->hasil + $querypotpemasaran->hasil + $querypotproduksi->hasil + $querypotumum->hasil ;
+		
+			echo'
+	
+		<tr>
+			<td class="tg-031e">'.$queryumum->hasil.'</td>
+			<td class="tg-031e">'.$queryumumbri->hasil.'</td>
+			<td class="tg-031e">'.$queryproduksi->hasil.'</td>
+			<td class="tg-031e">'.$queryproduksibri->hasil.'</td>
+			<td class="tg-031e">'.$querypemasaran->hasil.'</td>
+			<td class="tg-031e">'.$querypemasaranbri->hasil.'</td>
+			<td class="tg-031e">'.$querypotpemasaran->hasil.'</td>
+			<td class="tg-031e">'.$querypotproduksi->hasil.'</td>
+			<td class="tg-031e">'.$querypotumum->hasil.'</td>
+			<td class="tg-031e">'; echo $jumlah; echo'</td>
+			<td class="tg-031e"></td>
+			<td class="tg-031e"></td>
+			<td class="tg-031e"></td>
+		</tr>
+	
+	';
+
+  
+  
+  ?>
 </table>
  
  
