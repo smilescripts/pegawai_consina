@@ -67,7 +67,7 @@ do
 while ($minggu != $dateakhirnya);   
 	
 	
-	$cek=mysql_query("select * from head_penggajian where end='$endp' and start='$startp'");
+	$cek=mysql_query("select * from head_penggajian where end='$endp' and start='$startp' and format='Harian Bekasi'");
 			$getcek=mysql_fetch_object($cek);
 			
 			$data_baru="";
@@ -80,7 +80,7 @@ while ($minggu != $dateakhirnya);
 				catat($user,$aksi);
 			}else{
 				$pengaturan32 = mysql_fetch_array(mysql_query("SELECT VALUE FROM pengaturan_penggajian WHERE ID='9'"));
-				$data32 = mysql_fetch_array(mysql_query("SELECT kode_penggajian,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan32['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE start='$startp' AND end='$endp'"));
+				$data32 = mysql_fetch_array(mysql_query("SELECT kode_penggajian,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan32['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE start='$startp' AND end='$endp' and format='Harian Bekasi'"));
                 $datenow32=date("Y-m-d");
 				
 				if($data32["cktgl"]>=$datenow32){

@@ -65,9 +65,8 @@ do
    $im++;
 }
 while ($minggu != $dateakhirnya);   
-
-
-$cek=mysql_query("select * from head_penggajian where end='$endp' and start='$startp'");
+			
+			$cek=mysql_query("select * from head_penggajian where end='$endp' and start='$startp' and format='Harian'");
 			$getcek=mysql_fetch_object($cek);
 			
 			$data_baru="";
@@ -80,7 +79,7 @@ $cek=mysql_query("select * from head_penggajian where end='$endp' and start='$st
 				catat($user,$aksi);
 			}else{
 				$pengaturan32 = mysql_fetch_array(mysql_query("SELECT VALUE FROM pengaturan_penggajian WHERE ID='9'"));
-				$data32 = mysql_fetch_array(mysql_query("SELECT kode_penggajian,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan32['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE start='$startp' AND end='$endp'"));
+				$data32 = mysql_fetch_array(mysql_query("SELECT kode_penggajian,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan32['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE start='$startp' AND end='$endp' and format='Harian'"));
                 $datenow32=date("Y-m-d");
 				
 				if($data32["cktgl"]>=$datenow32){
@@ -154,7 +153,7 @@ $cek=mysql_query("select * from head_penggajian where end='$endp' and start='$st
 	$viewdatamerah=mysql_fetch_object($liburmerah);
 	$hariliburmerah=explode(",",$viewdatamerah->TANGGAL);
 	
-	$tipe="SIMPAN";
+	//$tipe="SIMPAN";
 	if($data_baru!="gagal"){
 	
 	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Kontrak' and STATE_ID='$_SESSION[STATE_ID]'");

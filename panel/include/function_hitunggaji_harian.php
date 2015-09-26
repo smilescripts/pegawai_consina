@@ -26,6 +26,8 @@
 			
 			mysql_query("DELETE from head_penggajian where start='$start' and end='$end' and format='$tipe' and kode_pegawai='$theadgaji->kode_pegawai'");
 		}
+	}
+	
 	function frmDate($date,$code){
         $explode = explode("-",$date);
         $year  = $explode[0];
