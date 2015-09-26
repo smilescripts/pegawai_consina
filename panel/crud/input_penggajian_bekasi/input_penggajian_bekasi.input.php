@@ -153,7 +153,7 @@ while ($minggu != $dateakhirnya);
 	$viewdatamerah=mysql_fetch_object($liburmerah);
 	$hariliburmerah=explode(",",$viewdatamerah->TANGGAL);
 	
-	$tipe="SIMPAN";
+	//$tipe="SIMPAN";
 	if($data_baru!="gagal"){
 	
 	
@@ -579,7 +579,6 @@ while ($minggu != $dateakhirnya);
 		$total_penerimaan=number_format(getthp($NIP) + $nominal_kehadiran_full+$totalgaji+$totallembur + $uang_makan_transport+ $totalpenghargaan+$nominal_penambahan_tambah);
 	
 		if($tipe=="SIMPAN"){
-<<<<<<< HEAD
 		
 			if($data_input=="good"){
 				$query = "SELECT max(kode_penggajian) as idMaks FROM head_penggajian";
