@@ -396,7 +396,7 @@ while ($minggu != $dateakhirnya);
 			$getcek=mysql_fetch_object($cek);
 			
 			if($getcek==""){
-				mysql_query("insert into head_penggajian values('$getkode','$kp','$gaji_pokok','$uang_makan_transport','$datalembur','$terlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$thp','$kasbon','$nominalpinjaman','$pot_mangkir','$jumlahmasuk','0','$hasiljumlahcuti','$nominal_kehadiran_full','Outlet','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah','$totaljamlembur','$jmlterlambat')");
+				mysql_query("insert into head_penggajian values('$getkode','$kp','$gaji_pokok','$uang_makan_transport','$datalembur','$terlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$thp','$kasbon','$nominalpinjaman','$pot_mangkir','$jumlahmasuk','0','$hasiljumlahcuti','$nominal_kehadiran_full','Outlet','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah','$totaljamlembur','$jmlterlambat','')");
 				$bulansekarang=$BULAN;
 				$tahunsekarang=$TAHUN;
 				mysql_query("UPDATE `kasbon_pegawai` SET `STATUS` = 'LUNAS' WHERE NIP_PEGAWAI='$kp' and MONTH(TANGGAL)='$bulansekarang' and YEAR(TANGGAL)='$tahunsekarang'");

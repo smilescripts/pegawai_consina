@@ -34,7 +34,19 @@
 	$harilibur1=explode(",",$viewdata->TANGGAL);
 	
 ?>
-
+<script>
+$(document).ready(function() {
+        $('#gaji_all').DataTable( {
+			
+			"paging": false,
+			"scrollY":200,
+			"scrollX":true
+			
+			
+        });
+		
+    });
+</script>
 <a href="modul/mod_laporan_slip_bekasi/cetaklaporan.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak slip gaji</a>
 
 <a href="modul/mod_laporan_slip_bekasi/cetakpdf.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak penggajian Bank</a>
@@ -43,6 +55,112 @@
 <a href="modul/mod_laporan_slip_bekasi/cetakpdftunai.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak penggajian Tunai</a>
 
 <hr/>
+	<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h3 class="panel-title">Rekap Harian Bekasi</h3>
+    </div>
+    <div class="panel-body">	
+
+
+		
+	<table id="gaji_all" class="table table-bordered">
+	<thead>
+	<tr>
+	<th class="tg-031e" rowspan="3"><center >No</center></th>
+	<th class="tg-031e" rowspan="3"><center>NIK</center></th>
+    <th class="tg-031e" colspan="1"><center>NAMA</center></th>
+    <th class="tg-031e" colspan="3"><center>POSISI</center></th>
+    <th class="tg-031e" rowspan="3"><center>GAJI PER-HARI</center></th>
+    <th class="tg-031e" rowspan="3"><center>LEMBURAN PER-JAM</center></th>
+	<th class="tg-031e" rowspan="3"><center>DITERIMA (TAKE HOME PAY)</center></th>
+	<th class="tg-031e" colspan="2"><center>LEMBURAN</center></th>
+	<th class="tg-031e" colspan="4"><center>POTONGAN</center></th>
+	<th class="tg-031e" rowspan="3"><center>LAIN-LAIN</center></th>
+	<th class="tg-031e" rowspan="3"><center>PENGHARGAAN</center></th>
+	<th class="tg-031e" rowspan="3"><center>TOTAL DITERIMA (BRI)</center></th>
+	<th class="tg-031e" rowspan="3"><center>NOMOR REKENING</center></th>
+	<th class="tg-031e" rowspan="3"><center>EMAIL</center></th>
+	<th class="tg-031e" rowspan="3"><center>KETERANGAN</center></th>
+	
+  </tr>
+  <tr>
+    <td class="tg-031e" rowspan="2"><center>LENGKAP</center></td>
+    <td class="tg-031e" rowspan="2"><center>SITE</center></td>
+    <td class="tg-031e" rowspan="2"><center>DEPARTEMEN</center></td>
+	<td class="tg-031e" rowspan="2"><center>JABATAN</center></td>
+	
+	
+	<td class="tg-031e" rowspan="2"><center>TOTAL JAM</center></td>
+	<td class="tg-031e" rowspan="2"><center>JUMLAH LEMBUR</center></td>
+	<td class="tg-031e" colspan="1"><center>MANGKIR</center></td>
+	<td class="tg-031e" rowspan="2"><center>PINJAMAN</center></td>
+	<td class="tg-031e" rowspan="2"><center>KASBON</center></td>
+	<td class="tg-031e" rowspan="2"><center>TOTAL HUTANG</center></td>
+  </tr>
+
+  <tr>
+	<td class="tg-031e"><center>TOTAL MANGKIR</center></td>
+   
+  </tr>
+  </thead>
+	<tbody>
+  <?php
+  $queryrekap = mysql_query("select * from `head_penggajian` join `pegawai` on `pegawai`.kode_pegawai = `head_penggajian`.kode_pegawai where `pegawai`.status_pegawai = 'Kontrak Bekasi'");
+  $no=0;
+  while($ambil=mysql_fetch_array($queryrekap)) {
+		$ID = $ambil["KODE_PEGAWAI"];
+		$queryID = mysql_fetch_object (mysql_query("SELECT * FROM PEGAWAI WHERE kode_pegawai = '$ambil[KODE_PEGAWAI]'"));
+		$queryDep = mysql_fetch_object (mysql_query("SELECT * FROM DEPARTEMEN WHERE KODE_DEPARTEMEN = '$ambil[KODE_DEPARTEMEN]'"));
+		$queryJab = mysql_fetch_object (mysql_query("SELECT * FROM JABATAN WHERE KODE_DEPARTEMEN = '$ambil[KODE_DEPARTEMEN]'"));
+		$querySite = mysql_fetch_object (mysql_query("SELECT * FROM state WHERE STATE_ID = '$ambil[STATE_ID]'"));
+	$no++;
+	echo'
+	
+		<tr>
+			<td class="tg-031e">'.$no.'</td>
+			<td class="tg-031e">'.$queryID->NIP_PEGAWAI.'</td>
+			<td class="tg-031e">'.$queryID->NAMA_PEGAWAI.'</td>
+			
+			<td class="tg-031e">'.$querySite->STATE_NAME.'</td>
+			
+			<td class="tg-031e">'.$queryDep->NAMA_DEPARTEMEN.'</td>
+			<td class="tg-031e">'.$queryJab->NAMA_JABATAN.'</td>
+		
+		
+			<td class="tg-031e">Rp.'.number_format($queryID->GAJI_POKOK).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["lemburan_perjam"]).'</td>
+			
+			<td class="tg-031e">Rp.'.number_format($ambil["thp"]).'</td>
+			<td class="tg-031e">'.$ambil["total_jam_lembur"].' Jam</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["lembur"]).'</td>
+			<td class="tg-031e">'.$ambil["mangkir"].' Hari</td>
+			
+			<td class="tg-031e">Rp.'.number_format($ambil["pinjaman"]).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["kasbon"]).'</td>
+		
+			<td class="tg-031e">
+			';
+			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"];
+			echo 'Rp.'.number_format($totalhutang);
+			echo '
+			</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["tabungan"]).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["nominal_kehadiran_full"]).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["thp"]).'</td>
+			<td class="tg-031e">'.$queryID->NO_REKENING.'</td>
+			<td class="tg-031e">'.$queryID->EMAIL.'</td>
+			<td class="tg-031e"></td>
+  </tr>';
+  }
+  ?>
+  </tbody>
+</table>
+
+ 
+ 
+	</div>
+
+	</div>
 			
 <div class="panel panel-warning" id="non-printable">
 	<div class="panel-heading">

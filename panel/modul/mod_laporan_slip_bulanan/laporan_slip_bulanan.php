@@ -23,14 +23,14 @@
     });
 </script>
 
-<ol class="breadcrumb" id="non-printable">
+<ol class="breadcrumb" id="non-printable" style="width:1300px;margin-left:-100px">
   <li><a href="#" id="beranda" class="beranda"><span class="glyphicon glyphicon-home"> Beranda</a></li>
   <li class="active"><span class="glyphicon glyphicon-user">Laporan gaji</li>
 </ol>
 
 
 
-<div class="panel panel-warning" id="non-printable">
+<div class="panel panel-warning" id="non-printable" style="width:1300px;margin-left:-100px">
   <h1 class="headingtable" style="margin-top:0px" ><span>Laporan</span> Gaji Karyawan Bulanan (Buaran)</h1>
 	
     <div class="panel-body" >
@@ -170,7 +170,7 @@
     </div>
 </div>
 
-<div class="panel panel-warning">
+<div class="panel panel-warning" style="width:1300px;margin-left:-100px">
   <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Bulanan (Buaran)</h1>
 	
     <div class="panel-body">

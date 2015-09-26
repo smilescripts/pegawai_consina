@@ -65,7 +65,7 @@ $(document).ready(function() {
 <hr/>
 <div class="panel panel-warning">
 	<div class="panel-heading">
-		<h3 class="panel-title">Rekap Bulanan Buaran</h3>
+		<h3 class="panel-title">Rekap Office</h3>
     </div>
     <div class="panel-body">	
 
@@ -73,9 +73,9 @@ $(document).ready(function() {
 		
 			<table id="gaji_all" class="table table-bordered">
 	<thead>
-  <tr>
-    <th class="tg-031e" rowspan="3"><center>No</center></th>
-    <th class="tg-031e" rowspan="3"><center>NIK</center></th>
+	<tr>
+	<th class="tg-031e" rowspan="3"><center >No</center></th>
+	<th class="tg-031e" rowspan="3"><center>NIK</center></th>
     <th class="tg-031e" colspan="1"><center>NAMA</center></th>
     <th class="tg-031e" colspan="3"><center>POSISI</center></th>
     <th class="tg-031e" rowspan="3"><center>GAJI POKOK</center></th>
@@ -167,7 +167,7 @@ $(document).ready(function() {
 			}
 			}
 			echo'
-			<td class="tg-031e">Rp.'.$ambil["total_penerimaan"].'</td>
+				<td class="tg-031e">Rp.'.number_format($ambil["thp"]).'</td>
 			<td class="tg-031e">'.$ambil["total_jam_lembur"].' Jam</td>
 			<td class="tg-031e">Rp.'.number_format($ambil["lembur"]).'</td>
 			<td class="tg-031e">'.$ambil["mangkir"].'</td>
