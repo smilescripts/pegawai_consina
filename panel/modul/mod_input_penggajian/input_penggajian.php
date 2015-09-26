@@ -102,6 +102,7 @@
 				audio.play();
 				$('#loadingDiv').show();
 				$('#penggajian_berhasil').hide();
+				$('#penggajian_berhasil_ubah').hide();
 				$('#penggajian_gagal').hide();
 				},
                 success: function(data) {
@@ -112,6 +113,11 @@
 					if(tipe=="SIMPAN"){
 						audiosucces.play();
 						$('#penggajian_berhasil').show();
+					
+					}
+					if(tipe=="ubah"){
+						audiosucces.play();
+						$('#penggajian_berhasil_ubah').show();
 					
 					}
 					if(tipe=="false"){
@@ -176,6 +182,9 @@
 		<center>
 		<div id="penggajian_berhasil" style="display:none" >
 		<div class="alert alert-success" role="alert"><h3 ><b>Proses Penggajian Bulan Ini Berhasil Dilakukan</b></h3></div>
+		</div>
+		<div id="penggajian_berhasil_ubah" style="display:none" >
+		<div class="alert alert-success" role="alert"><h3 ><b>Proses Perubahan Penggajian Bulan Ini Berhasil Dilakukan</b></h3></div>
 		</div>
 		<div id="penggajian_gagal" style="display:none" >
 		<div class="alert alert-danger" role="alert"><h3><b><span class="glyphicon glyphicon-alert"></span>&nbsp;Maaf Penggajian Bulan Ini Sudah Dilakukan&nbsp;<span class="glyphicon glyphicon-alert"></span></b></h3></div>

@@ -16,8 +16,7 @@
 	include("../../include/function_hitunggaji_harian.php");
 	include "../../include/catat.php";
 	$user=$_SESSION['KODE_PETUGAS'];
-	$aksi="Berhasil melakukan proses penggajian karyawan harian";
-	catat($user,$aksi);
+	
 	$jamsabtu=mysql_query("SELECT * FROM pengaturan_penggajian WHERE ID='6'") or die (mysql_error());
 	$tampiljamsabtu=mysql_fetch_object($jamsabtu);
 	$valuesabtu=$tampiljamsabtu->VALUE;
@@ -66,29 +65,39 @@ do
    $im++;
 }
 while ($minggu != $dateakhirnya);   
-	/* function hitung_minggu($tawal,$takhir) {
-		$adaysec =24*3600;
-		$tgl1= strtotime($tawal);
-		$tgl2= strtotime($takhir);
-		$minggu=0;
-		
-		for ($i=$tgl1;$i<$tgl2;$i+=$adaysec){
-			if (date("w",$i) =="0") { $minggu++;}
-		}
-		return $minggu;
-	}
-	
-	function hitung_sabtu($tawal,$takhir) {
-		$adaysec =24*3600;
-		$tgl1= strtotime($tawal);
-		$tgl2= strtotime($takhir);
-		$sabtu=0;
-		
-		for ($i=$tgl1;$i<$tgl2;$i+=$adaysec){
-			if (date("w",$i) =="6") {$sabtu++;}
-		}
-		return $sabtu;
-	} */
+
+
+$cek=mysql_query("select * from head_penggajian where end='$endp' and start='$startp'");
+			$getcek=mysql_fetch_object($cek);
+			
+			$data_baru="";
+			$data_input="";
+			
+			if($getcek==""){
+				$data_input="good";
+				$data_baru="SIMPAN";
+				$aksi="Berhasil melakukan proses penggajian karyawan harian buaran";
+				catat($user,$aksi);
+			}else{
+				$pengaturan32 = mysql_fetch_array(mysql_query("SELECT VALUE FROM pengaturan_penggajian WHERE ID='9'"));
+				$data32 = mysql_fetch_array(mysql_query("SELECT kode_penggajian,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan32['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE start='$startp' AND end='$endp'"));
+                $datenow32=date("Y-m-d");
+				
+				if($data32["cktgl"]>=$datenow32){
+					 $data_input="good";
+					 $data_baru="ubah";
+					 updategaji($startp,$endp,"Harian");
+					 $aksi="Berhasil melakukan proses perubahan penggajian karyawan harian buaran";
+						catat($user,$aksi);
+				}else{
+					$data_input="";
+					$data_baru="gagal";
+					$aksi="Gagal melakukan proses penggajian karyawan harian";
+					catat($user,$aksi);
+				}
+				
+			}
+
 	
 	function selisihHari($tglAwal, $tglAkhir)
 	{
@@ -145,6 +154,9 @@ while ($minggu != $dateakhirnya);
 	$viewdatamerah=mysql_fetch_object($liburmerah);
 	$hariliburmerah=explode(",",$viewdatamerah->TANGGAL);
 	
+	$tipe="SIMPAN";
+	if($data_baru!="gagal"){
+	
 	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Kontrak' and STATE_ID='$_SESSION[STATE_ID]'");
 	
 	while($datapegawai=mysql_fetch_object($getpegawai)){
@@ -182,16 +194,6 @@ while ($minggu != $dateakhirnya);
 		$lembur=number_format(nominalumt(gajilembur($NIP)));
 		$tabungan=$nominaltabungan;
 		$tanggal_gaji=date("Y-m-d");
-		$query = "SELECT max(kode_penggajian) as idMaks FROM head_penggajian";
-		$hasil = mysql_query($query);
-		$data  = mysql_fetch_array($hasil);
-		$nim = $data['idMaks'];
-		$noUrut = (int) substr($nim, 9, 5);
-		$noUrut++;
-		$inisial=date('d/m/').'GH-';
-		$w = $inisial;
-		$IDbaru = $char . sprintf("%05s", $noUrut);
-		$getkode=$w.$IDbaru;
 		
 		$kasbon=$hutang->hutangnya;
 /* ------------------Fungsi mangkir-------------------- */
@@ -541,11 +543,20 @@ while ($minggu != $dateakhirnya);
 		$total_penerimaan=number_format(getthp($NIP) + $nominal_kehadiran_full+$totalgaji+$totallembur + $uang_makan_transport+ $totalpenghargaan+$nominal_penambahan_tambah);
 	
 		if($tipe=="SIMPAN"){
-			$bulanini=$BULAN;
-			$cek=mysql_query("select * from head_penggajian where bulan='$bulanini' and tahun='$tahun' and kode_pegawai='$kp'");
-			$getcek=mysql_fetch_object($cek);
 			
-			if($getcek==""){
+			
+			if($data_input=="good"){
+				$query = "SELECT max(kode_penggajian) as idMaks FROM head_penggajian";
+				$hasil32 = mysql_query($query);
+				$data  = mysql_fetch_array($hasil32);
+				$nim = $data['idMaks'];
+				$noUrut = (int) substr($nim, 9, 5);
+				$noUrut++;
+				$inisial=date('d/m/').'GH-';
+				$w = $inisial;
+				$IDbaru = $char . sprintf("%05s", $noUrut);
+				$getkode=$w.$IDbaru;
+				
 				mysql_query("insert into head_penggajian values('$getkode','$kp','$totalgaji','$uang_makan_transport','$totallembur','$hariterlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$takehomepayfix','$kasbon','$nominalpinjaman','0','$jumlahmasuk','$totalpenghargaan','$hasiljumlahcuti','$nominal_kehadiran_full','Harian','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah','','','$nominallembur')");
 				$bulansekarang=$BULAN;
 				$tahunsekarang=$TAHUN;
@@ -585,13 +596,15 @@ while ($minggu != $dateakhirnya);
 		}
 	}
 	
+	}
+	
 	if($tipe=="SIMPAN"){
-		if($getcek==""){
+		if($data_input=="good"){
 			header('Content-Type: application/json');
-			echo json_encode(array('tipe' => 'SIMPAN'));
+			echo json_encode(array('tipe' => $data_baru));
 		}
 	
-		if($getcek!=""){
+		if($data_baru=="gagal"){
 			header('Content-Type: application/json');
 			echo json_encode(array('tipe' => 'false'));
 		}

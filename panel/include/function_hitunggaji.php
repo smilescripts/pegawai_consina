@@ -1,6 +1,34 @@
 <?php
 	include("koneksi.php");
 	
+	
+	function updategaji($start,$end,$tipe){
+		$tBULAN=new DateTime($end);
+		$tTAHUN=new DateTime($end);
+		
+		$BULAN=$tBULAN->format("m");
+		$TAHUN=$tTAHUN->format("Y");
+		$qheadgaji=mysql_query("select * from head_penggajian where start='$start' and end='$end' and format='$tipe'");
+		while($theadgaji=mysql_fetch_object($qheadgaji)){
+			if($theadgaji->kasbon>0){
+				mysql_query("UPDATE `kasbon_pegawai` SET `STATUS` = 'Hutang' WHERE NIP_PEGAWAI='$theadgaji->kode_pegawai' and MONTH(TANGGAL)='$BULAN' and YEAR(TANGGAL)='$TAHUN'");
+			}
+			if($theadgaji->pinjaman>0){
+				$qpinjamnan=mysql_query("select * from pembayaran_angsuran where NIP_PEGAWAI='$theadgaji->kode_pegawai' and DATE(TANGGAL_PEMBAYARAN)='$theadgaji->tanggal_gaji'");
+				while($tpinjaman=mysql_fetch_object($qpinjamnan)){
+					$thpinjaman=mysql_fetch_object(mysql_query("select * from pinjaman where KODE_PINJAMAN='$tpinjaman->ID_PINJAMAN'"));
+					mysql_query("UPDATE `pinjaman` SET `SISA_CICILAN` = '$thpinjaman->SISA_CICILAN'+1 WHERE KODE_PEGAWAI='$theadgaji->kode_pegawai' and KODE_PINJAMAN='$tpinjaman->ID_PINJAMAN'");
+					mysql_query("DELETE from pembayaran_angsuran where ID_PEMBAYARAN='$tpinjaman->ID_PEMBAYARAN'");
+				}
+			}
+			if($theadgaji->tabungan>0){
+				mysql_query("DELETE from tabungan where NIP='$theadgaji->kode_pegawai' and TANGGAL='$theadgaji->tanggal_gaji'");
+			}
+			
+			mysql_query("DELETE from head_penggajian where start='$start' and end='$end' and format='$tipe' and kode_pegawai='$theadgaji->kode_pegawai'");
+		}
+	}
+	
 	function frmDate($date,$code){
         $explode = explode("-",$date);
         $year  = $explode[0];

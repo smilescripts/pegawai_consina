@@ -54,11 +54,25 @@
                 
 				<td>
 				';
-		
-				if($objectdata->STATUS!='LUNAS'){
-					echo'
+				$pengaturan = mysql_fetch_array(mysql_query("SELECT VALUE FROM pengaturan_penggajian WHERE ID='9'"));
+				$data = mysql_fetch_array(mysql_query("SELECT kode_penggajian,start,end,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE bulan=MONTH('$objectdata->TANGGAL') AND tahun=YEAR('$objectdata->TANGGAL')"));
+                $datenow=date("Y-m-d");
+				if($data["cktgl"]==""){
+					 echo'
                     <a href="#dialog-pinjaman" id="'.$objectdata->KODE_KASBON.'" alt="Ubah" title="Ubah" class="glyphicon ubah-pinjaman glyphicon-edit" data-toggle="modal"></a>&nbsp; 
 					';
+				}else{
+					if($objectdata->TANGGAL>=$data["start"] && $objectdata->TANGGAL<=$data["end"]){
+						if($data["cktgl"]>=$datenow){
+						  echo'
+						<a href="#dialog-pinjaman" id="'.$objectdata->KODE_KASBON.'" alt="Ubah" title="Ubah" class="glyphicon ubah-pinjaman glyphicon-edit" data-toggle="modal"></a>&nbsp; 
+						';
+						}
+					}else{
+						 echo'
+						<a href="#dialog-pinjaman" id="'.$objectdata->KODE_KASBON.'" alt="Ubah" title="Ubah" class="glyphicon ubah-pinjaman glyphicon-edit" data-toggle="modal"></a>&nbsp; 
+						';
+					} 
 				}
 		
 				echo '			 
