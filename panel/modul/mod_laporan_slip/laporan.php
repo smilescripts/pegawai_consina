@@ -37,6 +37,8 @@
 	$viewdata=mysql_fetch_object($libur1);
 	$harilibur1=explode(",",$viewdata->TANGGAL);
 	
+	
+	
 ?>
 
 <a href="modul/mod_laporan_slip/cetaklaporan.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak slip gaji</a>
@@ -47,6 +49,7 @@
 <a href="modul/mod_laporan_slip/cetakpdftunai.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak penggajian Tunai</a>
 
 <hr/>
+
 			
 <div class="panel panel-warning" id="non-printable">
 	<div class="panel-heading">

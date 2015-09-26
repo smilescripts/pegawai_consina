@@ -1,4 +1,5 @@
 <?php
+	error_reporting(0);
     include_once "../../include/koneksi.php";
 	session_start();
 	$state_session=$_SESSION['STATE_ID'];
