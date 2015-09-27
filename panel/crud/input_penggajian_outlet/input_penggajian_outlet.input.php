@@ -224,9 +224,6 @@ while ($minggu != $dateakhirnya);
 		$jumlahlibur=count($harilibur);
 	
 	/* -------------------------------------- */
-	
-	
-	
 		$getcuti=mysql_query("select * from cuti where NIP_PEGAWAI='$kp' and MONTH(TANGGAL_AWAL)='$bulanini' and YEAR(TANGGAL_AWAL)='$tahun'");
 		$tanggalcuti=mysql_fetch_object($getcuti);
 		if($tanggalcuti->TANGGAL_AWAL!=""){

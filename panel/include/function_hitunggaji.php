@@ -2,6 +2,35 @@
 	include("koneksi.php");
 	
 	
+	function hitunghari($tglAwal, $tglAkhir,$parameter2)
+		{
+			$pecah1 = explode("-", $tglAwal);
+			$date1 = $pecah1[2];
+			$month1 = $pecah1[1];
+			$year1 = $pecah1[0];
+			$pecah2 = explode("-", $tglAkhir);
+			$date2 = $pecah2[2];
+			$month2 = $pecah2[1];
+			$year2 =  $pecah2[0];
+			$jd1 = GregorianToJD($month1, $date1, $year1);
+			$jd2 = GregorianToJD($month2, $date2, $year2);
+			$selisih = dateRange($tglAwal,$tglAkhir);
+	
+			for($i=1; $i<=$selisih; $i++)
+			{
+        
+				$tanggal = mktime(0, 0, 0, $month1, $date1+$i, $year1);
+				$tglstr = date("Y-m-d", $tanggal);
+		
+		
+				if ((date("N", $tanggal) == $parameter2))
+				{
+					$liburcounter++;
+				}
+			}
+			return $liburcounter;
+		}
+	
 	function updategaji($start,$end,$tipe){
 		$tBULAN=new DateTime($end);
 		$tTAHUN=new DateTime($end);
