@@ -9,12 +9,12 @@
         SELECT * FROM pegawai WHERE KODE_PEGAWAI=".$id
     ));
 
-	$SHIFT = mysql_fetch_array(mysql_query("
+	/* $SHIFT = mysql_fetch_array(mysql_query("
         SELECT * FROM pegawai_outlet_shift WHERE KODE_PEGAWAI=".$id
-    ));
+    )); */
 
     if($id> 0) { 
-		$SHIFT  = $SHIFT['KODE_SHIFT'];
+		//$SHIFT  = $SHIFT['KODE_SHIFT'];
 		$KODE_PEGAWAI = $data['KODE_PEGAWAI'];
 		$NIP_PEGAWAI = $data['NIP_PEGAWAI'];
 		$NAMA_PEGAWAI = $data['NAMA_PEGAWAI'];
@@ -58,7 +58,7 @@
 		$w = "PG".$state_session."-";
 		$NIP_PEGAWAI = ""/* $w.$char . sprintf("%05s", $noUrut) */;
 
-		$SHIFT = "";
+		//$SHIFT = "";
 		$NAMA_PEGAWAI = "";
 		$TEMPAT_LAHIR = "";
 		$TANGGAL_LAHIR = "";
@@ -227,20 +227,20 @@
 				?>
             </div>
 		</div>
-		<div class="form-group">
+		<!--<div class="form-group">
             <label for="SHIFT" class="col-sm-3 control-label">Shift</label>
             <div class="col-sm-9">
                 <?php
-                    $result1 = mysql_query("select * from jam_kerja where KODE_JAM_KERJA !='1' ");  
+                  /*   $result1 = mysql_query("select * from jam_kerja where KODE_JAM_KERJA !='1' ");  
                     echo '<select id="SHIFT" name="SHIFT" style="width: 100%;" class="form-control">';  
                         echo '<option value="">Silahkan Pilih shift</option>';  
 						while ($row1 = mysql_fetch_array($result1)) {  
                             echo '<option value="' . $row1['KODE_JAM_KERJA'] . '"';if($SHIFT==$row1['KODE_JAM_KERJA']){echo "selected='selected'";} echo'>' . $row1['KETERANGAN']. ' (' . $row1['JAM_DATANG']. '-' . $row1['JAM_PULANG']. ')</option>';  
 						}  
-                    echo '</select>';
+                    echo '</select>'; */
 				?>
             </div>
-		</div>
+		</div>-->
 		<input type="hidden" name="KODE_DEPARTEMEN" value="">
 		<!--<div class="form-group">
             <label for="KODE_DEPARTEMEN" class="col-sm-3 control-label">Departemen</label>
@@ -452,7 +452,7 @@
                         }
                     }
 				},  
-				SHIFT: {
+				/* SHIFT: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'
@@ -462,7 +462,7 @@
                             message: 'The must be less than 100 characters'
                         }
                     }
-				},
+				}, */
                 TEMPAT_LAHIR: {
                     validators: {
                         /* notEmpty: {

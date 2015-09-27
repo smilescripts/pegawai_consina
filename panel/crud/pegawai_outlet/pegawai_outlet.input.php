@@ -40,7 +40,7 @@
 		$NOMINAL_LEMBUR=$_POST['NOMINAL_LEMBUR'];
 		$OUTLET=$_POST['OUTLET'];
 		$STATE_ID=$_POST['STATE_ID'];
-		$SHIFT=$_POST['SHIFT'];
+		//$SHIFT=$_POST['SHIFT'];
 		//$FOTO_PEGAWAI=$_POST['FOTO_PEGAWAI'];
 		$tmptunjanganlain = $_POST['TUNJANGAN_LAIN'];
 		$tmptunjanganlain2=implode(",",$tmptunjanganlain);
