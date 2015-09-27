@@ -19,7 +19,7 @@
                 <th style="width:10px">No</th>
 				<th>Nama Jabatan</th>
 				<th>Tunjangan Jabatan</th>
-				<th>Departemen</th>
+				<th>Divisi</th>
 				<!--<th>Nominal Tabungan</th>-->
 				<!--<th>Nominal UMT</th>-->
 				<th style="width:10px">Aksi</th>
@@ -31,14 +31,14 @@
             $no = 1;
             
 			while($objectdata=mysql_fetch_object($querypetugas)){
-				$tdept=mysql_fetch_object(mysql_query("SELECT * FROM departemen WHERE KODE_DEPARTEMEN='".$objectdata->KODE_DEPARTEMEN."'"));
+				$tdept=mysql_fetch_object(mysql_query("SELECT * FROM divisi WHERE ID='".$objectdata->KODE_DIVISI."'"));
 				
 				echo'
             <tr>
 				<td>'.$no.'</td>
 				<td>'.$objectdata->NAMA_JABATAN.'</td>
 				<td>Rp.'.number_format($objectdata->TUNJANGAN_JABATAN).',-</td>
-				<td>'.$tdept->NAMA_DEPARTEMEN.'</td>
+				<td>'.$tdept->NAMA.'</td>
 				
 			
 				<td>

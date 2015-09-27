@@ -13,7 +13,7 @@
 		$NAMA_JABATAN = $data['NAMA_JABATAN'];
 		$TUNJANGAN_JABATAN = $data['TUNJANGAN_JABATAN'];
 		$TUNJANGAN_LAIN = $data['TUNJANGAN_LAIN'];
-		$KODE_DEPARTEMEN = $data['KODE_DEPARTEMEN'];
+		$KODE_DIVISI = $data['KODE_DIVISI'];
         $tmptunjanganlain=array();
         $tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
 		$NOMINAL_TABUNGAN = $data['NOMINAL_TABUNGAN'];
@@ -26,7 +26,7 @@
         $tmptunjanganlain=array();
         $tmptunjanganlain=explode(",",$TUNJANGAN_LAIN);
 		$NOMINAL_TABUNGAN = "";
-		$KODE_DEPARTEMEN = "";
+		$KODE_DIVISI = "";
 		$NOMINAL_UMT = "";
     }
 ?>
@@ -53,14 +53,14 @@
             </div>
 		</div>
 		<div class="form-group">
-            <label for="DEPARTEMEN" class="col-sm-3 control-label"> Departemen</label>
+            <label for="DIVISI" class="col-sm-3 control-label"> Divisi</label>
             <div class="col-sm-9">
 				<?php
-                    $result = mysql_query("select * from departemen");  
-                    echo '<select id="KODE_DEPARTEMEN" name="KODE_DEPARTEMEN" class="form-control">';  
-                        echo '<option value="">Silahkan Pilih Departemen</option>';  
+                    $result = mysql_query("select * from divisi");  
+                    echo '<select id="KODE_DIVISI" name="KODE_DIVISI" class="form-control">';  
+                        echo '<option value="">Silahkan Pilih Divisi</option>';  
 						while ($row = mysql_fetch_array($result)) {  
-                            echo '<option value="' . $row['KODE_DEPARTEMEN'] . '"';if($KODE_DEPARTEMEN==$row['KODE_DEPARTEMEN']){echo "selected='selected'";} echo'>' . $row['NAMA_DEPARTEMEN']. '</option>';  
+                            echo '<option value="' . $row['ID'] . '"';if($KODE_DIVISI==$row['ID']){echo "selected='selected'";} echo'>' . $row['NAMA']. '</option>';  
 						}  
                     echo '</select>';
 				?>
@@ -169,7 +169,7 @@
                             },
                         }
                     },
-					KODE_DEPARTEMEN: {
+					KODE_DIVISI: {
                         validators: {
                             notEmpty: {
                                 message: 'The is required'

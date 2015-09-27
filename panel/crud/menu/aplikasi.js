@@ -24,6 +24,10 @@
             var url = "modul/mod_pegawai_outlet/pegawai_outlet.php";
             $("#data-utama").load(url);
         });
+		$('.divisi').live("click", function(){
+            var url = "modul/mod_divisi/divisi.php";
+            $("#data-utama").load(url);
+        });
 		$('.penyesuaian_dana').live("click", function(){
             var url = "modul/mod_penyesuaian_dana/penyesuaian_dana.php";
             $("#data-utama").load(url);
