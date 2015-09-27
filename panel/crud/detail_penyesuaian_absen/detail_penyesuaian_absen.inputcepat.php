@@ -291,12 +291,12 @@
 						if ($data56["KODE_ABSENSI"]=="") {
 							mysql_query("insert into detail_penyesuaian_absensi values(NULL,'$HEAD_ID_PENYESUAIAN','$JAM_MASUK','$JAM_KELUAR','$start1','$KODE_PEGAWAI')");
 							mysql_query("
-								INSERT INTO `absensi` (`KODE_ABSENSI`, `KODE_JAM_KERJA`, `NIP_PEGAWAI`, `TANGGAL`, `JAM_MASUK`, `JAM_KELUAR`, `TELAT`) VALUES (NULL, '1', '$KODE_PEGAWAI', '$start1', '$JAM_MASUK', '$JAM_KELUAR', '0');
+								INSERT INTO `absensi` (`KODE_ABSENSI`, `KODE_JAM_KERJA`, `NIP_PEGAWAI`, `TANGGAL`, `JAM_MASUK`, `JAM_KELUAR`, `TELAT`) VALUES (NULL, '$KODE_JAM_KERJA', '$KODE_PEGAWAI', '$start1', '$JAM_MASUK', '$JAM_KELUAR', '0');
 							");
 						}else if ($data56["KODE_ABSENSI"]!=""){
 							if($data56['JAM_MASUK']=='00:00:00' or $data56['JAM_KELUAR']=='00:00:00'){
 								mysql_query("insert into detail_penyesuaian_absensi values(NULL,'$HEAD_ID_PENYESUAIAN','$JAM_MASUK','$JAM_KELUAR','$start1','$KODE_PEGAWAI')");
-								mysql_query("update absensi set JAM_MASUK='$JAM_MASUK',JAM_KELUAR='$JAM_KELUAR' where TANGGAL='$start1' and NIP_PEGAWAI='$KODE_PEGAWAI' ");
+								mysql_query("update absensi set KODE_JAM_KERJA='$KODE_JAM_KERJA',JAM_MASUK='$JAM_MASUK',JAM_KELUAR='$JAM_KELUAR' where TANGGAL='$start1' and NIP_PEGAWAI='$KODE_PEGAWAI' ");
 							}
 						}
 					}
