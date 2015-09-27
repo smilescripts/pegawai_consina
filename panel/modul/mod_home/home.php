@@ -15,7 +15,7 @@
 </ol>
 
 <div class="row" style="border:1">
-    <div class="col-md-8">
+    <div class="col-md-12">
    <div class="panel panel-warning">
     <div class="panel-heading">
         <h3 class="panel-title">Grafik Penggajian</h3>
@@ -28,145 +28,198 @@
     <script>
 	var chart1; // globally available
 	$(document).ready(function() {
+	
       chart1 = new Highcharts.Chart({
-         chart: {
-            renderTo: 'container21',
-			type: 'column'
-           
-         },   
-		 title: {
-            text: 'Grafik pembayaran penggajian karyawan'
-         },
-         xAxis: {
-            categories: ['Nominal penggajian berdasarkan bulan']
-         },
-         yAxis: {
-            title: {
-               text: 'Nominal'
-            }
-         },
-              series:             
-            [
-            <?php 
-			$sqla = "SELECT * FROM head_penggajian group by bulan";
-            $query1 = mysql_query($sqla) or die(mysql_error()); 
-            while( $ret = mysql_fetch_array( $query1) ){
-            	$tanggal_gaji=$ret['tanggal_gaji'];
-				$bulan=DateTime::createFromFormat('Y-m-d', ''.$ret["tanggal_gaji"].'');
-				$nbulan=$bulan->format('M Y');
-				
-				
-                $sql_jumlah   = "SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as jumlah FROM head_penggajian  group by bulan";        
-				$query_jumlah = mysql_query($sql_jumlah)  or die(mysql_error()); 
-                 while( $data = mysql_fetch_array($query_jumlah ) ){
-                    $jumlah = $data["jumlah"];   
+        chart: {
+			renderTo: 'container4',
+            type: 'line'
+        },
+	
+        title: {
+            text: 'Grafik Penggajian'
+        },
+        subtitle: {
+            text: 'Perbulan'
+        },
+		
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
 			
-                  }
-					$strv=str_replace(",","",number_format($jumlah));
-                  ?>
-                  {
-                      name: '<?php echo $nbulan .' (Rp.'.number_format($jumlah).')'; ?>',
-                      data: [<?php echo $strv; ?>]
-                  },
-                  <?php } ?>
-            ]
-      });
-   });	
+            title: {
+                text: 'Jumlah'
+            }
+			
+			
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true,
+					 formatter: function () {
+                            return Highcharts.numberFormat(this.y,0);
+                     }
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Penggajian',
+            data: [
+				<?php
+					$tahun=date("Y");
+					for($x=1; $x<=12; $x++){
+						if($x<10){
+							$tampil=mysql_fetch_object(mysql_query("SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as jumlah_gaji FROM head_penggajian  where bulan='0".$x."' and tahun='$tahun'"));
+						}else{
+							$tampil=mysql_fetch_object(mysql_query("SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as jumlah_gaji FROM head_penggajian where bulan='$x' and tahun='$tahun'"));
+						}
+						if($tampil->jumlah_gaji!=""){
+							$getjumlah=$tampil->jumlah_gaji;
+							$number=number_format($getjumlah,0,'','');
+							$replace=str_replace(',','',$number);
+							
+							echo "$getjumlah,";
+						}else{
+							echo "0,";
+						}
+					}
+				?>
+			]
+        }]
+    });
+});
    
    
    var chart2; // globally available
 	$(document).ready(function() {
+	
       chart2 = new Highcharts.Chart({
-         chart: {
-            renderTo: 'container22',
-			type: 'column'
-           
-         },   
-		 title: {
-            text: 'Grafik potongan kasbon pegawai'
-         },
-         xAxis: {
-            categories: ['Nominal kasbon pegawai berdasarkan bulan']
-         },
-         yAxis: {
-            title: {
-               text: 'Nominal'
-            }
-         },
-              series:             
-            [
-            <?php 
-			$kasbon = "SELECT * FROM head_penggajian group by bulan";
-            $querykasbon = mysql_query($kasbon) or die(mysql_error()); 
-            while( $retkasbon = mysql_fetch_array($querykasbon) ){
-            	$tanggal_kasbon=$retkasbon['tanggal_gaji'];
-				$bulankasbon=DateTime::createFromFormat('Y-m-d', ''.$retkasbon["tanggal_gaji"].'');
-				$nbulankabon=$bulankasbon->format('M Y');
-				$sql_jumlah   = "SELECT sum(kasbon) as jumlahkasbon FROM head_penggajian where tanggal_gaji='$tanggal_kasbon'";        
-				$query_jumlah = mysql_query($sql_jumlah)  or die(mysql_error()); 
-                 while( $data = mysql_fetch_array($query_jumlah )){
-                    $jumlahkasbon = $data["jumlahkasbon"];   
+        chart: {
+			renderTo: 'container22',
+            type: 'line'
+        },
+	
+        title: {
+            text: 'Grafik Kasbon'
+        },
+        subtitle: {
+            text: 'Perbulan'
+        },
+		
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
 			
-                  }             
-                  ?>
-                  {
-                      name: '<?php echo $nbulankabon .' (Rp.'.number_format($jumlahkasbon).')'; ?>',
-                      data: [<?php echo "$jumlahkasbon"; ?>]
-                  },
-                  <?php } ?>
-            ]
-      });
-   });	
-   
+            title: {
+                text: 'Jumlah'
+            }
+			
+			
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true,
+					 formatter: function () {
+                            return Highcharts.numberFormat(this.y,0);
+                     }
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Kasbon',
+            data: [
+				<?php
+					$tahun=date("Y");
+					for($x=1; $x<=12; $x++){
+						if($x<10){
+							$tampil=mysql_fetch_object(mysql_query("SELECT sum(kasbon) as jumlahkasbon FROM head_penggajian where bulan='0".$x."' and tahun='$tahun'"));
+						}else{
+							$tampil=mysql_fetch_object(mysql_query("SELECT sum(kasbon) as jumlahkasbon FROM head_penggajian where bulan='$x' and tahun='$tahun'"));
+						}
+						if($tampil->jumlahkasbon!=""){
+							$getjumlah=$tampil->jumlahkasbon;
+							echo "$getjumlah,";
+						}else{
+							echo "0,";
+						}
+					}
+				?>
+			]
+        }]
+    });
+});
    
    var chart3; // globally available
-	$(document).ready(function() {
+		$(document).ready(function() {
+	
       chart3 = new Highcharts.Chart({
-         chart: {
-            renderTo: 'container23',
-			type: 'column'
-           
-         },   
-		 title: {
-            text: 'Grafik potongan pinjaman pegawai'
-         },
-         xAxis: {
-            categories: ['Nominal pinjaman pegawai berdasarkan bulan']
-         },
-         yAxis: {
-            title: {
-               text: 'Nominal'
-            }
-         },
-              series:             
-            [
-            <?php 
-			$pinjaman = "SELECT * FROM head_penggajian group by bulan";
-            $querypinjaman = mysql_query($pinjaman) or die(mysql_error()); 
-            while($retpinjaman = mysql_fetch_array($querypinjaman) ){
-            	$tanggal_pinjaman=$retpinjaman['tanggal_gaji'];
-				$bulanpinjaman=DateTime::createFromFormat('Y-m-d', ''.$retpinjaman["tanggal_gaji"].'');
-				$nbulanpinjaman=$bulanpinjaman->format('M Y');
-				$sql_jumlah   = "SELECT sum(pinjaman) as jumlahpinjaman FROM head_penggajian where tanggal_gaji='$tanggal_pinjaman'";        
-				$query_jumlah = mysql_query($sql_jumlah)  or die(mysql_error()); 
-                 while( $data = mysql_fetch_array($query_jumlah ) ){
-                    $jumlahpinjaman = $data["jumlahpinjaman"];   
+        chart: {
+			renderTo: 'container23',
+            type: 'line'
+        },
+	
+        title: {
+            text: 'Grafik Peminjaman'
+        },
+        subtitle: {
+            text: 'Perbulan'
+        },
+		
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
 			
-                  }             
-                  ?>
-                  {
-                      name: '<?php echo $nbulanpinjaman .' (Rp.'.number_format($jumlahpinjaman).')'; ?>',
-                      data: [<?php echo "$jumlahpinjaman "; ?>]
-                  },
-                  <?php } ?>
-            ]
-      });
-   });	
+            title: {
+                text: 'Jumlah'
+            }
+			
+			
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true,
+					 formatter: function () {
+                            return Highcharts.numberFormat(this.y,0);
+                     }
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Peminjaman',
+            data: [
+				<?php
+					$tahun=date("Y");
+					for($x=1; $x<=12; $x++){
+						if($x<10){
+							$tampil=mysql_fetch_object(mysql_query("SELECT sum(pinjaman) as jumlahpinjaman FROM head_penggajian where bulan='0".$x."' and tahun='$tahun'"));
+						}else{
+							$tampil=mysql_fetch_object(mysql_query("SELECT sum(pinjaman) as jumlahpinjaman FROM head_penggajian where bulan='$x' and tahun='$tahun'"));
+						}
+						if($tampil->jumlahpinjaman!=""){
+							$getjumlah=$tampil->jumlahpinjaman;
+							echo "$getjumlah,";
+						}else{
+							echo "0,";
+						}
+					}
+				?>
+			]
+        }]
+    });
+});
    
 
 </script>
 <div style="overflow-y:scroll;height:940px">
-<div id="container21" style="height: 400px"></div>
+<div id="container4" style="height: 400px"></div>
 <hr/>
 <div id="container22" style="height: 400px"></div>
 <hr/>
@@ -184,7 +237,7 @@
   <div class="col-md-4">
   <div class="panel panel-warning">
     <div class="panel-heading">
-        <h3 class="panel-title">Pembayaran Pinjaman karyawan</h3>
+        <h3 class="panel-title">Pembayaran Pinjaman karyawan  
     </div>
     <div class="panel-body">
 	<div style="padding: 10px 10px 10px;">
@@ -278,46 +331,4 @@
   
   </div>
  
-  <div class="col-md-4">
-   <div class="panel panel-warning">
-    <div class="panel-heading">
-        <h3 class="panel-title">Monitoring sistem</h3>
-    </div>
-    <div class="panel-body">
-	<div style="padding: 10px 10px 10px;">
-          
-	</div>
-	<div class="well">
-  
-
-<div class="table-responsive">
-    <table id="example" class="table table-bordered">
-	<thead>
-        <tr>
-		<th>Parameter</th>
-		<th>Status</th>
-		 </tr>
-	</thead>
-	<tbody>
-		<tr>
-		<td>Internet Connection</td>
-		<td>
-		<?php
-		if(fsockopen("www.google.com", 80)){echo "<b style='color:green'>Connected</b>";}else{echo "<b style='color:red'>Disconnected</b>";}		
-		?></td>
-		</tr>
-		<tr>
-		<td>Database Connection</td>
-		<td><?php echo @mysql_ping() ? '<b style="color:green">Connected</b>' : '<b style="color:green">Disconnected</b>';?></td>
-		</tr>
-		
-	</tbody>
-    </table>
-</div>
-
-	</div>
-    </div>
-	</div>
-  
-  </div>
 </div>

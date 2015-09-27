@@ -174,6 +174,10 @@
             var url = "modul/mod_rekapitulasi_bulanan/laporan_slip_bulanan.php";
             $("#data-utama").load(url);
 		});
+		$('.rekapitulasi_absensi').live("click", function(){
+            var url = "modul/mod_rekapitulasi_absensi/rekapitulasi_absensi.php";
+            $("#data-utama").load(url);
+		});
 		$('.rekapitulasi_outlet').live("click", function(){
             var url = "modul/mod_rekapitulasi_outlet/laporan_slip_outlet.php";
             $("#data-utama").load(url);

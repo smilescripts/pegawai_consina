@@ -312,8 +312,8 @@ while ($minggu != $dateakhirnya);
 						$tmenit=mysql_fetch_object($qmenit);
 						$tmenit2=explode(",",$tmenit->VALUE);
 						$ckmenit1=date('H:i', strtotime($getabsensidata->JAM_MASUK));
-						$ckmenit2=date('H', strtotime($tampiljam1->JAM_DATANG));
-						$ckmenit3=$ckmenit2.":".$tmenit2[0];
+						$ckmenit23=date('i', strtotime($tampiljam1->JAM_DATANG)+60*$tmenit2[0]);
+						$ckmenit3=$ckmenit2.":".$ckmenit23;
 						
 						if($ckmenit1>$ckmenit3){
 							$nominal_kehadiran_full=0;

@@ -68,7 +68,7 @@
 					 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-tasks"></span>Rekapitulasi<span class="caret"></span></a>
 					<ul class="dropdown-menu " role="menu">
 					<?php
-						$mastermenu=mysql_query("select * from rights_menu where ID = '31' OR ID='32' OR ID='40' OR ID='43' ");
+						$mastermenu=mysql_query("select * from rights_menu where ID = '31' OR ID='32' OR ID='40' OR ID='43' OR ID='48' ");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){
