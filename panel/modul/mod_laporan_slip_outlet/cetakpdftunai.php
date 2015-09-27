@@ -5,7 +5,7 @@ include_once "../../include/koneksi.php";
 $profil=mysql_fetch_object(mysql_query("SELECT * FROM profil_perusahaan"));
 include "../../include/catat.php";
 	$user=$_SESSION['KODE_PETUGAS'];
-	$aksi="Mengakses halaman cetak pdf data penggajian karyawan Outlet";
+	$aksi="Mengakses halaman cetak pdf data penggajian karyawan Counter";
 	catat($user,$aksi);
 //============================================================+
 // File name   : example_001.php
@@ -95,7 +95,7 @@ ob_start();
 include "hanyacetaktunai.php";
 $msg = ob_get_clean();
 // Print text using writeHTMLCell()
-$pdf->writeHTMLCell(0, 0, 55, 30,"Data Penggajian Pegawai Outlet (Cash)", 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, 55, 30,"Data Penggajian Pegawai Counter (Cash)", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, 170, 37,"$_GET[BULAN]-$_GET[TAHUN]", 0, 1, 0, true, '', true);
 $pdf->writeHTMLCell(0, 0, '', 45, $msg, 0, 1, 0, true, '', true);
 
@@ -103,7 +103,7 @@ $pdf->writeHTMLCell(0, 0, '', 45, $msg, 0, 1, 0, true, '', true);
 
 // Close and output PDF document
 // This method has several options, check the source code documentation for more information.
-$pdf->Output('penggajian Tunai pegawai Outlet consina-'.$BULAN.'-'.$TAHUN.'.pdf', 'I');
+$pdf->Output('penggajian Tunai pegawai Counter consina-'.$BULAN.'-'.$TAHUN.'.pdf', 'I');
 
 //============================================================+
 // END OF FILE

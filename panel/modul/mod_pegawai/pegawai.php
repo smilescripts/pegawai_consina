@@ -38,7 +38,7 @@
 </div> 
 
 <div class="panel panel-warning">
-  <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Pegawai Harian (Buaran)</h1>
+  <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Pegawai Harian (Jakarta)</h1>
 			<div class="btnbantuan" style="margin-top: -55px;">
 							<a href="#dialog-pegawai" id="0" class="btn tambah-pegawai btn-danger" data-toggle="modal" ><i class="glyphicon glyphicon-plus-sign"></i>Tambah Data</a>
 							</div>

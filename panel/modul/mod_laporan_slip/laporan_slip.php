@@ -30,7 +30,7 @@
 
 
 <div class="panel panel-warning" id="non-printable" style="width:1300px;margin-left:-100px">
-   <h1 class="headingtable" style="margin-top:0px" ><span>Laporan</span> Gaji Karyawan Harian (Buaran)</h1>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Laporan</span> Gaji Karyawan Harian (Jakarta)</h1>
 	
     <div class="panel-body">
 		<div class="well">
@@ -170,7 +170,7 @@
 </div>
 
 <div class="panel panel-warning"  style="width:1300px;margin-left:-100px">
-    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Harian (Buaran)</h1>
+    <h1 class="headingtable" style="margin-top:0px" ><span>Data</span> Laporan Gaji Karyawan Harian (Jakarta)</h1>
 	
     <div class="panel-body">
 		<center>

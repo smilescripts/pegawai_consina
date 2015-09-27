@@ -30,7 +30,7 @@
 
 
 <div class="panel panel-warning" id="non-printable">
-   <h1 class="headingtable" style="margin-top:0px" ><span>Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Buaran)</h1>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Jakarta)</h1>
     <div class="panel-body" >
 		<div class="well">
             <form class="form-horizontal rekapitulasi_harianForm" id="rekapitulasi_harianForm" action="modul/mod_rekapitulasi_harian/laporan_slip_harian.php" type="POST">
@@ -152,7 +152,7 @@
 </div>
 
 <div class="panel panel-warning">
-   <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Buaran)</h1>
+   <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan Harian (Jakarta)</h1>
     <div class="panel-body">
 		<div id="data-rekapitulasi_harian" id="non-printable">
 		<center>

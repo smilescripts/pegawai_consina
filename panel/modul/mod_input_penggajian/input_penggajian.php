@@ -37,7 +37,7 @@
 
 <div class="panel panel-warning">
    
-	   <h1 class="headingtable" style="margin-top:0px" ><span>Penggajian</span> Pegawai Harian(Buaran)</h1>
+	   <h1 class="headingtable" style="margin-top:0px" ><span>Penggajian</span> Pegawai Harian (Jakarta)</h1>
 	
     <div class="panel-body">
 		<div class="well">
