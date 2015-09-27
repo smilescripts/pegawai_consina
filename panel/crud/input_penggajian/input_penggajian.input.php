@@ -537,7 +537,7 @@ while ($minggu != $dateakhirnya);
 		$terlambat=potogan_terlambat($NIP);
 		$go=str_replace(array(','), array(''), $takehomepay);
 		$pot_mangkir=$go / $hitungjumlahharikerja * $hasil;
-		$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$datapegawai->GAJI_POKOK) + $nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$nominal_penambahan_tambah-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$nominal_pemotongan_tambah);
+		$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$datapegawai->GAJI_POKOK)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan);
 		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman+$nominal_pemotongan_tambah);
 		$total_penerimaan=number_format(getthp($NIP) + $nominal_kehadiran_full+$totalgaji+$totallembur + $uang_makan_transport+ $totalpenghargaan+$nominal_penambahan_tambah);
 	

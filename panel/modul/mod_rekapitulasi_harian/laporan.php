@@ -700,7 +700,7 @@ while ($minggu != $dateakhirnya);
 				
 				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$tambah_pemotongan);
 				$total_penerimaan=getthp($NIP)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan;
-				$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pgrade_bekasi->NOMINAL_GRADE)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan);
+				$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pdata->GAJI_POKOK)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan);
 			?>
 			<p>Bonus kehadiran full:Rp.<?php echo number_format($nominal_kehadiran_full);?></p>
 			<p>Potongan Kasbon:Rp.<?php echo number_format($kasbon);?></p>

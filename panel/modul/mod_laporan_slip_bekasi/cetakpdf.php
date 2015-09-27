@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 session_start();
 include_once "../../include/koneksi.php";
 $profil=mysql_fetch_object(mysql_query("SELECT * FROM profil_perusahaan"));

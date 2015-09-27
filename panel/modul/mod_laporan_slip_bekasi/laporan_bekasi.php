@@ -175,7 +175,7 @@ $(document).ready(function() {
 	
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH' and STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi'"));
-			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Harian' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and format='Harian Bekasi' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
 		   
 		}
 		
@@ -185,11 +185,11 @@ $(document).ready(function() {
 		
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH' and STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi'"));
-			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian Bekasi' and kode_pegawai='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
 		}
 		
 		if($DEPT!="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian' and kode_pegawai IN (SELECT KODE_PEGAWAI FROM pegawai WHERE STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi')") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM head_penggajian where bulan='$BULAN' and tahun='$TAHUN' and departemen='$DEPT' and format='Harian Bekasi' and kode_pegawai IN (SELECT KODE_PEGAWAI FROM pegawai WHERE STATE_ID='$_SESSION[STATE_ID]' AND STATUS_PEGAWAI='Kontrak Bekasi')") or die (mysql_error());
 		}
 	
 		while($objectdata=mysql_fetch_object($query)){
