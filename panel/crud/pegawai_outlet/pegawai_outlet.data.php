@@ -18,7 +18,9 @@
 		<thead>
             <tr>
 				<th>No</th>
+				
 				<th>Foto</th>
+				<th>No FP</th>
 				<th>NIP</th>
 				<th>Nama</th>
 				<th>Departemen</th>
@@ -61,6 +63,7 @@
                 }
                 echo '
                 </td>
+				<td>'.$objectdata->KODE_PEGAWAI.'</td>
 				<td>'.$objectdata->NIP_PEGAWAI.'</td>
 				<td>'.$objectdata->NAMA_PEGAWAI.'</td>
 				<td>'.$tampildepartemen->NAMA_DEPARTEMEN.'</td>

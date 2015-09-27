@@ -19,6 +19,7 @@
             <tr>
 				<th style="width:10px">No</th>
 				<th>Foto</th>
+				<th>No FP</th>
 				<th>NIP</th>
 				<th>Nama</th>
 				<th>Departemen</th>
@@ -37,7 +38,7 @@
 		<tbody>
 		<?php
 			
-				$querypetugas=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak'") or die (mysql_error());
+				$querypetugas=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak' and OUTLET!='YA'") or die (mysql_error());
 			
             $no = 1;
             
@@ -62,6 +63,7 @@
                 }
                 echo '
                 </td>
+				<td>'.$objectdata->KODE_PEGAWAI.'</td>
 				<td>'.$objectdata->NIP_PEGAWAI.'</td>
 				<td>'.$objectdata->NAMA_PEGAWAI.'</td>
 				<td>'.$tampildepartemen->NAMA_DEPARTEMEN.'</td>
