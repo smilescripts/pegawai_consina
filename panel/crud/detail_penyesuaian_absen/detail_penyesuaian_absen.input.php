@@ -23,11 +23,12 @@
 		$KODE_PEGAWAI = $_POST['KODE_PEGAWAI'];
 	
 		if($ID_DETAIL_PENYESUAIAN == 0) {
+			$KODE_JAM_KERJA = $_POST['KODE_JAM_KERJA'];
 			mysql_query("insert into detail_penyesuaian_absensi values(NULL,'$HEAD_ID_PENYESUAIAN','$JAM_MASUK','$JAM_KELUAR','$TANGGAL','$KODE_PEGAWAI')");
 			$data56 = mysql_fetch_array(mysql_query("SELECT * FROM absensi where TANGGAL='$TANGGAL' and NIP_PEGAWAI='$KODE_PEGAWAI'"));
 			if ($data56["KODE_ABSENSI"]=="") {
 				mysql_query("
-					INSERT INTO `absensi` (`KODE_ABSENSI`, `KODE_JAM_KERJA`, `NIP_PEGAWAI`, `TANGGAL`, `JAM_MASUK`, `JAM_KELUAR`, `TELAT`) VALUES (NULL, '1', '$KODE_PEGAWAI', '$TANGGAL', '$JAM_MASUK', '$JAM_KELUAR', '0');
+					INSERT INTO `absensi` (`KODE_ABSENSI`, `KODE_JAM_KERJA`, `NIP_PEGAWAI`, `TANGGAL`, `JAM_MASUK`, `JAM_KELUAR`, `TELAT`) VALUES (NULL, '$KODE_JAM_KERJA', '$KODE_PEGAWAI', '$TANGGAL', '$JAM_MASUK', '$JAM_KELUAR', '0');
 				");
 			}else{
 				mysql_query("update absensi set JAM_MASUK='$JAM_MASUK',JAM_KELUAR='$JAM_KELUAR',TANGGAL='$TANGGAL' where TANGGAL='$TANGGAL' and NIP_PEGAWAI='$KODE_PEGAWAI' ");
