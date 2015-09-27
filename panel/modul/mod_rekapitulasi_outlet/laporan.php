@@ -144,21 +144,21 @@
 		$no = 0;
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI LIKE '$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Tetap' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
        
 		}
 	
 		if($DEPT=="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Tetap'  and OUTLET='YA'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar')  and OUTLET='YA'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI LIKE '$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI='Tetap' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI' and OUTLET='YA'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI' and OUTLET='YA'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI='Tetap' and OUTLET='YA'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA'") or die (mysql_error());
 		}
 	
 		while($objectdata=mysql_fetch_object($query)){
@@ -184,7 +184,6 @@
 			$sisa_cicilan=$getpinjaman->SISA_CICILAN;
 			$hutang=gethutangrekap($kp,$BULAN,$TAHUN);	
 			$gaji_pokok=$data->GAJI_POKOK;
-			
 			$tabungan=$nominaltabungan;
 			$tanggal_gaji=date("Y-m-d");
 			$tipe=$_POST["tipe"];
@@ -287,7 +286,7 @@
 				$tgl1 =$tanggalawalcuti;
 				$tgl2 =$tanggalakhircuti;
 				$jumlahcuti1=dateRange($tgl1,$tgl2);
-				$hrmingggu=selisihHariMinggu($tgl1,$tgl2);
+				$hrmingggu=hitunghari($tgl1,$tgl2,$parameter2);
 				foreach($harilibur1 as $datalibur12){
 					$startcuti = $tgl1;
 					$endcuti = $tgl2;
@@ -347,7 +346,7 @@
 			
 		<div class="col-md-5">
 			<?php 
-				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Tetap' and OUTLET='YA'") or die (mysql_error());
+				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA'") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
 				$penyesuaian_pemotongan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);

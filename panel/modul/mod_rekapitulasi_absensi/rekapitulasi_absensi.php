@@ -36,9 +36,18 @@
 		<div class="well">
             <form class="form-horizontal rekapitulasi_bulananForm" id="rekapitulasi_bulananForm" action="modul/mod_rekapitulasi_absensi/rekapitulasi_absensi.php" type="POST">
 				<div class="form-group">
-					<div class="col-sm-2">
-						<input type="text" class="form-control" value="" id="NIP_PEGAWAIH" name="NIP_PEGAWAIH" placeholder="NIP Pegawai" \>
-					</div>	
+					<div class="col-sm-3">
+					 <?php
+                   
+					$result=mysql_query("SELECT * FROM pegawai where STATUS_PEGAWAI!='Keluar'") or die (mysql_error());
+                    echo '<select id="NIP_PEGAWAIH" name="NIP_PEGAWAIH" style="width: 100%;" class="NIP_PEGAWAIH form-control">';  
+                        echo '<option value="">Silahkan Pilih Pegawai</option>';  
+						while ($row = mysql_fetch_array($result)) {  
+                            echo '<option value="' . $row['NIP_PEGAWAI'] .'">'.$row['NAMA_PEGAWAI']. '</option>';  
+						}  
+                    echo '</select>';
+					?>
+					</div>		
 				
                     <div class="col-sm-4">
                        <div class="input-daterange input-group" id="datepicker">
@@ -48,12 +57,12 @@
 						</div>
                     </div>
 					
-					 <div class="col-sm-3">
+					 <div class="col-sm-2">
              
 					<?php
 						$result = mysql_query("select * from departemen");  
 						echo '<select id="DEPT" name="KODE_DEPARTEMEN" class="form-control">';  
-                        echo'<option value="all">&bull;Semua Departemen</option>';
+                        echo'<option value="all">Departemen</option>';
 						
 						while ($row = mysql_fetch_array($result)) {  
                             echo '<option value="' . $row['KODE_DEPARTEMEN'] . '">&bull;' . $row['NAMA_DEPARTEMEN']. '</option>';  
@@ -79,6 +88,9 @@
 	
 			<script type="text/javascript">
 			$(document).ready(function() {
+				$(document).ready(function() {
+					$(".NIP_PEGAWAIH").select2();
+					});
 				$('.input-daterange').datepicker({
 						format: "yyyy-mm-dd",
 						orientation: "top right",

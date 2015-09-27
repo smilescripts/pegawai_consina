@@ -204,6 +204,10 @@
 		$('.restore').live("click", function(){
             var url = "modul/mod_restore/restore.php";
             $("#data-utama").load(url);
+		});	
+		$('.import_absensi').live("click", function(){
+            var url = "modul/mod_import_absensi/import_absensi.php";
+            $("#data-utama").load(url);
 		});
 	
 		$('.mesin').live("click", function(){

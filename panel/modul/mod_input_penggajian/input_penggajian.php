@@ -41,9 +41,11 @@
 	
     <div class="panel-body">
 		<div class="well">
+		
 			<form class="form-inline" id="input_penggajianForm" action="crud/input_penggajian/input_penggajian.input.php" type="POST">
-			 
+					
                     <div class="col-sm-6">
+						
                        <div class="input-daterange input-group" id="datepicker">
 							<input type="text" class="input-sm form-control" id="start" name="start" readonly />
 							<span class="input-group-addon">to</span>

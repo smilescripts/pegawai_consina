@@ -141,7 +141,7 @@ while ($minggu != $dateakhirnya);
 	$tipe="SIMPAN";
 	if($data_baru!="gagal"){
 	
-	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Tetap' and OUTLET!='YA'");
+	$getpegawai=mysql_query("select * from pegawai where (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET!='YA'");
 	
 	while($datapegawai=mysql_fetch_object($getpegawai)){
 		$totalgaji=0;

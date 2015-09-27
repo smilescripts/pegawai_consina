@@ -227,6 +227,7 @@ $(document).ready(function() {
 			$totallembur=0;
 			$subtotalgaji=0;
 			$no++;
+
 	?>
 		<hr/>
 		<center><h3><u>SLIP GAJI KARYAWAN CONSINA</u></h3><h3><?php echo $namabulan;?> <?php echo $TAHUN;?></h3></center><hr/>

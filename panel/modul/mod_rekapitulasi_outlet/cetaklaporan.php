@@ -184,24 +184,24 @@ while ($minggu != $dateakhirnya);
 		$no = 0;
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI LIKE '$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Tetap' and OUTLET='YA' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
        
 		}
 	
 		if($DEPT=="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Tetap' and OUTLET='YA' ") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA' ") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI LIKE '$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI='Tetap' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI' and OUTLET='YA'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI' and OUTLET='YA'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI='Tetap' and OUTLET='YA'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA'") or die (mysql_error());
 		}
 	
-		while($objectdata=mysql_fetch_object($query)){
+	while($objectdata=mysql_fetch_object($query)){
 			$totalgaji=0;
 			$totaljam=0;
 			$totaljamlembur=0;
@@ -224,19 +224,8 @@ while ($minggu != $dateakhirnya);
 			$sisa_cicilan=$getpinjaman->SISA_CICILAN;
 			$hutang=gethutangrekap($kp,$BULAN,$TAHUN);	
 			$gaji_pokok=$data->GAJI_POKOK;
-			
 			$tabungan=$nominaltabungan;
 			$tanggal_gaji=date("Y-m-d");
-			/* $query = "SELECT max(kode_penggajian) as idMaks FROM head_penggajian";
-			$hasil = mysql_query($query);
-			$data  = mysql_fetch_array($hasil);
-			$nim = $data['idMaks'];
-			$noUrut = (int) substr($nim, 9, 5);
-			$noUrut++;
-			$inisial=date('d/m/').'GH-';
-			$w = $inisial;
-			$IDbaru = $char . sprintf("%05s", $noUrut);
-			$getkode=$w.$IDbaru; */
 			$tipe=$_POST["tipe"];
 			$kasbon=$hutang->hutangnya;
 /* ------------------Fungsi mangkir-------------------- */
@@ -272,7 +261,7 @@ while ($minggu != $dateakhirnya);
 	
 			$tahun=$TAHUN;
 			$bulanini=$BULAN;
-			$libur=mysql_query("select * from hari_libur where BULAN='$bulanini' and YEAR(TANGGAL)='$tahun'");
+			$libur=mysql_query("select * from hari_libur_outlet where BULAN='$bulanini' and YEAR(TANGGAL)='$tahun'");
 	
 			while($viewdata=mysql_fetch_object($libur)){
 				$harilibur=array();
@@ -282,7 +271,49 @@ while ($minggu != $dateakhirnya);
 				} 
 			}
 			$jumlahlibur=count($harilibur);
-	
+			$cekharilibur=mysql_query("select * from libur_outlet_perbln where BULAN='$bulanini' AND TAHUN='$tahun'");
+			$getharilibur=mysql_fetch_object($cekharilibur);
+			for($libur=0;$libur < 4;$libur++){
+				if($libur==0){
+					$tamplibur=$getharilibur->SENIN;
+					$parameter=2;
+				}
+				if($libur==1){
+					$tamplibur=$getharilibur->SELASA;
+					$parameter=3;
+				}
+				if($libur==2){
+					$tamplibur=$getharilibur->RABU;
+					$parameter=4;
+				}
+				if($libur==3){
+					$tamplibur=$getharilibur->KAMIS;
+					$parameter=5;
+				}
+				
+				$tmpliburoutlet=array();
+				$tmpliburoutlet=explode(",",$tamplibur);
+				
+				foreach($tmpliburoutlet as $tmpliburoutlets){
+					if($tmpliburoutlets==$kp){
+						$parameter2=$parameter;
+					}
+				}		
+			}	
+			if($parameter2==2){
+				
+				$paramhari="Senin";
+			}if($parameter2==3){
+				
+				$paramhari="Selasa";
+			}if($parameter2==4){
+				
+				$paramhari="Rabu";
+			}if($parameter2==5){
+				
+				$paramhari="Kamis";
+			}
+			$hari_libur_outlet_outlet=hitunghari($startp,$endp,$parameter2);
 	/* -------------------------------------- */
 	
 			$getcuti=mysql_query("select * from cuti where NIP_PEGAWAI='$kp' and MONTH(TANGGAL_AWAL)='$bulanini' and YEAR(TANGGAL_AWAL)='$tahun'");
@@ -323,9 +354,9 @@ while ($minggu != $dateakhirnya);
 			$uang_makan_transport=$objectdata->NOMINAL_UMT *$jumlahmasuk ;
 
 			$takehomepay=getthp($NIP) - ($hutang->hutangnya+$nominalpinjaman+$nominaltabungan);
-			$hitungjumlahharikerja=dateRange($startp,$endp)-selisihHariMinggu($startp,$endp)-$jumlahlibur;
+			$hitungjumlahharikerja=dateRange($startp,$endp)-$hari_libur_outlet_outlet-$jumlahlibur;
 			$mangkir=$hitungjumlahharikerja-$jumlahmasuk-$hasiljumlahcuti;
-	
+			
 			if($mangkir<=0){
 			$hasil=0;
 			if($hasiljumlahcuti==0){
@@ -340,7 +371,7 @@ while ($minggu != $dateakhirnya);
 			$hasil=$mangkir;
 			$nominal_kehadiran_full=0;
 			}
-	
+			
 			$totalpenghargaan=$nominal_kehadiran_full;
 			$terlambat=potogan_terlambat($NIP,$BULAN,$TAHUN);
 			$takehomepayfix=getthp($NIP) + $uang_makan_transport+$nominal_kehadiran_full - ($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$terlambat);
@@ -357,7 +388,7 @@ while ($minggu != $dateakhirnya);
 	<tr>
 		<th width="60%" style="text-align:left">
 			<?php 
-				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Tetap' and OUTLET='YA'") or die (mysql_error());
+				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA'") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
 				$penyesuaian_pemotongan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);
@@ -385,7 +416,7 @@ while ($minggu != $dateakhirnya);
 					$tambah_penambahan=$nominal_penambahan;
 					
 				}
-			?>
+				?>
 			<p>Kepada Yth :<?php echo  $getnamapegawaidata->NAMA_PEGAWAI;?><p>
 			<p>NIP Karyawan :<?php echo  $getnamapegawaidata->NIP_PEGAWAI;?><p>
 			<?php
@@ -440,7 +471,8 @@ while ($minggu != $dateakhirnya);
 				<td><?php echo $getabsensidata->JAM_MASUK;?></td>
 				<td><?php echo $getabsensidata->JAM_KELUAR;?></td>
 				<td><?php 
-					$queryjam1=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
+				
+				$queryjam1=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
 					$tampiljam1=mysql_fetch_object($queryjam1);
 					
 						$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='2'");
@@ -448,7 +480,8 @@ while ($minggu != $dateakhirnya);
 						$tmenit2=explode(",",$tmenit->VALUE);
 						$ckmenit1=date('H:i', strtotime($getabsensidata->JAM_MASUK));
 						$ckmenit2=date('H', strtotime($tampiljam1->JAM_DATANG));
-						$ckmenit3=$ckmenit2.":".$tmenit2[0];
+						$ckmenit23=date('i', strtotime($tampiljam1->JAM_DATANG)+60*$tmenit2[0]);
+						$ckmenit3=$ckmenit2.":".$ckmenit23;
 						
 						if($ckmenit1>$ckmenit3){
 							$nominal_kehadiran_full=0;
@@ -458,49 +491,50 @@ while ($minggu != $dateakhirnya);
 							$jammasuknya=$tampiljam1->JAM_DATANG;
 						}
 					
-					if($datetime->format('D')=="Sat"){
+					/* if($datetime->format('D')=="Sat"){
 				
 						$jamnya=strtotime($jammasuknya);
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
 						$jmlhjam=$jamkeluarpegawai->diff($jammasukpegawai)->format('%h'); 
-					}
+					} */
 					
-					if($datetime->format('D')!="Sat"){
+					/* if($datetime->format('D')!="Sat"){ */
 						$jamnya=strtotime($jammasuknya)+60*60*1;
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
 						$jmlhjam=$jamkeluarpegawai->diff($jammasukpegawai)->format('%h'); 
-					}
+					/* } */
 					$totaljam=$jmlhjam+$totaljam;
 					echo $jmlhjam.' Jam';
 				?></td>
 				<td><?php
 			
-					if($datetime->format('D')!="Sat"){
-						$queryjam=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
+					/* if($datetime->format('D')!="Sat"){
+					 */	
+					 $queryjam=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
 						$tampiljam=mysql_fetch_object($queryjam);
 						$start=new DateTime($tampiljam->JAM_PULANG);
 						$end=new DateTime($getabsensidata->JAM_KELUAR);
 			
 						if($end < $start){$lembur1 = 0 ;}
 						else{$lembur1 = $end->diff($start)->format('%h'); }
-					}
+					/* } */
 			
-					if($datetime->format('D')=="Sat"){
+					/* if($datetime->format('D')=="Sat"){
 			
 						if($jmlhjam < $valuesabtu){$lembur1 = 0 ;}
 						else{$lembur1 = $jmlhjam-$valuesabtu; }
-					}
+					} */
 					$totaljamlembur=$lembur1+$totaljamlembur;
 					echo $lembur1.' Jam';
 				?></td>
 				<?php
 			
 					$gajilembur=0;
-					if($datetime->format('D')!="Sat"){
+					/* if($datetime->format('D')!="Sat"){ */
 						$JAM_PULANG=new DateTime($tampiljam->JAM_PULANG);	
 						$jdatang=strtotime($tampiljam->JAM_DATANG)+60*60*1;
 						$param3=date('H:i:s',$jdatang);
@@ -576,9 +610,9 @@ while ($minggu != $dateakhirnya);
 								}
 							}
 						}
-					}
+					/* } */
 			
-					if($datetime->format('D')=="Sat"){
+				/* 	if($datetime->format('D')=="Sat"){
 			
 						$hitungharigaji=$getnamapegawaidata->GAJI_POKOK/$valuesabtu;
 			
@@ -619,7 +653,7 @@ while ($minggu != $dateakhirnya);
 							}
 						}
 			
-					}
+					} */
 					$totalgaji=$gajiperhari+$totalgaji;
 					$totallembur=$gajilembur+$totallembur;
 				?>
@@ -645,6 +679,7 @@ while ($minggu != $dateakhirnya);
 				<?php 
 			
 					echo $totaljamlembur.' Jam';
+					
 					$lembur=((1/173)*(getthp($NIP) + $uang_makan_transport))*$totaljamlembur;
 					$pot_mangkir=((getthp($NIP) + $uang_makan_transport)/26)*$hasil;
 				?>

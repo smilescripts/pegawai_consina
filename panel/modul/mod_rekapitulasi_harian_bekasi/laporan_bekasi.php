@@ -162,21 +162,21 @@ while ($minggu != $dateakhirnya);
 		$no = 0;
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where STATUS_PEGAWAI='Kontrak Bekasi' and NIP_PEGAWAI='$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak Bekasi' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar') and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
        
 		}
 	
 		if($DEPT=="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI ='Kontrak Bekasi'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar')") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
-			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where STATUS_PEGAWAI='Kontrak Bekasi' and NIP_PEGAWAI='$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI ='Kontrak Bekasi' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar') and NIP_PEGAWAI='$NIP_PEGAWAIH'"));
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar') and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI='Kontrak Bekasi'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar')") or die (mysql_error());
 		}
 	
 		while($objectdata=mysql_fetch_object($query)){
@@ -354,7 +354,7 @@ while ($minggu != $dateakhirnya);
 			
 		<div class="col-md-5" >
 			<?php 
-				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Kontrak Bekasi'") or die (mysql_error());
+				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar')") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
 				$grade_bekasi=mysql_query("select * from grade_bekasi where KODE_GRADE='$getnamapegawaidata->GAJI_POKOK'");
 				$pgrade_bekasi=mysql_fetch_object($grade_bekasi);

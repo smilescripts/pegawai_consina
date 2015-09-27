@@ -166,21 +166,21 @@ while ($minggu != $dateakhirnya);
 		$no = 0;
 		if($DEPT=="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI='Kontrak'  and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar')  and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
        
 		}
 	
 		if($DEPT=="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai WHERE STATUS_PEGAWAI ='Kontrak'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai WHERE (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar')") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH!=""){
 			$pegawaicari=mysql_fetch_object(mysql_query("SELECT * FROM pegawai where NIP_PEGAWAI='$NIP_PEGAWAIH'"));
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI ='Kontrak' and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar') and KODE_PEGAWAI='$pegawaicari->KODE_PEGAWAI'") or die (mysql_error());
 		}
 	
 		if($DEPT!="all" && $NIP_PEGAWAIH==""){
-			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and STATUS_PEGAWAI='Kontrak' and STATE_ID='$_SESSION[STATE_ID]'") or die (mysql_error());
+			$query=mysql_query("SELECT * FROM pegawai where KODE_DEPARTEMEN='$DEPT' and (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar') and STATE_ID='$_SESSION[STATE_ID]'") or die (mysql_error());
 		}
 	
 		while($objectdata=mysql_fetch_object($query)){
@@ -340,7 +340,7 @@ while ($minggu != $dateakhirnya);
 			
 		<div class="col-md-5" >
 			<?php 
-				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and STATUS_PEGAWAI='Kontrak'") or die (mysql_error());
+				$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->KODE_PEGAWAI' and (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar')") or die (mysql_error());
 				$getnamapegawaidata=mysql_fetch_object($pegawaidata);
 				$penyesuaian_pemotongan=mysql_query("select *,SUM(NOMINAL) as total from penyesuaian_dana where KODE_PEGAWAI='$getnamapegawaidata->KODE_PEGAWAI' and STATUS='Pemotongan' and BULAN='$bulanini' and TAHUN='$tahun' GROUP BY KODE_PEGAWAI");
 				$get_penyesuaian_pemotongan=mysql_fetch_object($penyesuaian_pemotongan);

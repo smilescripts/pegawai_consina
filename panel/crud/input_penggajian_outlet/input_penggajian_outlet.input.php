@@ -144,7 +144,7 @@ while ($minggu != $dateakhirnya);
 	$tipe="SIMPAN";
 	if($data_baru!="gagal"){
 	
-	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Tetap' and OUTLET='YA'");
+	$getpegawai=mysql_query("select * from pegawai where (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA'");
 	
 	while($datapegawai=mysql_fetch_object($getpegawai)){
 		
@@ -222,7 +222,50 @@ while ($minggu != $dateakhirnya);
 			} 
 		}
 		$jumlahlibur=count($harilibur);
-	
+		
+		$cekharilibur=mysql_query("select * from libur_outlet_perbln where BULAN='$bulanini' AND TAHUN='$tahun'");
+			$getharilibur=mysql_fetch_object($cekharilibur);
+			for($libur=0;$libur < 4;$libur++){
+				if($libur==0){
+					$tamplibur=$getharilibur->SENIN;
+					$parameter=2;
+				}
+				if($libur==1){
+					$tamplibur=$getharilibur->SELASA;
+					$parameter=3;
+				}
+				if($libur==2){
+					$tamplibur=$getharilibur->RABU;
+					$parameter=4;
+				}
+				if($libur==3){
+					$tamplibur=$getharilibur->KAMIS;
+					$parameter=5;
+				}
+				
+				$tmpliburoutlet=array();
+				$tmpliburoutlet=explode(",",$tamplibur);
+				
+				foreach($tmpliburoutlet as $tmpliburoutlets){
+					if($tmpliburoutlets==$kp){
+						$parameter2=$parameter;
+					}
+				}		
+			}	
+			if($parameter2==2){
+				
+				$paramhari="Senin";
+			}if($parameter2==3){
+				
+				$paramhari="Selasa";
+			}if($parameter2==4){
+				
+				$paramhari="Rabu";
+			}if($parameter2==5){
+				
+				$paramhari="Kamis";
+			}
+			$hari_libur_outlet_outlet=hitunghari($startp,$endp,$parameter2);
 	/* -------------------------------------- */
 		$getcuti=mysql_query("select * from cuti where NIP_PEGAWAI='$kp' and MONTH(TANGGAL_AWAL)='$bulanini' and YEAR(TANGGAL_AWAL)='$tahun'");
 		$tanggalcuti=mysql_fetch_object($getcuti);
@@ -233,7 +276,7 @@ while ($minggu != $dateakhirnya);
 				$tgl1 =$tanggalawalcuti;
 				$tgl2 =$tanggalakhircuti;
 				$jumlahcuti1=dateRange($tgl1,$tgl2);
-				$hrmingggu=selisihHariMinggu($tgl1,$tgl2);
+				$hrmingggu=hitunghari($tgl1,$tgl2,$parameter2);
 				foreach($harilibur1 as $datalibur12){
 					$startcuti = $tgl1;
 					$endcuti = $tgl2;
@@ -261,7 +304,7 @@ while ($minggu != $dateakhirnya);
 		$uang_makan_transport=$datapegawai->NOMINAL_UMT *$jumlahmasuk ;
 
 		$takehomepay=getthp($NIP) - ($hutang->hutangnya+$nominalpinjaman+$nominaltabungan);
-		$hitungjumlahharikerja=dateRange($startp,$endp)-selisihHariMinggu($startp,$endp)-$jumlahlibur;
+		$hitungjumlahharikerja=dateRange($startp,$endp)-$hari_libur_outlet_outlet-$jumlahlibur;
 		$mangkir=$hitungjumlahharikerja-$jumlahmasuk-$hasiljumlahcuti;
 	
 		if($mangkir<=0){
@@ -323,26 +366,26 @@ while ($minggu != $dateakhirnya);
 							$jammasuknya=$tampiljam1->JAM_DATANG;
 						}
 				
-					if($datetime->format('D')=="Sat"){
+					/* if($datetime->format('D')=="Sat"){
 				
 						$jamnya=strtotime($jammasuknya);
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
 						$jmlhjam=$jamkeluarpegawai->diff($jammasukpegawai)->format('%h'); 
-					}
+					} */
 					
-					if($datetime->format('D')!="Sat"){
+					/* if($datetime->format('D')!="Sat"){ */
 						$jamnya=strtotime($jammasuknya)+60*60*1;
 						$param1=date('H:i:s',$jamnya);
 						$jammasukpegawai=new DateTime($param1);
 						$jamkeluarpegawai=new DateTime($getabsensidata->JAM_KELUAR);
 						$jmlhjam=$jamkeluarpegawai->diff($jammasukpegawai)->format('%h'); 
-					}
+					/* } */
 					$totaljam=$jmlhjam+$totaljam;
 					
 				
-					if($datetime->format('D')!="Sat"){
+					/* if($datetime->format('D')!="Sat"){ */
 						$queryjam=mysql_query("SELECT * FROM jam_kerja WHERE KODE_JAM_KERJA=".$getabsensidata->KODE_JAM_KERJA) or die (mysql_error());
 						$tampiljam=mysql_fetch_object($queryjam);
 						$start=new DateTime($tampiljam->JAM_PULANG);
@@ -350,13 +393,13 @@ while ($minggu != $dateakhirnya);
 			
 						if($end < $start){$lembur1 = 0 ;}
 						else{$lembur1 = $end->diff($start)->format('%h'); }
-					}
+					/* } */
 			
-					if($datetime->format('D')=="Sat"){
+					/* if($datetime->format('D')=="Sat"){
 			
 						if($jmlhjam < $valuesabtu){$lembur1 = 0 ;}
 						else{$lembur1 = $jmlhjam-$valuesabtu; }
-					}
+					} */
 					$totaljamlembur=$lembur1+$totaljamlembur;
 			} 
 		

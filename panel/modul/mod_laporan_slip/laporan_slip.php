@@ -37,9 +37,18 @@
             <form class="form-horizontal laporan_slipForm" id="laporan_slipForm" action="modul/mod_laporan_slip/laporan_slip.php" type="POST">
 		
 				<div class="form-group">
-					<div class="col-sm-2">
-						<input type="text" class="form-control" value="" id="NIP_PEGAWAIH" name="NIP_PEGAWAIH" placeholder="NIP Pegawai" \>
-					</div>	
+					<div class="col-sm-3">
+					 <?php
+                   
+					$result=mysql_query("SELECT * FROM pegawai where (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar')") or die (mysql_error());
+                    echo '<select id="NIP_PEGAWAIH" name="NIP_PEGAWAIH" style="width: 100%;" class="NIP_PEGAWAIH form-control">';  
+                        echo '<option value="">Silahkan Pilih Pegawai</option>';  
+						while ($row = mysql_fetch_array($result)) {  
+                            echo '<option value="' . $row['NIP_PEGAWAI'] .'">'.$row['NAMA_PEGAWAI']. '</option>';  
+						}  
+                    echo '</select>';
+					?>
+					</div>
 				
                     <div class="col-sm-2">
                         <div class="input-group date" id="datePicker1">
@@ -74,6 +83,9 @@
 	
 			<script type="text/javascript">
 				$(document).ready(function() {
+						$(document).ready(function() {
+					$(".NIP_PEGAWAIH").select2();
+					});
 					$('#datePicker').datepicker({
 						format: "yyyy",
 						startView: 2,

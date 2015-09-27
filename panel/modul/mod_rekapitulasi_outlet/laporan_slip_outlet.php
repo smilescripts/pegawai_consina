@@ -36,11 +36,20 @@
 		<div class="well">
             <form class="form-horizontal rekapitulasi_outletForm" id="rekapitulasi_outletForm" action="modul/mod_rekapitulasi_outlet/laporan_slip_outlet.php" type="POST">
 				<div class="form-group">
-					<div class="col-sm-2">
-						<input type="text" class="form-control" value="" id="NIP_PEGAWAIH" name="NIP_PEGAWAIH" placeholder="NIP Pegawai" \>
+					<div class="col-sm-3">
+					 <?php
+                   
+					$result=mysql_query("SELECT * FROM pegawai where (STATUS_PEGAWAI='Tetap' and STATUS_PEGAWAI!='Keluar') and OUTLET='YA'") or die (mysql_error());
+                    echo '<select id="NIP_PEGAWAIH" name="NIP_PEGAWAIH" style="width: 100%;" class="NIP_PEGAWAIH form-control">';  
+                        echo '<option value="">Silahkan Pilih Pegawai</option>';  
+						while ($row = mysql_fetch_array($result)) {  
+                            echo '<option value="' . $row['NIP_PEGAWAI'] .'">'.$row['NAMA_PEGAWAI']. '</option>';  
+						}  
+                    echo '</select>';
+					?>
 					</div>	
 				
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                        <div class="input-daterange input-group" id="datepicker">
 							<input type="text" class="input-sm form-control" id="start" name="start" readonly />
 							<span class="input-group-addon">to</span>
@@ -70,6 +79,9 @@
 	
 			<script type="text/javascript">
 			$(document).ready(function() {
+				$(document).ready(function() {
+					$(".NIP_PEGAWAIH").select2();
+					});
 				$('.input-daterange').datepicker({
 						format: "yyyy-mm-dd",
 						orientation: "top right",

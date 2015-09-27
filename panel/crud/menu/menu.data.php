@@ -107,7 +107,7 @@
                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> Pengaturan<span class="caret"></span></a>
 					<ul class="dropdown-menu " role="menu">
 					<?php
-						$mastermenu=mysql_query("select * from rights_menu where ID >'15' and ID < 25 or ID='30' or ID='33' or ID='46' or ID='47'");
+						$mastermenu=mysql_query("select * from rights_menu where ID >'15' and ID < 25 or ID='30' or ID='33' or ID='46' or ID='47' or ID='50'");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){

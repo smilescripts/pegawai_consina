@@ -157,7 +157,7 @@ while ($minggu != $dateakhirnya);
 	if($data_baru!="gagal"){
 	
 	
-	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Kontrak Bekasi'");
+	$getpegawai=mysql_query("select * from pegawai where (STATUS_PEGAWAI='Kontrak Bekasi' and STATUS_PEGAWAI!='Keluar')");
 	
 	while($datapegawai=mysql_fetch_object($getpegawai)){
 		

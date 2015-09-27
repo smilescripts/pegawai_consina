@@ -156,7 +156,7 @@ while ($minggu != $dateakhirnya);
 	//$tipe="SIMPAN";
 	if($data_baru!="gagal"){
 	
-	$getpegawai=mysql_query("select * from pegawai where STATUS_PEGAWAI='Kontrak' and STATE_ID='$_SESSION[STATE_ID]'");
+	$getpegawai=mysql_query("select * from pegawai where (STATUS_PEGAWAI='Kontrak' and STATUS_PEGAWAI!='Keluar') and STATE_ID='$_SESSION[STATE_ID]'");
 	
 	while($datapegawai=mysql_fetch_object($getpegawai)){
 				$nominal_pemotongan="";
