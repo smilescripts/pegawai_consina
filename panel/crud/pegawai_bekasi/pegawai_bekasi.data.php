@@ -24,6 +24,10 @@
 				<th>Jabatan</th>
 				<th>Departemen</th>
 				<th>Status</th>
+				<th>Site</th>
+				<th>Gaji Pokok</th>
+				<th>No Rekening</th>
+				<th>Email</th>
 				<th>Aksi</th>
             </tr>
 		</thead>
@@ -39,6 +43,10 @@
                 $tampiljabatan=mysql_fetch_object($queryjabatan);
                 $querydepartemen=mysql_query("SELECT * FROM departemen WHERE KODE_DEPARTEMEN=".$objectdata->KODE_DEPARTEMEN) or die (mysql_error());
                 $tampildepartemen=mysql_fetch_object($querydepartemen);
+				$querystate=mysql_query("SELECT * FROM state WHERE STATE_ID=".$objectdata->STATE_ID) or die (mysql_error());
+                $tampilstate=mysql_fetch_object($querystate);
+				$querygajibekasi=mysql_query("SELECT * FROM grade_bekasi WHERE KODE_GRADE=".$objectdata->GAJI_POKOK) or die (mysql_error());
+                $tampilgajibekasi=mysql_fetch_object($querygajibekasi);
                 echo'
             <tr>
 				<td>'.$no.'</td>
@@ -61,6 +69,10 @@
 		
 				echo'
 				</td>
+				<td>'.$tampilstate->STATE_NAME.'</td>
+				<td>'.$tampilgajibekasi->NOMINAL_GRADE.'</td>
+				<td>'.$objectdata->NO_REKENING.'</td>
+				<td>'.$objectdata->EMAIL.'</td>
 				<td>
                     <a href="#dialog-pegawai_bekasi" id="'.$objectdata->KODE_PEGAWAI.'" alt="Ubah" title="Ubah" class="glyphicon ubah-pegawai_bekasi glyphicon-edit" data-toggle="modal"></a>&nbsp; 
                    

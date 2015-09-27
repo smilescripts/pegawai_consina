@@ -65,7 +65,7 @@ $(document).ready(function() {
 
 	<div class="panel panel-warning">
 	<div class="panel-heading">
-		<h3 class="panel-title">Rekap Harian Buaran</h3>
+		<h3 class="panel-title">Rekap Harian Jakarta</h3>
     </div>
     <div class="panel-body">	
 
