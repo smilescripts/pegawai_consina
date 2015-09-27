@@ -234,7 +234,7 @@ function getdivisi(){
 
 function getjabatan(){
 	var jabatan = $('#KODE_DIVISI').val();
-	alert(jabatan);
+	//alert(jabatan);
 	$.ajax({
         url: "crud/pegawai_bulanan/ambiljabatan.php",
         data: {jabatan: jabatan},
@@ -352,7 +352,7 @@ function getjabatan(){
             <label for="TANGGAL_MASUK" class="col-sm-3 control-label">Tanggal Masuk</label>
             <div class="col-sm-9">
                 <div class="input-group date" id="datePicker1">
-                    <input type="text" class="form-control" id="TANGGAL_MASUK" name="TANGGAL_MASUK" value="<?php echo $TANGGAL_MASUK; ?>"  required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" id="TANGGAL_MASUK" name="TANGGAL_MASUK" value="<?php echo $TANGGAL_MASUK; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
             </div>
 		</div>
@@ -419,7 +419,7 @@ function getjabatan(){
             todayHighlight: true
 		}).on('changeDate', function(e) {
             // Revalidate the date field
-            $('#pegawai_bulananForm').formValidation('revalidateField', 'TANGGAL_MASUK');
+           // $('#pegawai_bulananForm').formValidation('revalidateField', 'TANGGAL_MASUK');
         });
         $('#datePicker2').datepicker({
             format: "yyyy-mm-dd",
@@ -613,7 +613,7 @@ function getjabatan(){
                         }
                     }
 				}, */
-                GAJI_POKOK: {
+                /* GAJI_POKOK: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'
@@ -622,7 +622,7 @@ function getjabatan(){
                             message: 'The is numeric'
                         }
                     }
-				},
+				}, */
                
                 STATUS_PEGAWAI: {
                     validators: {
