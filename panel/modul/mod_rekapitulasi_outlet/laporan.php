@@ -261,6 +261,19 @@
 					}
 				}		
 			}	
+			if($parameter2==2){
+				
+				$paramhari="Senin";
+			}if($parameter2==3){
+				
+				$paramhari="Selasa";
+			}if($parameter2==4){
+				
+				$paramhari="Rabu";
+			}if($parameter2==5){
+				
+				$paramhari="Kamis";
+			}
 			$hari_libur_outlet_outlet=hitunghari($startp,$endp,$parameter2);
 	/* -------------------------------------- */
 	
@@ -653,9 +666,9 @@
 			<p>Potongan Kasbon:Rp.<?php echo number_format($kasbon);?></p>
 			<p>Potongan Pinjaman:Rp.<?php echo number_format($nominalpinjaman);?></p>
 			<p>Potongan Tabungan:Rp.<?php echo number_format($nominaltabungan);?></p>
+			
 		</div>
 		<div class="col-md-6">
-			<p>Jumlah Libur/bulan ini:Rp.<?php echo $hari_libur_outlet_outlet;?></p>
 			<p>Total potongan gaji:Rp.<?php echo $total_potongan;?></p>
 			<p>Total Penerimaan gaji:<?php echo  $total_penerimaan;?></p>
 			<p>Total mangkir(<?php echo  $hasil;?> Hari): Rp.<?php echo  number_format($pot_mangkir);?></p>
@@ -684,6 +697,9 @@
 			?></p>
 			<p><?php if($nominal_penambahan!=""){ echo $fix_penambahan;}?></p>
 			<p><?php if($nominal_pemotongan!=""){ echo $fix_pemotongan;}?></p>
+			<p>Jadwal Hari Libur:<?php echo $paramhari;?></p>
+			
+			<p>Jumlah Jadwal Libur/bulan ini (<?php echo $bulanini;?>): <?php echo $hari_libur_outlet_outlet;?> Hari </p>
 			
 				<br/>
 				<br/>
