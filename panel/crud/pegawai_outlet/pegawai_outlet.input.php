@@ -64,7 +64,7 @@
 				   '$STATUS_PEGAWAI','$new_name','$JENIS_KELAMIN','$EMAIL','$NO_REKENING','$STATE_ID','$NOMINAL_UMT','$TABUNGAN','$PENGHARGAAN'
 				   ,'$CATATAN','$tmptunjanganlain2','$NOMINAL_LEMBUR','$OUTLET')");
 				   $ID_PEGAWAI=mysql_insert_id();
-				   mysql_query("insert into pegawai_outlet_shift values(NULL,'$ID_PEGAWAI','$SHIFT')");
+				   //mysql_query("insert into pegawai_outlet_shift values(NULL,'$ID_PEGAWAI','$SHIFT')");
 				   include "../../include/catat.php";
 					$user=$_SESSION['KODE_PETUGAS'];
 					$aksi="Melakukan tambah data Pegawai dengan NIP:".$NIP_PEGAWAI."";
@@ -90,7 +90,7 @@
 				   '$ALAMAT','$NOMOR_TELEPON','$KODE_JABATAN','$KODE_DEPARTEMEN','$GAJI_POKOK','$TANGGAL_MASUK','$TANGGAL_KELUAR',
 				   '$STATUS_PEGAWAI','','$JENIS_KELAMIN','$EMAIL','$NO_REKENING','$STATE_ID','$NOMINAL_UMT','$TABUNGAN','$PENGHARGAAN','$CATATAN','$tmptunjanganlain2','$NOMINAL_LEMBUR','$OUTLET')");	
 					$ID_PEGAWAI=mysql_insert_id();
-					 mysql_query("insert into pegawai_outlet_shift values(NULL,'$ID_PEGAWAI','$SHIFT')");
+					 //mysql_query("insert into pegawai_outlet_shift values(NULL,'$ID_PEGAWAI','$SHIFT')");
 				   //$zk->setUser($ID_PEGAWAI,$ID_PEGAWAI, $NAMA_PEGAWAI, '', LEVEL_USER);			
 				include "../../include/catat.php";
 				$user=$_SESSION['KODE_PETUGAS'];
@@ -114,7 +114,7 @@
 					, KODE_DEPARTEMEN = '$KODE_DEPARTEMEN', GAJI_POKOK = '$GAJI_POKOK', TANGGAL_MASUK = '$TANGGAL_MASUK', TANGGAL_KELUAR = '$TANGGAL_KELUAR'
 					, STATUS_PEGAWAI = '$STATUS_PEGAWAI', FOTO_PEGAWAI = '$new_name', JENIS_KELAMIN = '$JENIS_KELAMIN', EMAIL = '$EMAIL', NO_REKENING = '$NO_REKENING', STATE_ID = '$STATE_ID', NOMINAL_UMT = '$NOMINAL_UMT', TABUNGAN = '$TABUNGAN', PENGHARGAAN = '$PENGHARGAAN', CATATAN = '$CATATAN', TUNJANGAN_LAIN = '$tmptunjanganlain2', NOMINAL_LEMBUR = '$NOMINAL_LEMBUR', OUTLET = '$OUTLET' WHERE KODE_PEGAWAI = '$KODE_PEGAWAI' ");
 					
-					mysql_query("update pegawai_outlet_shift set KODE_SHIFT='$SHIFT' where KODE_PEGAWAI='$KODE_PEGAWAI'");
+					//mysql_query("update pegawai_outlet_shift set KODE_SHIFT='$SHIFT' where KODE_PEGAWAI='$KODE_PEGAWAI'");
 					//$zk->setUser($KODE_PEGAWAI,$KODE_PEGAWAI, $NAMA_PEGAWAI, '', LEVEL_USER);
 					include "../../include/catat.php";
 					$user=$_SESSION['KODE_PETUGAS'];
@@ -139,7 +139,7 @@
 					, AGAMA = '$AGAMA', JUMLAH_ANAK = '$JUMLAH_ANAK', ALAMAT = '$ALAMAT', NOMOR_TELEPON = '$NOMOR_TELEPON', KODE_JABATAN = '$KODE_JABATAN'
 					, KODE_DEPARTEMEN = '$KODE_DEPARTEMEN', GAJI_POKOK = '$GAJI_POKOK', TANGGAL_MASUK = '$TANGGAL_MASUK', TANGGAL_KELUAR = '$TANGGAL_KELUAR'
 					, STATUS_PEGAWAI = '$STATUS_PEGAWAI', JENIS_KELAMIN = '$JENIS_KELAMIN', EMAIL = '$EMAIL', NO_REKENING = '$NO_REKENING', STATE_ID = '$STATE_ID', NOMINAL_UMT = '$NOMINAL_UMT', TABUNGAN = '$TABUNGAN', PENGHARGAAN = '$PENGHARGAAN', CATATAN = '$CATATAN', TUNJANGAN_LAIN = '$tmptunjanganlain2', NOMINAL_LEMBUR = '$NOMINAL_LEMBUR', OUTLET = '$OUTLET' WHERE KODE_PEGAWAI = '$KODE_PEGAWAI' ");
-					mysql_query("update pegawai_outlet_shift set KODE_SHIFT='$SHIFT' where KODE_PEGAWAI='$KODE_PEGAWAI'");
+					//mysql_query("update pegawai_outlet_shift set KODE_SHIFT='$SHIFT' where KODE_PEGAWAI='$KODE_PEGAWAI'");
 					
 				include "../../include/catat.php";
 				$user=$_SESSION['KODE_PETUGAS'];
