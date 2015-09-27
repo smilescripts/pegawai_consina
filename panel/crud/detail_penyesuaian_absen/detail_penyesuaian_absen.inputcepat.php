@@ -23,11 +23,58 @@
 	$querywaktukerja=mysql_query("select * from jam_kerja where KODE_JAM_KERJA='$KODE_JAM_KERJA'");	
 	$getwaktukerja=mysql_fetch_object($querywaktukerja);
 	
-	$hariliburmerah=array();
-	$liburmerah=mysql_query("select * from hari_libur where BULAN='$BULAN' and TAHUN='$TAHUN'");
-	$viewdatamerah=mysql_fetch_object($liburmerah);
-	$hariliburmerah=explode(",",$viewdatamerah->TANGGAL);
-	$jumlahlibur=count($hariliburmerah);
+	if($KODE_JAM_KERJA==1){
+		$hariliburmerah=array();
+		$liburmerah=mysql_query("select * from hari_libur where BULAN='$BULAN' and TAHUN='$TAHUN'");
+		$viewdatamerah=mysql_fetch_object($liburmerah);
+		if($viewdatamerah!=""){
+			$hariliburmerah=explode(",",$viewdatamerah->TANGGAL);
+		}
+		
+		$jumlahlibur=count($hariliburmerah);
+	}else{
+		$hariliburmerah=array();
+		$liburmerah=mysql_query("select * from hari_libur_outlet where BULAN='$BULAN' and TAHUN='$TAHUN'");
+		$viewdatamerah=mysql_fetch_object($liburmerah);
+		if($viewdatamerah!=""){
+			$hariliburmerah=explode(",",$viewdatamerah->TANGGAL);
+		}
+		
+		$jumlahlibur=count($hariliburmerah);
+		
+		$cekharilibur=mysql_query("select * from libur_outlet_perbln where BULAN='$BULAN' AND TAHUN='$TAHUN'");
+			$getharilibur=mysql_fetch_object($cekharilibur);
+			for($liburoutlet=0;$liburoutlet < 4;$liburoutlet++){
+				if($liburoutlet==0){
+					$tamplibur=$getharilibur->SENIN;
+					$parameter=2;
+				}
+				if($liburoutlet==1){
+					$tamplibur=$getharilibur->SELASA;
+					$parameter=3;
+				}
+				if($liburoutlet==2){
+					$tamplibur=$getharilibur->RABU;
+					$parameter=4;
+				}
+				if($liburoutlet==3){
+					$tamplibur=$getharilibur->KAMIS;
+					$parameter=5;
+				}
+				
+				$tmpliburoutlet=array();
+				$tmpliburoutlet=explode(",",$tamplibur);
+				
+				foreach($tmpliburoutlet as $tmpliburoutlets){
+					if($tmpliburoutlets==$KODE_PEGAWAI){
+						$parameter2=$parameter;
+					}
+				}		
+			}	
+			$hari_libur_outlet_outlet=hitunghari($start,$end,$parameter2);
+	}
+	
+	
 	
 	$cekdata=mysql_query("SELECT TANGGAL FROM absensi where NIP_PEGAWAI='$KODE_PEGAWAI' and TANGGAL BETWEEN '$start' AND '$end' and (JAM_KELUAR!='00:00:00' and JAM_MASUK!='00:00:00')");
 	$ada=mysql_fetch_object($cekdata);
@@ -76,22 +123,41 @@
 				$jalan=0;
 			}
 			if($jalan==1){
-				$jumlahcuti1=dateRange($tgl1,$tgl2);
-				$hrmingggu=selisihHariMinggu($tgl1,$tgl2);
-				$liburcuti=0;
-				foreach($hariliburmerah as $datalibur12){
-					$startcuti = $tgl1;
-					$endcuti = $tgl2;
-					while (strtotime($startcuti) <= strtotime($endcuti)) {
-						if($startcuti==$datalibur12){
-							$liburcuti=$liburcuti+1;	
+				if($KODE_JAM_KERJA==1){
+					$jumlahcuti1=dateRange($tgl1,$tgl2);
+					$hrmingggu=selisihHariMinggu($tgl1,$tgl2);
+					$liburcuti=0;
+					foreach($hariliburmerah as $datalibur12){
+						$startcuti = $tgl1;
+						$endcuti = $tgl2;
+						while (strtotime($startcuti) <= strtotime($endcuti)) {
+							if($startcuti==$datalibur12){
+								$liburcuti=$liburcuti+1;	
+							}
+							$startcuti = date ("Y-m-d", strtotime("+1 day", strtotime($startcuti)));
 						}
-						$startcuti = date ("Y-m-d", strtotime("+1 day", strtotime($startcuti)));
+								
 					}
-							
+					$jumlahcuti=$jumlahcuti+$jumlahcuti1-$hrmingggu-$liburcuti;
+					$jalan=0;
+				}else{
+					$jumlahcuti1=dateRange($tgl1,$tgl2);
+					$hrmingggu=hitunghari($tgl1,$tgl2,$parameter2);
+					$liburcuti=0;
+					foreach($hariliburmerah as $datalibur12){
+						$startcuti = $tgl1;
+						$endcuti = $tgl2;
+						while (strtotime($startcuti) <= strtotime($endcuti)) {
+							if($startcuti==$datalibur12){
+								$liburcuti=$liburcuti+1;	
+							}
+							$startcuti = date ("Y-m-d", strtotime("+1 day", strtotime($startcuti)));
+						}
+								
+					}
+					$jumlahcuti=$jumlahcuti+$jumlahcuti1-$hrmingggu-$liburcuti;
+					$jalan=0;
 				}
-				$jumlahcuti=$jumlahcuti+$jumlahcuti1-$hrmingggu-$liburcuti;
-				$jalan=0;
 			}
 		}
 		if($jumlahcuti<=0){
@@ -104,8 +170,15 @@
 	}else{
 		$hasiljumlahcuti=0;
 	}
-	$hitungjumlahharikerja=dateRange($start,$end)-selisihHariMinggu($start,$end)-$jumlahlibur;
+	
+	if($KODE_JAM_KERJA==1){
+		$hitungjumlahharikerja=dateRange($start,$end)-selisihHariMinggu($start,$end)-$jumlahlibur;
+	}else{
+		$hitungjumlahharikerja=dateRange($start,$end)-$hari_libur_outlet_outlet-$jumlahlibur;
+	}
+	//$hitungjumlahharikerja=$jumlahlibur;
 	$mangkir=$hitungjumlahharikerja-$jumlahmasuk-$hasiljumlahcuti;
+	//$mangkir=$hitungjumlahharikerja;
 	if($mangkir<=0){
 		header('Content-Type: application/json');
 		echo json_encode(array('hasil' => '0','ket' => 'nol'));
@@ -171,18 +244,30 @@
 					}		
 				}
 				
-				$hrmingggu2=selisihHariMinggu($start1,$start1);
-				if($hrmingggu2!=""){
-					$liburminggu=1;
+				if($KODE_JAM_KERJA==1){
+					$hrmingggu2=selisihHariMinggu($start1,$start1);
+					if($hrmingggu2!=""){
+						$liburminggu=1;
+					}else{
+						$liburminggu=0;
+					}
+					
+					$hrsabtu=selisihHariSabtu($start1,$start1);
+					if($hrsabtu!=""){
+						$JAM_MASUK=$getwaktukerja->JAM_DATANG;
+						$JAM_KELUAR="13:00:00";
+					}else{
+						$JAM_MASUK=$getwaktukerja->JAM_DATANG;
+						$JAM_KELUAR=$getwaktukerja->JAM_PULANG;
+					}
 				}else{
-					$liburminggu=0;
-				}
-				
-				$hrsabtu=selisihHariSabtu($start1,$start1);
-				if($hrsabtu!=""){
-					$JAM_MASUK=$getwaktukerja->JAM_DATANG;
-					$JAM_KELUAR="13:00:00";
-				}else{
+					$hrmingggu2=hitunghari($start1,$start1,$parameter2);
+					if($hrmingggu2!=""){
+						$liburminggu=1;
+					}else{
+						$liburminggu=0;
+					}
+					
 					$JAM_MASUK=$getwaktukerja->JAM_DATANG;
 					$JAM_KELUAR=$getwaktukerja->JAM_PULANG;
 				}
