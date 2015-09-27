@@ -21,8 +21,11 @@
 				<th>Foto</th>
 				<th>NIP</th>
 				<th>Nama</th>
-				<th>Jabatan</th>
 				<th>Departemen</th>
+				<th>Divisi</th>
+				<th>Jabatan</th>
+				<th>Line</th>
+				<th>Pengawas</th>
 				<th>Status</th>
 				<th>Site</th>
 				<th>Gaji Pokok</th>
@@ -45,6 +48,8 @@
                 $tampildepartemen=mysql_fetch_object($querydepartemen);
 				$querystate=mysql_query("SELECT * FROM state WHERE STATE_ID=".$objectdata->STATE_ID) or die (mysql_error());
                 $tampilstate=mysql_fetch_object($querystate);
+				$tdivisi=mysql_fetch_object(mysql_query("select * from divisi where ID='$objectdata->KODE_DIVISI'"));
+				$tpengawas=mysql_fetch_object(mysql_query("select * from pegawai where KODE_PEGAWAI='$objectdata->PENGAWAS'"));
                 echo'
             <tr>
 				<td>'.$no.'</td>
@@ -59,8 +64,11 @@
                 </td>
 				<td>'.$objectdata->NIP_PEGAWAI.'</td>
 				<td>'.$objectdata->NAMA_PEGAWAI.'</td>
-				<td>'.$tampiljabatan->NAMA_JABATAN.'</td>
 				<td>'.$tampildepartemen->NAMA_DEPARTEMEN.'</td>
+				<td>'.$tdivisi->NAMA.'</td>
+				<td>'.$tampiljabatan->NAMA_JABATAN.'</td>
+				<td>'.$objectdata->LINE.'</td>
+				<td>'.$tpengawas->NAMA_PEGAWAI.'</td>
 				<td>';
 		
 				if($objectdata->STATUS_PEGAWAI=="Kontrak"){echo "Harian";}else if($objectdata->STATUS_PEGAWAI=="Tetap"){echo "Bulanan";}else{echo "Keluar";}

@@ -28,6 +28,9 @@
 		$NOMOR_TELEPON=$data['NOMOR_TELEPON'];
 		$KODE_JABATAN=$data['KODE_JABATAN'];
 		$KODE_DEPARTEMEN=$data['KODE_DEPARTEMEN'];
+		$KODE_DIVISI=$data['KODE_DIVISI'];
+		$LINE=$data['LINE'];
+		$PENGAWAS=$data['PENGAWAS'];
 		$GAJI_POKOK=$data['GAJI_POKOK'];
 		$TANGGAL_MASUK=$data['TANGGAL_MASUK'];
 		$TANGGAL_KELUAR=$data['TANGGAL_KELUAR'];
@@ -70,6 +73,9 @@
 		$NOMOR_TELEPON="";
 		$KODE_JABATAN="";
 		$KODE_DEPARTEMEN="";
+		$KODE_DIVISI="";
+		$LINE="";
+		$PENGAWAS="";
 		$GAJI_POKOK="";
 		$TANGGAL_MASUK="";
 		$TANGGAL_KELUAR="";
@@ -213,6 +219,75 @@
 				<input type="text" class="form-control" value="<?php echo $EMAIL; ?>" id="EMAIL" name="EMAIL" \>
             </div>
 		</div>
+		
+		<script type="text/javascript">
+function getdivisi(){
+	var divisi = $('#KODE_DEPARTEMEN').val();
+	//alert(divisi);
+	$.ajax({
+        url: "crud/pegawai_outlet/ambildivisi.php",
+        data: {divisi: divisi},
+        cache: false,
+		 type: 'POST',
+        success: function(msg){
+            //jika data sukses diambil dari server kita tampilkan
+            //di <select id=kota>
+			//alert(msg);
+            $("#KODE_DIVISI").html(msg);
+			
+        }
+    });
+}
+
+function getjabatan(){
+	var jabatan = $('#KODE_DIVISI').val();
+	//alert(jabatan);
+	$.ajax({
+        url: "crud/pegawai_outlet/ambiljabatan.php",
+        data: {jabatan: jabatan},
+        cache: false,
+		 type: 'POST',
+        success: function(msg){
+            //jika data sukses diambil dari server kita tampilkan
+            //di <select id=kota>
+            $("#KODE_JABATAN").html(msg);
+			
+        }
+    });
+}
+</script>
+		
+		
+		<div class="form-group">
+            <label for="KODE_DEPARTEMEN" class="col-sm-3 control-label">Departemen</label>
+            <div class="col-sm-9">
+                <?php
+                    $result = mysql_query("select * from departemen");  
+                    echo '<select id="KODE_DEPARTEMEN" name="KODE_DEPARTEMEN" style="width: 100%;" class="form-control" onchange="getdivisi();">';  
+                        echo '<option value="">Silahkan Pilih Departemen</option>';  
+						while ($row = mysql_fetch_array($result)) {  
+                            echo '<option value="' . $row['KODE_DEPARTEMEN'] . '"';if($KODE_DEPARTEMEN==$row['KODE_DEPARTEMEN']){echo "selected='selected'";} echo'>' . $row['NAMA_DEPARTEMEN']. '</option>';  
+						}  
+                    echo '</select>';
+				?>
+            </div>
+		</div>
+		<div class="form-group">
+            <label for="KODE_DIVISI" class="col-sm-3 control-label">Divisi</label>
+            <div class="col-sm-9">
+                <?php
+                    $result = mysql_query("select * from divisi");  
+                    echo '<select id="KODE_DIVISI" name="KODE_DIVISI" style="width: 100%;" class="form-control" onchange="getjabatan();">';  
+                        echo '<option value="">Silahkan Pilih Divisi</option>';  
+						while ($row = mysql_fetch_array($result)) {
+							if($row['ID']==$KODE_DIVISI){
+								echo '<option value="' . $row['ID'] . '"';if($KODE_DIVISI==$row['ID']){echo "selected='selected'";} echo'>' . $row['NAMA']. '</option>';  
+							}
+						}  
+                    echo '</select>';
+				?>
+            </div>
+		</div>
 		<div class="form-group">
             <label for="KODE_JABATAN" class="col-sm-3 control-label">Jabatan</label>
             <div class="col-sm-9">
@@ -221,41 +296,17 @@
                     echo '<select id="KODE_JABATAN" name="KODE_JABATAN" style="width: 100%;" class="form-control">';  
                         echo '<option value="">Silahkan Pilih Jabatan</option>';  
 						while ($row = mysql_fetch_array($result)) {  
-                            echo '<option value="' . $row['KODE_JABATAN'] . '"';if($KODE_JABATAN==$row['KODE_JABATAN']){echo "selected='selected'";} echo'>' . $row['NAMA_JABATAN']. '</option>';  
+							if($row['KODE_JABATAN']==$KODE_JABATAN){
+								echo '<option value="' . $row['KODE_JABATAN'] . '"';if($KODE_JABATAN==$row['KODE_JABATAN']){echo "selected='selected'";} echo'>' . $row['NAMA_JABATAN']. '</option>';  
+							}
 						}  
                     echo '</select>';
 				?>
             </div>
 		</div>
-		<!--<div class="form-group">
-            <label for="SHIFT" class="col-sm-3 control-label">Shift</label>
-            <div class="col-sm-9">
-                <?php
-                  /*   $result1 = mysql_query("select * from jam_kerja where KODE_JAM_KERJA !='1' ");  
-                    echo '<select id="SHIFT" name="SHIFT" style="width: 100%;" class="form-control">';  
-                        echo '<option value="">Silahkan Pilih shift</option>';  
-						while ($row1 = mysql_fetch_array($result1)) {  
-                            echo '<option value="' . $row1['KODE_JAM_KERJA'] . '"';if($SHIFT==$row1['KODE_JAM_KERJA']){echo "selected='selected'";} echo'>' . $row1['KETERANGAN']. ' (' . $row1['JAM_DATANG']. '-' . $row1['JAM_PULANG']. ')</option>';  
-						}  
-                    echo '</select>'; */
-				?>
-            </div>
-		</div>-->
-		<input type="hidden" name="KODE_DEPARTEMEN" value="">
-		<!--<div class="form-group">
-            <label for="KODE_DEPARTEMEN" class="col-sm-3 control-label">Departemen</label>
-            <div class="col-sm-9">
-                <?php
-/*                     $result = mysql_query("select * from departemen");  
-                    echo '<select id="KODE_DEPARTEMEN" name="KODE_DEPARTEMEN" style="width: 100%;" class="form-control">';  
-                        echo '<option value="">Silahkan Pilih Departemen</option>';  
-						while ($row = mysql_fetch_array($result)) {  
-                            echo '<option value="' . $row['KODE_DEPARTEMEN'] . '"';if($KODE_DEPARTEMEN==$row['KODE_DEPARTEMEN']){echo "selected='selected'";} echo'>' . $row['NAMA_DEPARTEMEN']. '</option>';  
-						}  
-                    echo '</select>'; */
-				?>
-            </div>-->
-		</div>
+	
+				<input type="hidden" class="form-control" value="" id="LINE" name="LINE" \>
+				<input type="hidden" class="form-control" value="" id="PENGAWAS" name="PENGAWAS" \>
 			<input type="hidden" class="form-control" value="YA" id="OUTLET" name="OUTLET" \>
            
 	
@@ -311,7 +362,7 @@
             <label for="TANGGAL_MASUK" class="col-sm-3 control-label">Tanggal Masuk</label>
             <div class="col-sm-9">
                 <div class="input-group date" id="datePicker1">
-                    <input type="text" class="form-control" id="TANGGAL_MASUK" name="TANGGAL_MASUK" value="<?php echo $TANGGAL_MASUK; ?>"  required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" id="TANGGAL_MASUK" name="TANGGAL_MASUK" value="<?php echo $TANGGAL_MASUK; ?>" ><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                 </div>
             </div>
 		</div>
@@ -562,13 +613,20 @@
                         }
                     }
 				},
-/*                 KODE_DEPARTEMEN: {
+				 KODE_DEPARTEMEN: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'
                         }
                     }
-				},     */
+				},     
+				KODE_DIVISI: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The is required'
+                        }
+                    }
+				},
 				/* NO_REKENING: {
                     validators: {
                         notEmpty: {
@@ -576,7 +634,7 @@
                         }
                     }
 				}, */
-                GAJI_POKOK: {
+                /* GAJI_POKOK: {
                     validators: {
                         notEmpty: {
                             message: 'The is required'
@@ -586,7 +644,7 @@
                         }
                     }
 				},
-               
+                */
                 STATUS_PEGAWAI: {
                     validators: {
                         notEmpty: {
