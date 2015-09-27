@@ -31,14 +31,14 @@
 
 <ol class="breadcrumb">
   <li><a href="#" id="beranda" class="beranda"><span class="glyphicon glyphicon-home"> Beranda</a></li>
-  <li class="active"><span class="glyphicon glyphicon-user"> input_penggajian outlet</li>
+  <li class="active"><span class="glyphicon glyphicon-user"> input_penggajian_counter</li>
 </ol>
 
 
 
 <div class="panel panel-warning">
   
-	  <h1 class="headingtable" style="margin-top:0px" ><span>Penggajian</span> Pegawai Bulanan (Outlet)</h1>
+	  <h1 class="headingtable" style="margin-top:0px" ><span>Penggajian</span> Pegawai Bulanan (Counter)</h1>
 	
     <div class="panel-body">
 

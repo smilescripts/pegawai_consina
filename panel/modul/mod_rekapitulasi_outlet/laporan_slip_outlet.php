@@ -24,14 +24,14 @@
 
 <ol class="breadcrumb" id="non-printable">
   <li><a href="#" id="beranda" class="beranda"><span class="glyphicon glyphicon-home"> Beranda</a></li>
-  <li class="active"><span class="glyphicon glyphicon-user">Rekapitulasi karyawan Outlet</li>
+  <li class="active"><span class="glyphicon glyphicon-user">Rekapitulasi karyawan Counter</li>
 </ol>
 
 
 
 
 <div class="panel panel-warning" id="non-printable">
-  <h1 class="headingtable" style="margin-top:0px" ><span>Rekapitulasi</span> gaji dan kehadiran karyawan bulanan (Outlet)</h1>
+  <h1 class="headingtable" style="margin-top:0px" ><span>Rekapitulasi</span> gaji dan kehadiran karyawan bulanan (Counter)</h1>
     <div class="panel-body" >
 		<div class="well">
             <form class="form-horizontal rekapitulasi_outletForm" id="rekapitulasi_outletForm" action="modul/mod_rekapitulasi_outlet/laporan_slip_outlet.php" type="POST">
@@ -150,7 +150,7 @@
 </div>
 
 <div class="panel panel-warning">
-    <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan bulanan (Outlet)</h1>
+    <h1 class="headingtable" style="margin-top:0px" ><span>Data Rekapitulasi</span> gaji dan kehadiran karyawan bulanan (Counter)</h1>
     <div class="panel-body">
 	<center>
 		<div id="loadingDiv" style="display:none" >

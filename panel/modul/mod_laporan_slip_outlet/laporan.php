@@ -57,7 +57,7 @@ $(document).ready(function() {
 <hr/>
 <div class="panel panel-warning">
 	<div class="panel-heading">
-		<h3 class="panel-title">Rekap Outlet</h3>
+		<h3 class="panel-title">Rekap Counter</h3>
     </div>
     <div class="panel-body">	
 
