@@ -41,9 +41,20 @@
 				<td>'.$objectdata->KETERANGAN.'</td>
 			
 				<td>
-                    <a href="#dialog-penyesuaian_dana" id="'.$objectdata->ID_PENYESUAIAN.'" alt="Ubah" title="Ubah" class="glyphicon ubah-penyesuaian_dana glyphicon-edit" data-toggle="modal"></a>&nbsp; 
+                    ';
                    
-				</td>
+				   $pengaturan = mysql_fetch_array(mysql_query("SELECT VALUE FROM pengaturan_penggajian WHERE ID='9'"));
+				$data = mysql_fetch_array(mysql_query("SELECT kode_penggajian,DATE_ADD(tanggal_gaji,INTERVAL ".$pengaturan['VALUE']." DAY) AS cktgl FROM head_penggajian WHERE bulan='$objectdata->BULAN' AND tahun='$objectdata->TAHUN'"));
+                $datenow=date("Y-m-d");
+				if($data["cktgl"]==""){
+					 echo'<a href="#dialog-penyesuaian_dana" id="'.$objectdata->ID_PENYESUAIAN.'" alt="Ubah" title="Ubah" class="glyphicon ubah-penyesuaian_dana glyphicon-edit" data-toggle="modal"></a>&nbsp;';
+				}else{
+					if($data["cktgl"]>=$datenow){
+					  echo'<a href="#dialog-penyesuaian_dana" id="'.$objectdata->ID_PENYESUAIAN.'" alt="Ubah" title="Ubah" class="glyphicon ubah-penyesuaian_dana glyphicon-edit" data-toggle="modal"></a>&nbsp;';
+					}
+				}
+				   
+				echo '</td>
             </tr>';
                 $no++;
             }
