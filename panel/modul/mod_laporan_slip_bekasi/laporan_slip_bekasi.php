@@ -92,12 +92,18 @@
 						orientation: "top center",
 						minViewMode: 2,
 						autoclose: true
+					}).on('changeDate', function(e) {
+						// Revalidate the date field
+						$('#laporan_slip_bekasiForm').formValidation('revalidateField', 'TAHUN');
 					});
 					$('#datePicker1').datepicker({
 						format: "mm",
 						orientation: "top center",
 						minViewMode: 1,
 						autoclose: true
+					}).on('changeDate', function(e) {
+						// Revalidate the date field
+						$('#laporan_slip_bekasiForm').formValidation('revalidateField', 'BULAN');
 					});
 					$('#laporan_slip_bekasiForm')
 				

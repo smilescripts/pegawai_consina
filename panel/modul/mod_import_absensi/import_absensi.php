@@ -31,7 +31,17 @@
 	
 	
 		<div class="well">
-         
+			<center>
+					<div id="import_berhasil" style="display:none" >
+					<div class="alert alert-success" role="alert">
+					<h3 ><b>berhasil inmport absensi</b></h3></br>
+					<div id="jmldt"></div></br>
+					<div id="dtggl"></div></br>
+					<div id="dtmsk"></div></br>
+					<div id="dtklr"></div>
+					</div>
+					</div>
+			</center>
 		</div>
     </div>
 </div>

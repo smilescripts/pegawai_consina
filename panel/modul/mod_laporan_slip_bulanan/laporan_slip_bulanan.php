@@ -91,12 +91,18 @@
 						minViewMode: 2,
 						orientation: "top center",
 						autoclose: true
+					}).on('changeDate', function(e) {
+						// Revalidate the date field
+						$('#laporan_slip_bulananForm').formValidation('revalidateField', 'TAHUN');
 					});
 					$('#datePicker1').datepicker({
 						format: "mm",
 						minViewMode: 1,
 						orientation: "top center",
 						autoclose: true
+					}).on('changeDate', function(e) {
+						// Revalidate the date field
+						$('#laporan_slip_bulananForm').formValidation('revalidateField', 'BULAN');
 					});
 					
 					$('#laporan_slip_bulananForm')
@@ -150,10 +156,6 @@
 								validators: {
 									notEmpty: {
 										message: 'The is required'
-									},
-									stringLength: {
-										max: 50,
-										message: 'The must be less than 50 characters'
 									}
 								}
 							},
@@ -161,10 +163,6 @@
 								validators: {
 									notEmpty: {
 										message: 'The is required'
-									},
-									stringLength: {
-										max: 50,
-										message: 'The must be less than 50 characters'
 									}
 								}
 							},
