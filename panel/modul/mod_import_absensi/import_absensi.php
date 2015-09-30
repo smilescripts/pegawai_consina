@@ -31,6 +31,7 @@
 	
 	
 		<div class="well">
+<<<<<<< HEAD
           <a href="#dialog-import_absensi" id="0" class="btn tambah-import_absensi btn-danger" data-toggle="modal">  <span class="glyphicon glyphicon-save" aria-hidden="true"></span>Import Data Absensi Pegawai</a> 
 		  <hr/>
 		<ul class="list-group" id="tutor">
@@ -41,6 +42,19 @@
   <li class="list-group-item">4.klik Simpan untuk melakukan import data absensi.</li>
  
 </ul>
+=======
+			<center>
+					<div id="import_berhasil" style="display:none" >
+					<div class="alert alert-success" role="alert">
+					<h3 ><b>berhasil inmport absensi</b></h3></br>
+					<div id="jmldt"></div></br>
+					<div id="dtggl"></div></br>
+					<div id="dtmsk"></div></br>
+					<div id="dtklr"></div>
+					</div>
+					</div>
+			</center>
+>>>>>>> origin/master
 		</div>
     </div>
 </div>

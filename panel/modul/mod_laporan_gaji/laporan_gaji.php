@@ -64,12 +64,18 @@
 						minViewMode: 2,
 						orientation: "top center",
 						autoclose: true
+					}).on('changeDate', function(e) {
+						// Revalidate the date field
+						$('#laporan_gajiForm').formValidation('revalidateField', 'TAHUN');
 					});
 					$('#datePicker1').datepicker({
 						format: "mm",
 						minViewMode: 1,
 						orientation: "top center",
 						autoclose: true
+					}).on('changeDate', function(e) {
+						// Revalidate the date field
+						$('#laporan_gajiForm').formValidation('revalidateField', 'BULAN');
 					});
 					$('#laporan_gajiForm')
 				

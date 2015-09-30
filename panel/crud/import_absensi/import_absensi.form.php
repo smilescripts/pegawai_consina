@@ -1,4 +1,4 @@
-<form class="form-horizontal restoreForm" enctype="multipart/form-data" id="restoreForm" action="crud/restore/import_absensi.input.php" type="POST">
+<form class="form-horizontal restoreForm" enctype="multipart/form-data" id="restoreForm" action="crud/import_absensi/import_absensi.input.php" type="POST">
 	<div class="modal-body">
 		<div class="form-group">
 			<label class="col-sm-3 control-label"></label>
@@ -20,13 +20,13 @@
 		<div class="form-group">
 			<label for="file" class="col-sm-3 control-label">File Import</label>
 			<div class="col-sm-9">
-				<input type="file" class="form-control" accept=".sql" id="file" name="file" placeholder="File Import" \>
+				<input type="file" class="form-control" accept=".xls" id="file" name="file" placeholder="File Import" \>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="cek" class="col-sm-3 control-label"></label>
 			<div class="col-sm-9">
-				* file yang bisa di import adalah .sql 
+				* file yang bisa di import excel (97/2003)adalah .xls 
 			</div>
 		</div>
 	</div>
@@ -35,6 +35,8 @@
         <button type="submit" class="btn btn-success">Simpan</button>
       </div>
 </form>
+
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.input-daterange').datepicker({
@@ -71,7 +73,13 @@
                 processData: false,
                 type: 'POST',
                 success: function(result) {
-					$('#dialog-restore').modal('hide');
+					//alert(result);
+					$('#dialog-import_absensi').modal('hide');
+					$('#import_berhasil').show();
+					$('#jmldt').html('Jumlah Data Absensi : '+result['jmldt']).show();
+					$('#dtggl').html('Jumlah Data Gagal : '+result['dtggl']).show();
+					$('#dtmsk').html('Jumlah Data Absensi Masuk : '+result['dtmsk']).show();
+					$('#dtklr').html('Jumlah Data Absensi Keluar : '+result['dtklr']).show();
                 }
             });
 		   
@@ -101,9 +109,16 @@
 							message: 'The is required'
 						},
 						file: {
-							extension: 'sql',
-							type: 'file/sql',   // 2048 * 1024
+							extension: 'xls',
+							type: 'application/vnd.ms-excel',   // 2048 * 1024
 							message: 'The selected file is not valid'
+						}
+					}
+				},
+				end: {
+					validators: {
+						notEmpty: {
+							message: 'The is required'
 						}
 					}
 				}
