@@ -23,7 +23,44 @@
 				<td>'.$pegawai->NAMA_PEGAWAI.'</td>
 		
 				</tr>';
+$total = $objectdata->thp + $total;
         }
-           
+		
+		echo '<tr>
+				<td>Total</td>
+				<td>'.number_format($total).'</td>
+				<td></td>
+			</tr>';
 	?>
+	
+</table>
+
+<p>
+<br><br>
+</p>
+
+
+<table>
+<tr>
+	<td colspan="3">Jakarta, <?php echo date('d'); echo" "; echo date('F'); echo" ";  echo date('Y'); ?></td>
+</tr>
+<tr>
+	<td><center>Mengetahui,</center></td>
+	<td></td>
+	<td><center>Menyetujui,</center></td>
+	
+</tr>
+<tr>
+	<td colspan="3" height="90px"></td>
+</tr>
+<tr>
+	<td><u><center>Doddy Purnomo</u></center></td>
+	<td></td>
+	<td><u><center>Disyon Toba</u></center></td>
+</tr>
+<tr>
+	<td><center><i>HRD</i></center></td>
+	<td></td>
+	<td><center><i>Director</i></center></td>
+</tr>
 </table>

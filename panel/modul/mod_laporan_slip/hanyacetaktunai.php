@@ -29,6 +29,64 @@
 		
 				</tr>
 			';
+$total = $objectdata->thp + $total;
         }
-    ?>
+		
+		echo '<tr>
+				<td>Total</td>
+				<td>'.number_format($total).'</td>
+				<td></td>
+			</tr>';
+	?>
+	
+</table>
+
+<p>
+<br><br>
+</p>
+
+
+<table width="100%"> 
+<tr> 
+	<td colspan="3">Jakarta, <?php echo date('d'); echo" "; echo date('F'); echo" ";  echo date('Y'); ?><p></p></td>
+</tr>
+<tr>
+	<td></td>
+	<td><center>Mengetahui,</center></td>
+	<td></td>
+	
+</tr>
+<tr>
+	<td colspan="3" height="90px"></td>
+</tr>
+<tr>
+	<td><u><center>Doddy Purnomo</u></center></td>
+	<td></td>
+	<td><u><center>Heru Nopriyanto</u></center></td>
+</tr>
+<tr>
+	<td><center><i>HRD</i></center></td>
+	<td></td>
+	<td><center><i>HR & GA Supervisor</i></center></td>
+</tr>
+<tr>
+	<td></td>
+	<td><center><p></p>Menyetujui,</center></td>
+	<td></td>
+</tr>
+<tr>
+	<td colspan="3" height="90px"></td>
+</tr>
+<tr>
+	<td></td>
+	<td><u><center>Disyon Toba,</center></u></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td><i><center>Director</center></i></td>
+	<td></td>
+</tr>
+
+	
 </table>

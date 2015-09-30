@@ -1,3 +1,25 @@
+<style>
+body {
+  background: rgb(204,204,204); 
+}
+page[size="A4"] {
+  background: white;
+  width: 21cm;
+  height: 29.7cm;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 0.5cm;
+  box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+@media print {
+  body, page[size="A4"] {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+</style>
+<body onload="print()">
+
 <?php 
 	session_start();
 	$state_session=$_SESSION['STATE_ID'];
@@ -9,68 +31,19 @@
 
 ?>
 
-<script>
-    $(document).ready(function() {
-        $('#lap_gaji').DataTable( {
-			
-			 "paging": false,
-			"scrollY":500,
-			"scrollX":true
-			
-			
-        });
-		
-    }); 
-	$(document).ready(function() {
-        $('#gaji_cash').DataTable( {
-			
-			"paging": false,
-			"scrollY":250,
-			"scrollX":true
-			
-			
-        });
-		
-    });
-	$(document).ready(function() {
-        $('#gaji_transfer').DataTable( {
-			
-			"paging": false,
-			"scrollY":250,
-			"scrollX":true
-			
-			
-        });
-		
-    });	
-	$(document).ready(function() {
-        $('#gaji_all').DataTable( {
-			
-			"paging": false,
-			"scrollY":200,
-			"scrollX":true
-			
-			
-        });
-		
-    });
-</script>
-<a href="modul/mod_laporan_gaji/cetakrekap.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak rekapitulasi gaji</a>
 
-<a href="modul/mod_laporan_gaji/cetakcash.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak laporan gaji cash</a>
 
-<a href="modul/mod_laporan_gaji/cetaktransfer.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak laporan gaji transfer</a>
 
-<hr/>
 <div class="panel panel-warning">
 	<div class="panel-heading">
 		<h3 class="panel-title">Laporan Penggajian dan Pinjaman Karyawan</h3>
+		<p>Periode   :  <?php echo $BULAN; echo" - "; echo $TAHUN; ?></p>
     </div>
     <div class="panel-body">	
 
 
-		<div class="table-responsive">
-			<table id="example" class="table table-bordered">
+		<div>
+			<table border="1" width="100%">
 				<thead>
 					<tr>
 					<th>Total Penggajian</th>
@@ -133,7 +106,7 @@
 		
  
 
-<table id="gaji_all" class="table table-bordered" border="1" >
+<table id="gaji_all" class="table table-bordered" border="1" width="100%">
 <thead>
 
   <tr>
@@ -260,8 +233,8 @@
     <div class="panel-body">	
 
 
-		<div class="table-responsive">
-			<table id="exampleaa" class="table table-bordered">
+		<div>
+			<table border="1" width="100%">
 				<thead>
 					<tr>
 					<th>No</th>
@@ -358,361 +331,7 @@
 	</div>
 </div>
 
-<div class="panel panel-warning">
-	<div class="panel-heading">
-		<h3 class="panel-title">Detail laporan data gaji</h3>
-    </div>
-    <div class="panel-body">	
+</page>
+		
 
-
- 
-			<table id="lap_gaji" class="table table-bordered" border="1" >
-				<thead>
-				<tr>
-					<th width="5%" style="background-color:grey">No</th>
-					<th style="background-color:grey">Pegawai</th>
-					<th style="background-color:grey">Kasbon</th>
-					<th style="background-color:grey">Pinjaman</th>
-					<th style="background-color:grey">Potongan</th>
-					<th  width="10%" style="background-color:grey">Mangkir</th>
-					<th style="background-color:grey"> penerimaan</th>
-					<th style="background-color:grey">THP</th>
-				</tr>
-				</thead>
-				<tbody>
-				<?php
-					$no = 0;
-					
-					if($DEPT=="all"){
-						$query=mysql_query("SELECT * FROM head_penggajian where tahun='$TAHUN' and bulan='$BULAN'") or die (mysql_error());
-       
-        
-					}
-					else{
-						$query=mysql_query("SELECT * FROM head_penggajian where tahun='$TAHUN' and bulan='$BULAN' and departemen='$DEPT'") or die (mysql_error());
-  	
-		
-					}
-	
-					while($objectdata=mysql_fetch_object($query)){
-						$no++;
-						echo'
-							<tr>
-							<td width="5%">'.$no.'</td>
-						';
-		
-						$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->kode_pegawai'") or die (mysql_error());
-						$getnamapegawaidata=mysql_fetch_object($pegawaidata);
-		
-						echo'
-							<td>'.$getnamapegawaidata->NAMA_PEGAWAI.'</td>
-						';
-		
-						$penggajiannama=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$objectdata->departemen'") or die (mysql_error());
-						$getnamapenggajian=mysql_fetch_object($penggajiannama);
-		
-						echo'
-						';
-		
-						echo'
-							
-						
-						';
-		
-						$tunjangandata=mysql_query("SELECT SUM(nominal_tunjangan) as nomtun from detail_tunjangan_penggajian where kode_penggajian='$objectdata->kode_penggajian'") or die (mysql_error());
-						$gettunjangandata=mysql_fetch_object($tunjangandata);
-		
-						echo'
-							<td>Rp.'.$objectdata->kasbon.'</td>
-							<td>Rp.'.$objectdata->pinjaman.'</td>
-							<td>Rp.'.$objectdata->total_potongan.'</td>
-							<td width="10%">'.$objectdata->mangkir.' Hari</td>
-							<td  width="15%">Rp.'.$objectdata->total_penerimaan.'</td>
-							<td>Rp.'.number_format($objectdata->thp).'</td>
-							</tr>
-						';
-						
-					}
-
-				?>
-				</tbody>
-			</table>
- 
- 
-	</div>
-</div>
-
-
-<div class="panel panel-warning">
-	<div class="panel-heading">
-		<h3 class="panel-title">Laporan Gaji Cash</h3>
-    </div>
-    <div class="panel-body">	
-
-
-
-<table id="gaji_cash" class="table table-bordered" border="1" >
-<thead>
-				
-
-  <tr>
-    <th class="tg-s6z2" rowspan="2"><br>NO</th>
-    <th class="tg-s6z2" style="text-align:center" rowspan="2"><br><br>NAMA LENGKAP<br></th>
-    <th class="tg-s6z2" style="text-align:center" colspan="4">POSISI</th>
-  
-    <th class="tg-s6z2" style="text-align:center" rowspan="2"><br>NOMINAL</th>
-  </tr>
-  <tr>
-    <td class="tg-s6z2" style="text-align:center">SITE</td>
-    <td class="tg-s6z2" style="text-align:center">DEPARTEMEN</td>
-    <td class="tg-s6z2" style="text-align:center">DIVISI</td>
-    <td class="tg-s6z2" style="text-align:center">JABATAN</td>
-  </tr>
-  	</thead>
-				<tbody>
-  <?php
-					$no = 0;
-					
-					if($DEPT=="all"){
-										$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
-		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
-		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL) ") or die (mysql_error());
-     
-        
-					}
-					else{
-		$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
-		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
-		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL)  and head_penggajian.departemen='$DEPT' ") or die (mysql_error());
-     
-		
-					}
-	
-					while($objectdata=mysql_fetch_object($query)){
-						$no++;
-						echo'
-							<tr>
-							<td width="10%">'.$no.'</td>
-						';
-		
-						$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->kode_pegawai'") or die (mysql_error());
-						$getnamapegawaidata=mysql_fetch_object($pegawaidata);
-		
-						echo'
-						<td>'.$getnamapegawaidata->NAMA_PEGAWAI.'</td>
-						';
-		
-						$dept=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$getnamapegawaidata->KODE_DEPARTEMEN'") or die (mysql_error());
-						$getdept=mysql_fetch_object($dept);
-						$jabatan=mysql_query("SELECT * FROM jabatan where KODE_JABATAN='$getnamapegawaidata->KODE_JABATAN'") or die (mysql_error());
-						$getjabatan=mysql_fetch_object($jabatan);
-						$site=mysql_query("SELECT * FROM state where STATE_ID='$getnamapegawaidata->STATE_ID'") or die (mysql_error());
-						$getsite=mysql_fetch_object($site);
-						$queryDiv = mysql_fetch_object (mysql_query("SELECT * FROM DIVISI WHERE ID = '$getnamapegawaidata->KODE_DIVISI'"));
-		
-						echo'
-						
-							<td>'.$getsite->STATE_NAME.'</td>
-							<td>'.$getdept->NAMA_DEPARTEMEN.'</td>
-							<td>'.$queryDiv->NAMA.'</td>
-							<td>'.$getjabatan->NAMA_JABATAN.'</td>
-						';
-		
-						
-		
-						$tunjangandata=mysql_query("SELECT SUM(nominal_tunjangan) as nomtun from detail_tunjangan_penggajian where kode_penggajian='$objectdata->kode_penggajian'") or die (mysql_error());
-						$gettunjangandata=mysql_fetch_object($tunjangandata);
-		
-						echo'
-						
-							<td>Rp.'.number_format($objectdata->thp).'</td>
-						
-							
-							</tr>
-						';
-					$tcash=$objectdata->thp+$tcash;
-					}
-
-				?>
-  
-  </tbody>
-</table>
-
-	<h4>Total Penggajian Cash: Rp.<?php echo number_format($getcash->total_gaji_cash);?></h4>
-	<p>Keterangan: *Nominal yang memiliki nilai Minus dianggap Nol / Kosong pada proses perhitungan Total penggajian</p>
-	</div>
-</div>
-
-
-<div class="panel panel-warning">
-	<div class="panel-heading">
-		<h3 class="panel-title">Laporan Gaji Transfer</h3>
-    </div>
-    <div class="panel-body">	
-
-
-<table id="gaji_transfer" class="table table-bordered" border="1" >
-<thead>
-				
-
-  <tr>
-    <th class="tg-s6z2" rowspan="2"><br>NO</th>
-    <th class="tg-s6z2" style="text-align:center" rowspan="2"><br><br>NAMA LENGKAP<br></th>
-    <th class="tg-s6z2" style="text-align:center" colspan="3">POSISI</th>
-  
-    <th class="tg-s6z2" style="text-align:center" rowspan="2"><br>NOMINAL</th>
-  </tr>
-  <tr>
-    <td class="tg-s6z2" style="text-align:center">SITE</td>
-    <td class="tg-s6z2" style="text-align:center">DEPARTEMEN</td>
-    <td class="tg-s6z2" style="text-align:center">JABATAN</td>
-  </tr>
-  	</thead>
-				<tbody>
-  <?php
-					$no = 0;
-					
-					if($DEPT=="all"){
-						$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
-		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
-		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!=''") or die (mysql_error());
-     
-	
-        
-					}
-					else{
-						$query=mysql_query("SELECT head_penggajian.* FROM head_penggajian
-		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
-		where head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and pegawai.NO_REKENING!='' and head_penggajian.departemen='$DEPT'") or die (mysql_error());
-  	
-		
-					}
-	
-					while($objectdata=mysql_fetch_object($query)){
-						$no++;
-						echo'
-							<tr>
-							<td width="10%">'.$no.'</td>
-						';
-		
-						$pegawaidata=mysql_query("SELECT * FROM pegawai where KODE_PEGAWAI='$objectdata->kode_pegawai'") or die (mysql_error());
-						$getnamapegawaidata=mysql_fetch_object($pegawaidata);
-		
-						echo'
-						<td>'.$getnamapegawaidata->NAMA_PEGAWAI.'</td>
-						';
-		
-						$dept=mysql_query("SELECT * FROM departemen where KODE_DEPARTEMEN='$getnamapegawaidata->KODE_DEPARTEMEN'") or die (mysql_error());
-						$getdept=mysql_fetch_object($dept);
-						$jabatan=mysql_query("SELECT * FROM jabatan where KODE_JABATAN='$getnamapegawaidata->KODE_JABATAN'") or die (mysql_error());
-						$getjabatan=mysql_fetch_object($jabatan);
-						$site=mysql_query("SELECT * FROM state where STATE_ID='$getnamapegawaidata->STATE_ID'") or die (mysql_error());
-						$getsite=mysql_fetch_object($site);
-		
-						echo'
-							<td>'.$getsite->STATE_NAME.'</td>
-							<td>'.$getdept->NAMA_DEPARTEMEN.'</td>
-							<td>'.$getjabatan->NAMA_JABATAN.'</td>
-						';
-		
-						
-		
-						$tunjangandata=mysql_query("SELECT SUM(nominal_tunjangan) as nomtun from detail_tunjangan_penggajian where kode_penggajian='$objectdata->kode_penggajian'") or die (mysql_error());
-						$gettunjangandata=mysql_fetch_object($tunjangandata);
-		
-						echo'
-						
-							<td>Rp.'.number_format($objectdata->thp).'</td>
-						
-							
-							</tr>
-						';
-		$ttrans=$objectdata->thp+$ttrans;
-					}
-
-				?>
-  
-    </tbody>
-</table>
-
-	<h4>Total Penggajian Transfer: Rp.<?php echo number_format($gettrans->total_gaji_trans);?></h4>
-	<p>Keterangan: *Nominal yang memiliki nilai Minus dianggap Nol / Kosong pada proses perhitungan Total penggajian</p>
-	</div>
-</div>
-<!-- Laporan anyar -->
-
-<div class="panel panel-warning">
-	<div class="panel-heading">
-		<h3 class="panel-title">Bar Grafik Penggajian</h3>
-    </div>
-    <div class="panel-body">	
-		<script src="modul/mod_laporan_gaji/highcharts.js" type="text/javascript"></script>
-		<script src="modul/mod_laporan_gaji/exporting.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			var chart1; // globally available
-			$(document).ready(function() {
-			  chart1 = new Highcharts.Chart({
-				 chart: {
-					renderTo: 'containera',
-					type: 'column'
-				 },   
-				 title: {
-					text: 'Grafik Pengeluaran Penggajian'
-				 },
-				 xAxis: {
-					categories: ['Laporan Grafik Penggajian']
-				 },
-				 yAxis: {
-					title: {
-					   text: 'Nominal Penggajian'
-					}
-				 },
-					  series:             
-					[
-					<?php 
-					$sqla = "SELECT distinct(kode_penggajian)  FROM head_penggajian  limit 1";
-					$query1 = mysql_query($sqla) or die(mysql_error()); 
-					while( $ret = mysql_fetch_array( $query1) ){
-						$merek=$ret['kode_penggajian'];
-						$seri=$ret['kode_penggajian'];                     
-						$tipe=$ret['kode_penggajian'];  
-						
-						 $sql_jumlah   = "SELECT count(kode_penggajian) FROM head_penggajian where kode_penggajian='$merek' limit 1";        
-						 
-						 $query_jumlah = mysql_query($sql_jumlah)  or die(mysql_error()); 
-						 while( $data = mysql_fetch_array($query_jumlah ) ){
-							$jumlah = $data[0];   
-						if($DEPT=="all"){
-				$querypetugas=mysql_query("SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as total_gaji,sum(kasbon) as total_kasbon,sum(pinjaman) as total_pinjaman from head_penggajian where tahun='$TAHUN' and bulan='$BULAN'") or die (mysql_error());
-				}
-				else{
-				$querypetugas=mysql_query("SELECT SUM(CASE WHEN thp > 0 THEN thp ELSE 0 END) as total_gaji,sum(kasbon) as total_kasbon,sum(pinjaman) as total_pinjaman from head_penggajian where tahun='$TAHUN' and bulan='$BULAN' and departemen='$DEPT'") or die (mysql_error());
-				
-					
-				}
-				$objectdata=mysql_fetch_object($querypetugas);
-				$thpf=str_replace(",","",number_format($objectdata->total_gaji));	
-						  }             
-						  ?>
-						  {
-							 name: '<?php echo "Total Penggajian ".''.$thpf.''; ?>',
-							  data: [<?php echo $thpf; ?>]
-						  }, 
-						  {
-							  name: '<?php echo "Total Kabon ".''.$objectdata->total_kasbon.''; ?>',
-							  data: [<?php echo $objectdata->total_kasbon; ?>]
-						  },
-						  {
-							  name: '<?php echo "Total Pinjaman ".''.$objectdata->total_pinjaman.''; ?>',
-							  data: [<?php echo $objectdata->total_pinjaman; ?>]
-						  },
-						  <?php } ?>
-					]
-			  });
-			});	
-		</script>
-		<div id="containera"></div>
-
-    </div>
-</div>
-
+</body>

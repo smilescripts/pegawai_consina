@@ -48,6 +48,8 @@ $(document).ready(function() {
 		
     });
 </script>
+<a href="modul/mod_laporan_slip_outlet/cetakrekap.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak rekap</a>
+
 <a href="modul/mod_laporan_slip_outlet/cetaklaporan.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak slip gaji</a>
 
 <a href="modul/mod_laporan_slip_outlet/cetakpdf.php?BULAN=<?php echo $BULAN;?>&TAHUN=<?php echo $TAHUN;?>&DEPT=<?php echo $DEPT;?>&NIP_PEGAWAIH=<?php echo $NIP_PEGAWAIH;?>" target="_blank" class="btn btn-info">Cetak penggajian Bank</a>
@@ -69,7 +71,7 @@ $(document).ready(function() {
 	<th class="tg-031e" rowspan="3"><center >No</center></th>
 	<th class="tg-031e" rowspan="3"><center>NIK</center></th>
     <th class="tg-031e" colspan="1"><center>NAMA</center></th>
-    <th class="tg-031e" colspan="3"><center>POSISI</center></th>
+    <th class="tg-031e" colspan="4"><center>POSISI</center></th>
     <th class="tg-031e" rowspan="3"><center>GAJI POKOK</center></th>
     <th class="tg-031e" colspan="3"><center>UANG MAKAN & TRANSPORT</center></th>
 	<th class="tg-031e" colspan="<?php echo $hasil_row[0];?>"><center>TUNJANGAN</center></th>
@@ -88,6 +90,7 @@ $(document).ready(function() {
     <td class="tg-031e" rowspan="2"><center>LENGKAP</center></td>
     <td class="tg-031e" rowspan="2"><center>SITE</center></td>
     <td class="tg-031e" rowspan="2"><center>DEPARTEMEN</center></td>
+    <td class="tg-031e" rowspan="2"><center>DIVISI</center></td>
 	<td class="tg-031e" rowspan="2"><center>JABATAN</center></td>
 	
 	<td class="tg-031e" rowspan="2"><center>JUMLAH HARI KERJA</center></td>
@@ -125,6 +128,7 @@ $(document).ready(function() {
 		$queryID = mysql_fetch_object (mysql_query("SELECT * FROM PEGAWAI WHERE kode_pegawai = '$ambil[KODE_PEGAWAI]'"));
 		$queryDep = mysql_fetch_object (mysql_query("SELECT * FROM DEPARTEMEN WHERE KODE_DEPARTEMEN = '$ambil[KODE_DEPARTEMEN]'"));
 		$queryJab = mysql_fetch_object (mysql_query("SELECT * FROM JABATAN WHERE KODE_DEPARTEMEN = '$ambil[KODE_DEPARTEMEN]'"));
+		$queryDiv = mysql_fetch_object (mysql_query("SELECT * FROM DIVISI WHERE ID = '$ambil[KODE_DIVISI]'"));
 		$querySite = mysql_fetch_object (mysql_query("SELECT * FROM state WHERE STATE_ID = '$ambil[STATE_ID]'"));
 	$no++;
 	echo'
@@ -137,6 +141,7 @@ $(document).ready(function() {
 			<td class="tg-031e">'.$querySite->STATE_NAME.'</td>
 			
 			<td class="tg-031e">'.$queryDep->NAMA_DEPARTEMEN.'</td>
+			<td class="tg-031e">'.$queryDiv->NAMA.'</td>
 			<td class="tg-031e">'.$queryJab->NAMA_JABATAN.'</td>
 		
 		
