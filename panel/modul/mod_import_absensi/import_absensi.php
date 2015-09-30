@@ -25,13 +25,22 @@
 <div class="panel panel-warning">
   <h1 class="headingtable" style="margin-top:0px" ><span>Import</span> Data Absensi</h1>
     <div class="btnbantuan" style="margin-top:-55px;">
-						 <a href="#dialog-import_absensi" id="0" class="btn tambah-import_absensi btn-danger" data-toggle="modal">Import Data</a> 
+						
 							</div>
     <div class="panel-body">
 	
 	
 		<div class="well">
-         
+          <a href="#dialog-import_absensi" id="0" class="btn tambah-import_absensi btn-danger" data-toggle="modal">  <span class="glyphicon glyphicon-save" aria-hidden="true"></span>Import Data Absensi Pegawai</a> 
+		  <hr/>
+		<ul class="list-group" id="tutor">
+  <li class="list-group-item"><b>TAHAPAN MELAKUKAN IMPORT ABSENSI</b></li>
+  <li class="list-group-item">1.Silahkan klik tombol import data.</li>
+  <li class="list-group-item">2.Pilih file absensi pegawai dalam format excell 2003.</li>
+  <li class="list-group-item">3.Masukan periode tanggal awal - akhir absensi.</li>
+  <li class="list-group-item">4.klik Simpan untuk melakukan import data absensi.</li>
+ 
+</ul>
 		</div>
     </div>
 </div>

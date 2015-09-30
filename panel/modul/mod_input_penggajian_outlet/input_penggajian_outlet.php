@@ -52,11 +52,17 @@
 						</div>
                     </div>
 
-				<button type="submit" class="btn btn-info">Proses penggajian</button>
+				<button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>Proses penggajian</button>
 
 			</form>
 		</div>
-
+<ul class="list-group" id="tutor">
+  <li class="list-group-item"><b>TAHAPAN MELAKUKAN PENGGAJIAN</b></li>
+  <li class="list-group-item">1.Masukan periode tanggal awal - akhir tutup buku.</li>
+  <li class="list-group-item">2.Klik tombol proses penggajian untuk melakukan proses penggajian.</li>
+  <li class="list-group-item">3.Pastikan semua data yang berhubungan dengan penggajian sudah dicek kebenarannya.</li>
+ 
+</ul>
     </div>
 </div>
 <audio id="audio">
@@ -98,6 +104,7 @@
                 data: $form.serialize(),
 				beforeSend: function(){
 				audio.play();
+				$('#tutor').hide();
 				$('#loadingDiv').show();
 				$('#penggajian_berhasil').hide();
 				$('#penggajian_berhasil_ubah').hide();

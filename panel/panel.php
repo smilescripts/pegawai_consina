@@ -20,7 +20,18 @@
     <link rel="icon" href="<?php echo $profil->logo; ?>">
 
     <title><?php echo $profil->NAMA_PERUSAHAAN; ?></title>
-	
+	  <style>
+	ul, li{
+	margin:0;
+	padding:0;
+	border:0;
+	outline:0;
+	font-size:100%;
+	vertical-align:baseline;
+	background:transparent;
+	}              
+	</style>
+		
     <!-- Bootstrap core CSS -->
     <link href="bootstrap/docs/dist/css/bootstrap.min.css" rel="stylesheet">
 	 <!-- Bootstrap theme -->
@@ -90,8 +101,18 @@
                     <td class="col-sm-1" rowspan="2"><img alt="Brand" src="<?php echo $profil->logo; ?>" style="width:75px; height:75;"/></td>
                     <td class="col-sm-12" style="border-bottom:1pt solid green;">
                         <h3 style="color:<?php echo $profil->COLOR; ?>;"><?php echo $profil->NAMA_PERUSAHAAN; ?></h3>
+                    </td> 
+					<td class="col-sm-8" style="border-bottom:1pt solid green;" rowspan="2">
+					
+					<div class="clock" >
+						<div id="analogClock3" ></div>
+						
+					</div>
+		
+
                     </td>
 				</tr>
+				
 				<tr>
 				
                     <td class="col-sm-12">
@@ -115,6 +136,7 @@
 			
         </div>
 		<div id="data-menu" class="data-menu"></div>	
+		
     </nav>	
 
 
@@ -141,8 +163,16 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="crud/menu/aplikasi.js"></script>
 
+    <script src="crud/menu/aplikasi.js"></script>
+	<script type="text/javascript" src="tparty/clock/jquery.rotate.1-1.js"></script>
+					<script type="text/javascript" src="tparty/clock/jquery.analogclock-0.1.0.js"></script>
+					<script type="text/javascript">
+					$(document).ready( function() {
+					  $("#analogClock3").AnalogClock ( { skin: "mac" } );        
+						 
+					});
+					</script>
 	<!-- bootstrap -->
     <script src="bootstrap/docs/dist/js/bootstrap.min.js"></script>
 	 	<script src="js/timer.js"></script>
