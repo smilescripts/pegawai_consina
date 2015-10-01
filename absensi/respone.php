@@ -7,7 +7,7 @@
 	$mac_array = explode(" ",$mac_string);
 	$mac = $mac_array[3];
 	
-	$getmachine=mysql_query("select * from mesin_absensi where MAC_ADDRESS='$ip'");
+	$getmachine=mysql_query("select * from mesin_absensi");/* where MAC_ADDRESS='$ip' */
 	while($datamachine=mysql_fetch_object($getmachine)){
 		$ip=$datamachine->IP_ADDRESS;
 		$port=$datamachine->PORT_COM;

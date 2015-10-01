@@ -13,7 +13,7 @@
 		$pdfcetak=mysql_query("SELECT head_penggajian.* FROM head_penggajian
 		INNER JOIN pegawai on pegawai.KODE_PEGAWAI=head_penggajian.kode_pegawai 
 		where head_penggajian.format='Harian Bekasi' and head_penggajian.bulan='$BULAN' and head_penggajian.tahun='$TAHUN' and (pegawai.NO_REKENING='' or pegawai.NO_REKENING is NULL) 
-		 AND pegawai.STATUS_PEGAWAI='Kontrak Bekasi'") or die (mysql_error());
+		and pegawai.STATE_ID='$_SESSION[STATE_ID]' AND pegawai.STATUS_PEGAWAI='Kontrak Bekasi'") or die (mysql_error());
         $no = 0;
         
 		while($objectdata=mysql_fetch_object($pdfcetak)){
@@ -30,65 +30,6 @@
 		
 				</tr>
 			';
-        
-$total = $objectdata->thp + $total;
         }
-		
-		echo '<tr>
-				<td>Total</td>
-				<td>'.number_format($total).'</td>
-				<td></td>
-			</tr>';
-	?>
-	
-</table>
-
-<p>
-<br><br>
-</p>
-
-
-<table width="100%"> 
-<tr> 
-	<td colspan="3">Bekasi, <?php echo date('d'); echo" "; echo date('F'); echo" ";  echo date('Y'); ?><p></p></td>
-</tr>
-<tr>
-	<td></td>
-	<td><center>Mengetahui,</center></td>
-	<td></td>
-	
-</tr>
-<tr>
-	<td colspan="3" height="90px"></td>
-</tr>
-<tr>
-	<td><u><center>Doddy Purnomo</u></center></td>
-	<td></td>
-	<td><u><center>Heri Kadarsyah</u></center></td>
-</tr>
-<tr>
-	<td><center><i>HRD</i></center></td>
-	<td></td>
-	<td><center><i>HR Officer</i></center></td>
-</tr>
-<tr>
-	<td></td>
-	<td><center><p></p>Menyetujui,</center></td>
-	<td></td>
-</tr>
-<tr>
-	<td colspan="3" height="90px"></td>
-</tr>
-<tr>
-	<td></td>
-	<td><u><center>Disyon Toba,</center></u></td>
-	<td></td>
-</tr>
-<tr>
-	<td></td>
-	<td><i><center>Director</center></i></td>
-	<td></td>
-</tr>
-
-	
+    ?>
 </table>

@@ -69,7 +69,7 @@
 					var refreshId = setInterval(function() 
 					{
 						$("#cek").load('../panel/include/cek_koneksi_mesin.php?randval='+ Math.random());
-					}, 1000);
+					}, 60000);
                 });
 			</script>
 
@@ -131,11 +131,11 @@
 										//alert(nip);
 										var ur2="info.php?NIP="+nip;
 										$("#isi-info").load(ur2);
-										$("#dialog-info").modal("show");
-										window.clearInterval(refreshId);
-										setTimeout( function show(){
-											$("#dialog-info").modal("hide");
-										}, 5000 );
+										//$("#dialog-info").modal("show");
+										//window.clearInterval(refreshId);
+										//setTimeout( function show(){
+											//$("#dialog-info").modal("hide");
+										//}, 5000 );
 									}
 								}
 							});
@@ -163,11 +163,11 @@
 		</div>   
     </div> <!-- /container -->
 
-
+	
 	<footer class="footer">
 		<div class="container">
             <p class="pull-right"><a href="#" style="color:<?php echo $profil->COLOR; ?>;"><span class="glyphicon glyphicon-triangle-top"></span> Back to top <span class="glyphicon glyphicon-triangle-top"></span></a></p>
-            <p class="text-muted" style="color:<?php echo $profil->COLOR; ?>;">&copy; 2015  - <a href="" >Lukstron Development</a> - All Rights Reserved. </p>
+            <p class="text-muted" style="color:<?php echo $profil->COLOR; ?>;">&copy; 2015  - <a href="" >Consina</a> - All Rights Reserved. </p>
 		</div>
     </footer>
 	
