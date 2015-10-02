@@ -28,6 +28,10 @@
             var url = "modul/mod_divisi/divisi.php";
             $("#data-utama").load(url);
         });
+		$('.ambil_toko').live("click", function(){
+            var url = "modul/mod_ambil_toko/ambil_toko.php";
+            $("#data-utama").load(url);
+        });
 		$('.penyesuaian_dana').live("click", function(){
             var url = "modul/mod_penyesuaian_dana/penyesuaian_dana.php";
             $("#data-utama").load(url);

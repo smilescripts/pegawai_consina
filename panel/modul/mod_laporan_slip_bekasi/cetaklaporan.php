@@ -461,10 +461,10 @@ session_start();
 			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 7 KALI SETAHUN)</p>
 			<p>Rumus gaji Senin-Sabtu:(Gaji per hari + Jumlah lembur)</p>
 			<p>Rumus gaji Minggu/Hari libur:((Gaji per hari X 2) + (Lembur per jam X 2))</p>
-				<p>Pemotongan penyesuaian Gaji: Rp.
+				<p><!--Pemotongan penyesuaian Gaji: Rp.-->
 			<?php
 				
-				echo number_format($objectdata->pemotongan);
+				//echo number_format($objectdata->pemotongan);
 			?></p>	
 			</th>
 			<th style="text-align:right">
@@ -492,10 +492,10 @@ session_start();
 				$tnabung=mysql_fetch_object(mysql_query("SELECT tanggal_gaji as tanggalnabung FROM head_penggajian where kode_pegawai='$getnamapegawaidata->KODE_PEGAWAI' and tabungan!='0'  order by tanggal_gaji asc limit 1"));
 				echo $tnabung->tanggalnabung;
 			?></p>
-				<p>Penambahan penyesuaian Gaji:Rp.
+				<p><!--Penambahan penyesuaian Gaji:Rp.-->
 			<?php
 				
-				echo number_format($objectdata->penambahan);
+				//echo number_format($objectdata->penambahan);
 			?></p>
 			</th>
 		</tr>

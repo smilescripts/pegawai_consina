@@ -24,6 +24,13 @@ $jmldataklr = 0;
 
 for ($i=1; $i<=$hasildata; $i++)
 	{
+		$data1 = ""; 
+		$data2 = "";
+		$data3 = "";
+		$tmp = "";
+		$tmptanggal = "";
+		$TIME = "";
+		
 		$data1 = $data->val($i,1); 
 		$data2 = $data->val($i,2);
 		$data3 = $data->val($i,4);
@@ -32,19 +39,23 @@ for ($i=1; $i<=$hasildata; $i++)
 		$tampiljam = mysql_fetch_object($queryjam);
 		$tmp=str_replace("/","-",$data2);
 		$tmptanggal=date("Y-m-d", strtotime($tmp));
+		$tmptanggal1=date("Y-m-d H:i:s", strtotime($tmp));
 		
-		if($tmptanggal>=$start && $tmptanggal<=$end){
-			$tahan=mysql_query("select NIP_PEGAWAI from absensi where TANGGAL='$tmptanggal' and NIP_PEGAWAI='$data1'");
+		$tahan=mysql_query("select NIP_PEGAWAI from absensi where TANGGAL='$tmptanggal' and NIP_PEGAWAI='$data1'");
 			$get=mysql_fetch_object($tahan);
 			$hasil=$get->NIP_PEGAWAI;
-			$TIME=date("H:i:s", strtotime($data2));
+			$TIME=date("H:i:s", strtotime($tmptanggal1));
+			//echo $TIME.'</br>';
 			
 			$qpeg=mysql_query("select STATUS_PEGAWAI from pegawai where KODE_PEGAWAI='$data1'");
 			$tpeg=mysql_fetch_object($qpeg);
 			$cekcek=$get->STATUS_PEGAWAI;
 			
+			
+		if($tmptanggal>=$start && $tmptanggal<=$end){
+			
 			if($hasil==""){
-				if($cekcek=="Kontrak"){
+				/* if($cekcek=="Kontrak"){
 					$qmenit=mysql_query("select VALUE from pengaturan_penggajian where ID='15'");
 				}
 				if($cekcek=="Kontrak Bekasi"){
@@ -62,17 +73,17 @@ for ($i=1; $i<=$hasildata; $i++)
 					$smenit=date('H:i:s', strtotime($tampiljam->JAM_DATANG));
 				}else{
 					$smenit=date('H:i:s', strtotime($data2));
-				}
+				} */
 														
 				if($data3==$tampiljam->KODE_MASUK){
-					mysql_query("INSERT INTO absensi VALUES(NULL,'1','$data1','$tmptanggal','$TIME','00:00:00','')");
+					mysql_query("INSERT INTO absensi VALUES(NULL,'$tampiljam->KODE_JAM_KERJA','$data1','$tmptanggal','$TIME','00:00:00','')");
 					//header('Content-Type: application/json');
 					//echo json_encode(array('cek' => 'true','nip'=>$NIP));
 					$jmldatamsk++;
 				}
 														
 				if($data3==$tampiljam->KODE_KELUAR){
-					mysql_query("INSERT INTO absensi VALUES(NULL,'1','$data1','$tmptanggal','00:00:00','$TIME','')");
+					mysql_query("INSERT INTO absensi VALUES(NULL,'$tampiljam->KODE_JAM_KERJA','$data1','$tmptanggal','00:00:00','$TIME','')");
 					//header('Content-Type: application/json');
 					//echo json_encode(array('cek' => 'true','nip'=>$NIP));
 					$jmldataklr++;
@@ -87,13 +98,14 @@ for ($i=1; $i<=$hasildata; $i++)
 				$tahansemua2=mysql_query("select NIP_PEGAWAI from absensi where TANGGAL='$tmptanggal' and NIP_PEGAWAI='$data1' and JAM_MASUK ='00:00:00'");
 				$getsemua2=mysql_fetch_object($tahansemua2);
 				$hasilgetsemua2=$getsemua2->NIP_PEGAWAI;
+				
 														
 				if($hasilgetsemua1!="" && $data3==$tampiljam->KODE_KELUAR){
 					//$jamkeluar=date('H:i:s');
 					mysql_query("UPDATE `absensi` SET `JAM_KELUAR` = '$TIME' WHERE `NIP_PEGAWAI` ='$data1' and TANGGAL='$tmptanggal' ");	
 					$jmldataklr++;
 				}else if($hasilgetsemua2!="" && $data3==$tampiljam->KODE_MASUK){
-					//$jamkeluar=date('H:i:s');
+					/* //$jamkeluar=date('H:i:s');
 					if($cekcek=="Kontrak"){
 						$qmenit1=mysql_query("select VALUE from pengaturan_penggajian where ID='15'");
 					}
@@ -112,7 +124,7 @@ for ($i=1; $i<=$hasildata; $i++)
 						$smenit1=date('H:i:s', strtotime($tampiljam->JAM_DATANG));
 					}else{
 						$smenit1=date('H:i:s', strtotime($data2));
-					}
+					} */
 														
 					mysql_query("UPDATE `absensi` SET `JAM_MASUK` = '$TIME' WHERE `NIP_PEGAWAI` ='$data1' and TANGGAL='$tmptanggal' ");	
 					$jmldatamsk++;

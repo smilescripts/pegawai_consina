@@ -25,7 +25,7 @@
 						$data=$rights_groupdata["AKSES"];
 						$tmptrights_group=array();
 						$tmptrights_group=explode(",",$data);
-						$mastermenu=mysql_query("select * from rights_menu where ID < '11' or ID='28' or ID='34' or ID='35' or ID='36' or ID='37' or ID='42' or ID='49' order by MENU_NAME asc");
+						$mastermenu=mysql_query("select * from rights_menu where ID < '11' or ID='28' or ID='34' or ID='35' or ID='36' or ID='37' or ID='42' or ID='49' or ID='51' order by MENU_NAME asc");
 						
 						while($datamastermenu=mysql_fetch_object($mastermenu)){
 							foreach($tmptrights_group as $datarights){	

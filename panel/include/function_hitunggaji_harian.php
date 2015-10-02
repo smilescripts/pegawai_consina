@@ -42,6 +42,9 @@
 			if($theadgaji->kasbon>0){
 				mysql_query("UPDATE `kasbon_pegawai` SET `STATUS` = 'Hutang' WHERE NIP_PEGAWAI='$theadgaji->kode_pegawai' and MONTH(TANGGAL)='$BULAN' and YEAR(TANGGAL)='$TAHUN'");
 			}
+			if($theadgaji->toko>0){
+				mysql_query("UPDATE `ambil_toko` SET `STATUS` = 'Hutang' WHERE NIP_PEGAWAI='$theadgaji->kode_pegawai' and MONTH(TANGGAL)='$BULAN' and YEAR(TANGGAL)='$TAHUN'");
+			}
 			if($theadgaji->pinjaman>0){
 				$qpinjamnan=mysql_query("select * from pembayaran_angsuran where NIP_PEGAWAI='$theadgaji->kode_pegawai' and DATE(TANGGAL_PEMBAYARAN)='$theadgaji->tanggal_gaji'");
 				while($tpinjaman=mysql_fetch_object($qpinjamnan)){
