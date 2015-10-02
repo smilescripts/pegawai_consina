@@ -237,6 +237,7 @@ while ($minggu != $dateakhirnya);
 			$nominalpinjaman=$getpinjaman->CICILAN_PERBULAN;
 			$sisa_cicilan=$getpinjaman->SISA_CICILAN;
 			$hutang=gethutangrekap($kp,$BULAN,$TAHUN);	
+			$hutangtoko=gethutangtokorekap($kp,$BULAN,$TAHUN);
 			$gaji_pokok=$data->GAJI_POKOK;
 			$lembur=number_format(nominalumt(gajilembur($NIP)));
 			$tabungan=$nominaltabungan;
@@ -253,6 +254,7 @@ while ($minggu != $dateakhirnya);
 			$getkode=$w.$IDbaru; */
 			//$tipe=$_POST["tipe"];
 			$kasbon=$hutang->hutangnya;
+			$toko=$hutangtoko->hutangtoko;
 /* ------------------Fungsi mangkir-------------------- */
 			$kalender=CAL_GREGORIAN;
 			$bulan=$BULAN;
@@ -745,18 +747,19 @@ while ($minggu != $dateakhirnya);
 			<p>Lembur:Rp.<?php echo number_format($totallembur);?></p>
 			<?php
 				
-				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$tambah_pemotongan);
+				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$tambah_pemotongan+$toko);
 				$total_penerimaan=getthp($NIP)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan;
-				$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pgrade_bekasi->NOMINAL_GRADE)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan);
+				$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$pdata->GAJI_POKOK)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan+$toko);
 			?>
 			<p>Bonus kehadiran full:Rp.<?php echo number_format($nominal_kehadiran_full);?></p>
 			<p>Potongan Kasbon:Rp.<?php echo number_format($kasbon);?></p>
 			<p>Potongan Pinjaman:Rp.<?php echo number_format($nominalpinjaman);?></p>
 			<p>Potongan Tabungan:Rp.<?php echo number_format($nominaltabungan);?></p>
+			<p>Potongan Toko:Rp.<?php echo number_format($toko);?></p>
 			<p><?php if($nominal_penambahan!=""){ echo $fix_penambahan;}?></p>
 			</th>
 	     	<th style="text-align:right">
-				<p>Total potongan gaji:Rp.<?php echo $total_potongan;?></p>
+			<p>Total potongan gaji:Rp.<?php echo $total_potongan;?><br/>(Tabungan+Pinjaman+Kasbon+Toko+Penyesuaian Pengurangan dana)<i>*Jika ada</i></p>
 			<p>Total Penerimaan gaji:Rp. <?php echo  number_format($total_penerimaan);?></p>
 			<p>Total Cuti (<?php echo $hasiljumlahcuti; ?> Hari) :Rp.<?php echo  number_format($hasiljumlahcuti*$pgrade_bekasi->NOMINAL_GRADE);?></p>
 			<p><b>Total terima gaji:Rp.<?php echo  number_format($takehomepayfix);?></b></p>

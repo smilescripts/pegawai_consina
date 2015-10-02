@@ -85,7 +85,7 @@ $(document).ready(function() {
 	<th class="tg-031e" colspan="<?php echo $hasil_row[0];?>"><center>TUNJANGAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>DITERIMA (TAKE HOME PAY)</center></th>
 	<th class="tg-031e" colspan="2"><center>LEMBURAN</center></th>
-	<th class="tg-031e" colspan="7"><center>POTONGAN</center></th>
+	<th class="tg-031e" colspan="8"><center>POTONGAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>LAIN-LAIN</center></th>
 	<th class="tg-031e" rowspan="3"><center>PENGHARGAAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>TOTAL DITERIMA (BRI)</center></th>
@@ -117,6 +117,7 @@ $(document).ready(function() {
 	<td class="tg-031e" colspan="2"><center>TERLAMBAT</center></td>
 	<td class="tg-031e" rowspan="2"><center>PINJAMAN</center></td>
 	<td class="tg-031e" rowspan="2"><center>KASBON</center></td>
+	<td class="tg-031e" rowspan="2"><center>TOKO</center></td>
 	<td class="tg-031e" rowspan="2"><center>TOTAL HUTANG</center></td>
   </tr>
 
@@ -181,10 +182,11 @@ $(document).ready(function() {
 			<td class="tg-031e">Rp.'.$ambil["terlambat"].'</td>
 			<td class="tg-031e">Rp.'.number_format($ambil["pinjaman"]).'</td>
 			<td class="tg-031e">Rp.'.number_format($ambil["kasbon"]).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["toko"]).'</td>
 		
 			<td class="tg-031e">
 			';
-			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"];
+			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"] + $ambil["toko"];
 			echo 'Rp.'.number_format($totalhutang);
 			echo '
 			</td>
@@ -530,12 +532,12 @@ $(document).ready(function() {
 			<p>Potongan Kasbon:Rp.<?php echo number_format($objectdata->kasbon);?></p>
 			<p>Potongan Pinjaman:Rp.<?php echo number_format($objectdata->pinjaman);?></p>
 			<p>Potongan Tabungan:Rp.<?php echo number_format($objectdata->tabungan);?></p>
+			<p>Potongan Toko:Rp.<?php echo number_format($objectdata->toko);?></p>
 		
 		</div>
 		<div class="col-md-6">
-			<p>Total potongan gaji:Rp.<?php echo  $objectdata->total_potongan;?></p>
+			<p>Total potongan gaji:Rp.<?php echo  $objectdata->total_potongan;?><br/>(Tabungan+Pinjaman+Kasbon+Toko+Penyesuaian Pengurangan dana)<i>*Jika ada</i></p>
 			<p>Total mangkir (<?php echo  $objectdata->mangkir;?> Hari): Rp.<?php echo  number_format($objectdata->potongan_mangkir);?></p>
-		
 			<p><b>Total terima gaji:Rp.<?php echo  number_format($objectdata->thp);?></b></p>
 			<p>Total pengambilan tabungan anda sampai saat ini:<?php
 			

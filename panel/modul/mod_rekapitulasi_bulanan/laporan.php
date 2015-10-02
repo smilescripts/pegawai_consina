@@ -183,12 +183,14 @@
 			$nominalpinjaman=$getpinjaman->CICILAN_PERBULAN;
 			$sisa_cicilan=$getpinjaman->SISA_CICILAN;
 			$hutang=gethutangrekap($kp,$BULAN,$TAHUN);	
+			$hutangtoko=gethutangtokorekap($kp,$BULAN,$TAHUN);	
 			$gaji_pokok=$data->GAJI_POKOK;
 			
 			$tabungan=$nominaltabungan;
 			$tanggal_gaji=date("Y-m-d");
 			$tipe=$_POST["tipe"];
 			$kasbon=$hutang->hutangnya;
+			$toko=$hutangtoko->hutangtoko;
 /* ------------------Fungsi mangkir-------------------- */
 			$kalender=CAL_GREGORIAN;
 			$bulan=$BULAN;
@@ -615,17 +617,18 @@
 				$tmenit22=explode(",",$tmenit->VALUE);
 				
 				$terlambat=$jmlterlambat*$tmenit22[1];
-				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$tambah_pemotongan);
+				$total_potongan=number_format($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$tambah_pemotongan+$toko);
 				$total_penerimaan=number_format(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur+$tambah_penambahan);
-				$takehomepayfix2=(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur+$tambah_penambahan)-($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$tambah_pemotongan);
+				$takehomepayfix2=(getthp($NIP) + $uang_makan_transport + $nominal_kehadiran_full+$lembur+$tambah_penambahan)-($kasbon+$nominaltabungan+$nominalpinjaman+$terlambat+$tambah_pemotongan+$toko);
 			?>
 			<p>Potongan terlambat:Rp.<?php echo number_format($terlambat);?></p>
 			<p>Potongan Kasbon:Rp.<?php echo number_format($kasbon);?></p>
 			<p>Potongan Pinjaman:Rp.<?php echo number_format($nominalpinjaman);?></p>
 			<p>Potongan Tabungan:Rp.<?php echo number_format($nominaltabungan);?></p>
+			<p>Potongan Toko:Rp.<?php echo number_format($toko);?></p>
 		</div>
 		<div class="col-md-6">
-			<p>Total potongan gaji:Rp.<?php echo $total_potongan;?></p>
+			<p>Total potongan gaji:Rp.<?php echo $total_potongan;?><br/>(Tabungan+Pinjaman+Kasbon+Toko+Penyesuaian Pengurangan dana)<i>*Jika ada</i></p>
 			<p>Total Penerimaan gaji:<?php echo  $total_penerimaan;?></p>
 			<p>Total mangkir(<?php echo  $hasil;?> Hari): Rp.<?php echo  number_format($pot_mangkir);?></p>
 		

@@ -371,10 +371,11 @@ page[size="A4"] {
 				<p>Potongan Kasbon:Rp.<?php echo number_format($objectdata->kasbon);?></p>
 				<p>Potongan Pinjaman:Rp.<?php echo number_format($objectdata->pinjaman);?></p>
 				<p>Potongan Tabungan:Rp.<?php echo number_format($objectdata->tabungan);?></p>
+				<p>Potongan Toko:Rp.<?php echo number_format($objectdata->toko);?></p>
 			
 			</th>
 			<th style="text-align:right">
-				<p>Total potongan gaji:Rp.<?php echo  $objectdata->total_potongan;?></p>
+				<p>Total potongan gaji:Rp.<?php echo  $objectdata->total_potongan;?><br/>(Tabungan+Pinjaman+Kasbon+Toko+Penyesuaian Pengurangan dana)<i>*Jika ada</i></p>
 				<p>Total mangkir (<?php echo  $objectdata->mangkir;?> Hari): Rp.<?php echo  number_format($objectdata->potongan_mangkir);?></p>
 		
 				<p><b>Total terima gaji:Rp.<?php echo  number_format($objectdata->thp);?></b></p>

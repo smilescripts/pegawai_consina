@@ -84,7 +84,7 @@ $(document).ready(function() {
     <th class="tg-031e" rowspan="3"><center>LEMBURAN PER-JAM</center></th>
 	<th class="tg-031e" rowspan="3"><center>DITERIMA (TAKE HOME PAY)</center></th>
 	<th class="tg-031e" colspan="2"><center>LEMBURAN</center></th>
-	<th class="tg-031e" colspan="4"><center>POTONGAN</center></th>
+	<th class="tg-031e" colspan="5"><center>POTONGAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>LAIN-LAIN</center></th>
 	<th class="tg-031e" rowspan="3"><center>PENGHARGAAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>TOTAL DITERIMA (BRI)</center></th>
@@ -108,6 +108,7 @@ $(document).ready(function() {
 	<td class="tg-031e" colspan="1"><center>MANGKIR</center></td>
 	<td class="tg-031e" rowspan="2"><center>PINJAMAN</center></td>
 	<td class="tg-031e" rowspan="2"><center>KASBON</center></td>
+	<td class="tg-031e" rowspan="2"><center>TOKO</center></td>
 	<td class="tg-031e" rowspan="2"><center>TOTAL HUTANG</center></td>
   </tr>
 
@@ -154,10 +155,11 @@ $(document).ready(function() {
 			
 			<td class="tg-031e">Rp.'.number_format($ambil["pinjaman"]).'</td>
 			<td class="tg-031e">Rp.'.number_format($ambil["kasbon"]).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["toko"]).'</td>
 		
 			<td class="tg-031e">
 			';
-			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"];
+			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"]+  $ambil["toko"];
 			echo 'Rp.'.number_format($totalhutang);
 			echo '
 			</td>
@@ -553,7 +555,7 @@ $(document).ready(function() {
 			<p>Gaji per hari:Rp.<?php echo number_format($pdata->GAJI_POKOK);?></p>
 			<p>Lemburan per jam:Rp.<?php echo number_format($nominallembur);?></p>
 			<p>(Lemburan akan dibayar bila ada perintah LEMBUR)</p>
-			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 7 KALI SETAHUN)</p>
+			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 3 KALI SETAHUN)</p>
 			<p>Rumus gaji Senin-Sabtu:(Gaji per hari + Jumlah lembur)</p>
 			<p>Rumus gaji Minggu/Hari libur:((Gaji per hari X 2) + (Lembur per jam X 2))</p>
 			<p><!--Penambahan penyesuaian Gaji:Rp.-->
@@ -564,7 +566,7 @@ $(document).ready(function() {
 		</div>
 		<div class="col-md-6">
 			<p>Total Cuti: <?php echo $objectdata->jumlah_cuti;?> Hari</p>
-			<p>Total potongan gaji untuk pelunasan:Rp.<?php echo  $objectdata->total_potongan;?></p>
+			<p>Total potongan gaji untuk pelunasan:Rp.<?php echo  $objectdata->total_potongan;?><br/>(Tabungan+Pinjaman+Kasbon+Toko+Penyesuaian Pengurangan dana)<i>*Jika ada</i></p>
 			<p>Total bonus gaji untuk full 1 bulan masuk:Rp.<?php echo  number_format($objectdata->nominal_kehadiran_full);?></p>
 			<p><b>Total terima gaji:Rp.<?php echo  number_format($objectdata->thp);?></b></p>
 			<p>Total pengambilan tabungan anda sampai saat ini:<?php

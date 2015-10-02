@@ -458,7 +458,7 @@ session_start();
 				<p>Gaji per hari:Rp.<?php echo number_format($pgrade_bekasi->NOMINAL_GRADE);?></p>
 			<p>Lemburan per jam:Rp.<?php echo number_format($nominallembur);?></p>
 			<p>(Lemburan akan dibayar bila ada perintah LEMBUR)</p>
-			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 7 KALI SETAHUN)</p>
+			<p>ABSEN ALPA S/D HARI INI:(MAKSIMAL 3 KALI SETAHUN)</p>
 			<p>Rumus gaji Senin-Sabtu:(Gaji per hari + Jumlah lembur)</p>
 			<p>Rumus gaji Minggu/Hari libur:((Gaji per hari X 2) + (Lembur per jam X 2))</p>
 				<p><!--Pemotongan penyesuaian Gaji: Rp.-->
@@ -469,7 +469,7 @@ session_start();
 			</th>
 			<th style="text-align:right">
 				<p>Total Cuti: <?php echo $objectdata->jumlah_cuti;?> Hari</p>
-			<p>Total potongan gaji untuk pelunasan:Rp.<?php echo $objectdata->total_potongan;?></p>
+			<p>Total potongan gaji untuk pelunasan:Rp.<?php echo $objectdata->total_potongan;?><br/>(Tabungan+Pinjaman+Kasbon+Toko+Penyesuaian Pengurangan dana)<i>*Jika ada</i></p>
 			<p>Total bonus gaji untuk full 1 bulan masuk:Rp.<?php echo  number_format($objectdata->nominal_kehadiran_full);?></p>
 			<p><b>Total terima gaji:Rp.<?php echo  number_format($objectdata->thp);?></b></p>
 			<p>Total pengambilan tabungan anda sampai saat ini:<?php

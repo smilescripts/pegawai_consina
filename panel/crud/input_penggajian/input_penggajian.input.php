@@ -189,12 +189,14 @@ while ($minggu != $dateakhirnya);
 		$nominalpinjaman=$getpinjaman->CICILAN_PERBULAN;
 		$sisa_cicilan=$getpinjaman->SISA_CICILAN;
 		$hutang=gethutang($kp,$BULAN,$TAHUN);	
+		$tokohutang=gethutangtoko($kp,$BULAN,$TAHUN);
 		$gaji_pokok=$data->GAJI_POKOK;
 		$lembur=number_format(nominalumt(gajilembur($NIP)));
 		$tabungan=$nominaltabungan;
 		$tanggal_gaji=date("Y-m-d");
 		
 		$kasbon=$hutang->hutangnya;
+		$toko=$tokohutang->hutangtoko;
 /* ------------------Fungsi mangkir-------------------- */
 
 
@@ -537,8 +539,8 @@ while ($minggu != $dateakhirnya);
 		$terlambat=potogan_terlambat($NIP);
 		$go=str_replace(array(','), array(''), $takehomepay);
 		$pot_mangkir=$go / $hitungjumlahharikerja * $hasil;
-		$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$datapegawai->GAJI_POKOK)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan);
-		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman+$nominal_pemotongan_tambah);
+		$takehomepayfix=getthp($NIP)+($hasiljumlahcuti*$datapegawai->GAJI_POKOK)+$nominal_kehadiran_full+$totalgaji+$totallembur+$uang_makan_transport+$totalpenghargaan+$tambah_penambahan-($hutang->hutangnya+$nominalpinjaman+$nominaltabungan+$tambah_pemotongan+$toko);
+		$total_potongan=number_format($hutang->hutangnya+$nominaltabungan+$nominalpinjaman+$nominal_pemotongan_tambah+$toko);
 		$total_penerimaan=number_format(getthp($NIP) + $nominal_kehadiran_full+$totalgaji+$totallembur + $uang_makan_transport+ $totalpenghargaan+$nominal_penambahan_tambah);
 	
 		if($tipe=="SIMPAN"){
@@ -556,11 +558,12 @@ while ($minggu != $dateakhirnya);
 				$IDbaru = $char . sprintf("%05s", $noUrut);
 				$getkode=$w.$IDbaru;
 				
-				mysql_query("insert into head_penggajian values('$getkode','$kp','$totalgaji','$uang_makan_transport','$totallembur','$hariterlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$takehomepayfix','$kasbon','$nominalpinjaman','0','$jumlahmasuk','$totalpenghargaan','$hasiljumlahcuti','$nominal_kehadiran_full','Harian','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah','','','$nominallembur')");
+				mysql_query("insert into head_penggajian values('$getkode','$kp','$totalgaji','$uang_makan_transport','$totallembur','$hariterlambat','$tabungan','$hasil','$total_potongan','$total_penerimaan','$tanggal_gaji','$KODE_DEPARTEMEN','$takehomepayfix','$kasbon','$nominalpinjaman','0','$jumlahmasuk','$totalpenghargaan','$hasiljumlahcuti','$nominal_kehadiran_full','Harian','$BULAN','$TAHUN','$startp','$endp','$nominal_pemotongan_tambah','$nominal_penambahan_tambah','','','$nominallembur','$toko')");
 				$bulansekarang=$BULAN;
 				$tahunsekarang=$TAHUN;
 				mysql_query("UPDATE `kasbon_pegawai` SET `STATUS` = 'LUNAS' WHERE NIP_PEGAWAI='$kp' and MONTH(TANGGAL)='$bulansekarang' and YEAR(TANGGAL)='$tahunsekarang'");
-				
+				mysql_query("UPDATE `ambil_toko` SET `STATUS` = 'LUNAS' WHERE NIP_PEGAWAI='$kp' and MONTH(TANGGAL)='$bulansekarang' and YEAR(TANGGAL)='$tahunsekarang'");
+			
 				
 				if($tabungan !=0){
 					$tgl=date('Y-m-d');	

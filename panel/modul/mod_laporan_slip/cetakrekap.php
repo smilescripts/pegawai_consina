@@ -84,7 +84,7 @@ page[size="A4"] {
     <th class="tg-031e" rowspan="3"><center>LEMBURAN PER-JAM</center></th>
 	<th class="tg-031e" rowspan="3"><center>DITERIMA (TAKE HOME PAY)</center></th>
 	<th class="tg-031e" colspan="2"><center>LEMBURAN</center></th>
-	<th class="tg-031e" colspan="4"><center>POTONGAN</center></th>
+	<th class="tg-031e" colspan="5"><center>POTONGAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>LAIN-LAIN</center></th>
 	<th class="tg-031e" rowspan="3"><center>PENGHARGAAN</center></th>
 	<th class="tg-031e" rowspan="3"><center>TOTAL DITERIMA (BRI)</center></th>
@@ -108,6 +108,7 @@ page[size="A4"] {
 	<td class="tg-031e" colspan="1"><center>MANGKIR</center></td>
 	<td class="tg-031e" rowspan="2"><center>PINJAMAN</center></td>
 	<td class="tg-031e" rowspan="2"><center>KASBON</center></td>
+	<td class="tg-031e" rowspan="2"><center>TOKO</center></td>
 	<td class="tg-031e" rowspan="2"><center>TOTAL HUTANG</center></td>
   </tr>
 
@@ -154,10 +155,11 @@ page[size="A4"] {
 			
 			<td class="tg-031e">Rp.'.number_format($ambil["pinjaman"]).'</td>
 			<td class="tg-031e">Rp.'.number_format($ambil["kasbon"]).'</td>
+			<td class="tg-031e">Rp.'.number_format($ambil["toko"]).'</td>
 		
 			<td class="tg-031e">
 			';
-			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"];
+			$totalhutang=$ambil["pinjaman"] +  $ambil["kasbon"]+  $ambil["toko"];
 			echo 'Rp.'.number_format($totalhutang);
 			echo '
 			</td>

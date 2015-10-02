@@ -263,6 +263,15 @@
 		return $gethutang;	
 		
 	}
+	function gethutangtoko($NIP_PEGAWAI,$BULAN,$TAHUN){
+		$bulansekarang=$BULAN;
+		$tahunsekarang=$TAHUN;
+		$queryhutang=mysql_query("select sum(NOMINAL) as hutangtoko from ambil_toko where NIP_PEGAWAI='$NIP_PEGAWAI' and MONTH(TANGGAL)='$bulansekarang'  and YEAR(TANGGAL)='$tahunsekarang' and STATUS!='LUNAS' ");	
+		$gethutang=mysql_fetch_object($queryhutang);
+
+		return $gethutang;	
+		
+	}
 	
 	function gethutangrekap($NIP_PEGAWAI,$BULAN,$TAHUN){
 		$bulansekarang=$BULAN;
@@ -271,6 +280,15 @@
 		$gethutang=mysql_fetch_object($queryhutang);
 
 		return $gethutang;	
+		
+	}
+	function gethutangtokorekap($NIP_PEGAWAI,$BULAN,$TAHUN){
+		$bulansekarang=$BULAN;
+		$tahunsekarang=$TAHUN;
+		$queryhutang=mysql_query("select sum(NOMINAL) as hutangtoko from ambil_toko where NIP_PEGAWAI='$NIP_PEGAWAI' and MONTH(TANGGAL)='$bulansekarang' and YEAR(TANGGAL)='$tahunsekarang' ");	
+		$gethutangtoko=mysql_fetch_object($queryhutang);
+
+		return $gethutangtoko;	
 		
 	}
 
